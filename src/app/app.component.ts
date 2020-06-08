@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 export interface ITab {
   id: string;
   name: string;
+  url: string;
 }
 
 @Component({
@@ -15,15 +16,18 @@ export class AppComponent {
   tabs: ITab[] = [
     {
       id: "seasons",
-      name: "Seasons"
+      name: "Seasons",
+      url: "/seasons"
     },
     {
       id: "drivers",
-      name: "Drivers"
+      name: "Drivers",
+      url: "/drivers"
     },
     {
       id: "teams",
-      name: "Teams"
+      name: "Teams",
+      url: "/teams"
     }
   ]
 

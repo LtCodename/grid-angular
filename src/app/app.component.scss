@@ -11,11 +11,17 @@
     min-width: 100px;
     text-align: center;
     display: block;
+    text-decoration: none;
+}
+
+.active-tab {
+    background: #303960;
 }
 
 .tab:hover {
     transform: scale(1.1);
     background: #303960;
+    text-decoration: none;
 }
 
 .title {
@@ -25,6 +31,18 @@
     font-size: 1.25rem;
     color: #FFFFFF;
     font-weight: bold;
+    transition: 0.2s all;
+    cursor: pointer;
+    min-width: 100px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+}
+
+.title:hover {
+    transform: scale(1.1);
+    background: #f8b24f;
+    text-decoration: none;
 }
 
 .header {
@@ -54,4 +72,8 @@
 
 .tab-holder {
     position: relative;
+}
+
+.page-content-wrapper {
+    background: #e5e5e5;
 }

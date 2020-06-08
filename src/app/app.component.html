@@ -1,15 +1,21 @@
 <div class="column column-center-horizontal">
   <!-- Header Starts -->
   <div class="row header">
-    <span class="title">GRID</span>
+    <a 
+      class="title"
+      [routerLink]="['/dashboard']">
+      GRID
+    </a>
     <div class="row tabs">
       <div class="tab-holder" *ngFor="let tab of tabs">
-        <span 
-          class="tab"
+        <a 
+          class="tab" 
+          routerLinkActive="active-tab" 
+          [routerLink]="[tab.url]"
           (mouseenter)="tabMouseEnter(tab.id)"
           (mouseleave)="tabMouseLeave(tab.id)">
           {{tab.name}}
-        </span>
+        </a>
         <div 
           *ngIf="showPanels[tab.id]"
           class="info-panel"
@@ -25,6 +31,9 @@
     </div>
   </div>
   <!-- Header Ends -->
+  <div class="page-content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
