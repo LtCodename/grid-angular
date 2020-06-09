@@ -121,8 +121,13 @@
               "devServerTarget": "grid-angular:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "grid-angular"
 }

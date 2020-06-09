@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "grid-angular",
+      "public": "dist/grid-angular",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

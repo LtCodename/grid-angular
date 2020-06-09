@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "f1-grid": {
+      "hosting": {
+        "grid-angular": [
+          "f1-grid"
+        ]
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DriversService } from '../drivers.service';
+import { IDriver } from '../model';
 
 @Component({
   selector: 'app-drivers-page',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DriversPageComponent implements OnInit {
 
-  constructor() { }
+  drivers: IDriver[] = [];
+
+  constructor(private driversService: DriversService) {
+    this.driversService.drivers$.subscribe((data: IDriver[]) => {
+      this.drivers = data;
+      console.log(data);
+    })
+   }
 
   ngOnInit(): void {
   }

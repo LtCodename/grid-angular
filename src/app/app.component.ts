@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-
-export interface ITab {
-  id: string;
-  name: string;
-  url: string;
-}
+import { ITab } from './model';
 
 @Component({
   selector: 'app-root',
