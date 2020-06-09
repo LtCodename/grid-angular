@@ -1,10 +1,16 @@
+$blue: #303960;
+$pink: #ea9a96;
+$orange: #f8b24f;
+$grey: #e5e5e5;
+$white: #FFFFFF;
+
 .tab {
     margin: 0 30px;
-    background: #f8b24f;
+    background: $orange;
     padding: 8px 16px;
     border-radius: 50px;
     font-size: 1.25rem;
-    color: #FFFFFF;
+    color: $white;
     font-weight: bold;
     transition: 0.2s all;
     cursor: pointer;
@@ -15,21 +21,21 @@
 }
 
 .active-tab {
-    background: #303960;
+    background: $blue;
 }
 
 .tab:hover {
     transform: scale(1.1);
-    background: #303960;
+    background: $blue;
     text-decoration: none;
 }
 
 .title {
-    background: #303960;
+    background: $blue;
     padding: 8px 16px;
     border-radius: 40px;
     font-size: 1.25rem;
-    color: #FFFFFF;
+    color: $white;
     font-weight: bold;
     transition: 0.2s all;
     cursor: pointer;
@@ -41,7 +47,7 @@
 
 .title:hover {
     transform: scale(1.1);
-    background: #f8b24f;
+    background: $orange;
     text-decoration: none;
 }
 
@@ -49,6 +55,7 @@
     justify-content: space-between;
     width: 100%;
     flex-wrap: nowrap;
+    margin-bottom: 10px;
 }
 
 .tabs {
@@ -57,11 +64,11 @@
 }
 
 .info-panel {
-    background: #303960;
+    background: $blue;
     padding: 15px 20px;
     border-radius: 50px;
     font-size: 1.25rem;
-    color: #FFFFFF;
+    color: $white;
     font-weight: bold;
     position: absolute;
     width: max-content;
@@ -72,8 +79,4 @@
 
 .tab-holder {
     position: relative;
-}
-
-.page-content-wrapper {
-    background: #e5e5e5;
 }
