@@ -8,10 +8,8 @@ $white: #FFFFFF;
     background: $grey;
     width: fit-content;
     height: fit-content;
-    border-radius: 50px;
-    padding: 30px;
-}
-
-.page-wrapper {
-    height: calc(100vh - 41px);
+    border-radius: 80px;
+    padding: 50px;
+    justify-content: center;
+    max-width: 650px;
 }

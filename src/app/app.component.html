@@ -1,11 +1,6 @@
-<div class="column column-center-horizontal">
+<div class="column column-center-horizontal all-content">
   <!-- Header Starts -->
-  <div class="row header">
-    <a 
-      class="title"
-      [routerLink]="['/dashboard']">
-      GRID
-    </a>
+  <div class="column header column-center-horizontal">
     <div class="row tabs">
       <div class="tab-holder" *ngFor="let tab of tabs">
         <a 
@@ -35,5 +30,3 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-
-<router-outlet></router-outlet>

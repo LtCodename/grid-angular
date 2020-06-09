@@ -11,8 +11,8 @@ export class AppComponent {
   tabs: ITab[] = [
     {
       id: "seasons",
-      name: "Seasons",
-      url: "/seasons"
+      name: "Season",
+      url: "/season"
     },
     {
       id: "drivers",

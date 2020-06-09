@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DirverComponent } from './components/dirver/dirver.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { DriverModule } from './components/driver/driver.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBySqoOBscXNukfZu9wLROMXHEBASoMEjI",
@@ -22,8 +22,7 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DirverComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +31,8 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    DriverModule
   ],
   providers: [],
   bootstrap: [AppComponent]

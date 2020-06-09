@@ -1,5 +1,9 @@
 <div class="row row-center-horizontal row-center-vertical page-wrapper">
-    <div class="row page-content-wrapper">
-        <span>Drivers Will Be Here</span>
+    <div *ngIf="!showPreloader" class="row page-content-wrapper">
+        <app-driver *ngFor="let driver of drivers"
+            [name]="driver.name"
+            [teamColor]="driver.color"
+            [carNumber]="driver.number">
+        </app-driver>
     </div>
 </div>

@@ -1,3 +1,5 @@
+import { ITeam } from '../teams/teams-model';
+
 export interface IDriver {
     championships: string;
     debut: string;
@@ -8,6 +10,7 @@ export interface IDriver {
     poles: string;
     wins: string;
     id: string;
+    color: string;
     'date-of-birth': string;
     'team-id': string;
 }

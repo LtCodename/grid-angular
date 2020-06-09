@@ -5,7 +5,7 @@ $grey: #e5e5e5;
 $white: #FFFFFF;
 
 .tab {
-    margin: 0 30px;
+    margin: 0 10px;
     background: $orange;
     padding: 8px 16px;
     border-radius: 50px;
@@ -14,7 +14,7 @@ $white: #FFFFFF;
     font-weight: bold;
     transition: 0.2s all;
     cursor: pointer;
-    min-width: 100px;
+    min-width: 115px;
     text-align: center;
     display: block;
     text-decoration: none;
@@ -30,32 +30,11 @@ $white: #FFFFFF;
     text-decoration: none;
 }
 
-.title {
-    background: $blue;
-    padding: 8px 16px;
-    border-radius: 40px;
-    font-size: 1.25rem;
-    color: $white;
-    font-weight: bold;
-    transition: 0.2s all;
-    cursor: pointer;
-    min-width: 100px;
-    text-align: center;
-    display: block;
-    text-decoration: none;
-}
-
-.title:hover {
-    transform: scale(1.1);
-    background: $orange;
-    text-decoration: none;
-}
-
 .header {
     justify-content: space-between;
     width: 100%;
     flex-wrap: nowrap;
-    margin-bottom: 10px;
+    margin: 10px 0 20px 0;
 }
 
 .tabs {
@@ -64,8 +43,8 @@ $white: #FFFFFF;
 }
 
 .info-panel {
-    background: $blue;
-    padding: 15px 20px;
+    background: $pink;
+    padding: 20px 40px;;
     border-radius: 50px;
     font-size: 1.25rem;
     color: $white;
@@ -79,4 +58,8 @@ $white: #FFFFFF;
 
 .tab-holder {
     position: relative;
+}
+
+.all-content {
+    padding-bottom: 20px;
 }

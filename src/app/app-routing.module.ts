@@ -8,7 +8,7 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
-      path: 'seasons',
+      path: 'season',
       loadChildren: () => import('./seasons/seasons.module').then(m => m.SeasonsModule)
   },
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
       path: '**',
-      redirectTo: 'dashboard'
+      redirectTo: 'season'
   }
 ];
 

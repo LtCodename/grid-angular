@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DriversPageComponent } from './drivers-page/drivers-page.component';
 import { DriversRoutingModule } from './drivers-routing.module';
 import { HttpClientModule } from "@angular/common/http";
+import { DriverModule } from '../components/driver/driver.component';
 
 
 
@@ -11,7 +12,8 @@ import { HttpClientModule } from "@angular/common/http";
   imports: [
     CommonModule,
     DriversRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DriverModule
   ]
 })
 export class DriversModule { }

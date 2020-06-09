@@ -1,0 +1,29 @@
+$blue: #303960;
+$pink: #ea9a96;
+$orange: #f8b24f;
+$grey: #e5e5e5;
+$white: #FFFFFF;
+
+.driver {
+    margin: 0 15px 15px 0;
+    background: $blue;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    color: $white;
+    font-weight: bold;
+    transition: 0.2s all;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+}
+
+.driver:hover {
+    transform: scale(1.1);
+    background: $orange;
+    text-decoration: none;
+}
+
+.team-color {
+    margin-right: 10px;
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
-import { IDriver } from './model';
+import { IDriver } from './drivers-model';
 import { AngularFirestore } from "@angular/fire/firestore";
 
 @Injectable({
@@ -23,15 +23,14 @@ export class DriversService {
 
   private getDrivers() {
     return this.firestore.collection('drivers')
-        .snapshotChanges()
-        .pipe(map(this.processSnapshot));
+      .snapshotChanges()
+      .pipe(map(this.processSnapshot));
   }
 
   private processSnapshot(data) {
-      return data.map((e) => ({
-          id: e.payload.doc.id,
-          // @ts-ignore
-          ...e.payload.doc.data()
-      }));
+    return data.map((e) => ({
+      id: e.payload.doc.id,
+      ...e.payload.doc.data()
+    }));
   }
 }
