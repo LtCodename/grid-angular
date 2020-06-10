@@ -1,0 +1,22 @@
+<div class="info-panel">
+    <div *ngIf="mode === 'seasons'" class="column">
+        <span>{{mode}} Information</span>
+        <span>{{mode}} Information</span>
+        <span>{{mode}} Information</span>
+    </div>
+    <div *ngIf="mode === 'teams'" class="column">
+        <span>{{mode}} Information</span>
+        <span>{{mode}} Information</span>
+        <span>{{mode}} Information</span>
+    </div>
+    <div *ngIf="mode === 'drivers'" class="column">
+        <div *ngIf="showPanel" class="row row-center-horizontal">
+            <app-driver *ngFor="let driver of driversToDisplay"
+                [name]="driver.name"
+                [teamColor]="driver.color"
+                [small]="true"
+                [carNumber]="driver.number">
+            </app-driver>
+        </div>
+    </div>
+</div>

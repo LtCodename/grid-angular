@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, NgModule } from '@angular/core';
+import { Component, OnInit, Input, NgModule, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './driver.component.html',
   styleUrls: ['./driver.component.scss']
 })
-export class DriverComponent implements OnInit {
+export class DriverComponent implements OnInit, OnChanges {
 
   @Input() small: boolean = false;
   @Input() name: string = "";
@@ -18,6 +18,19 @@ export class DriverComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.small) {
+      this.shortenName();
+    }
+  }
+
+  shortenName(): void {
+    const nameArray = this.name.split(" ");
+    const lastName: string = nameArray[1];
+    if (lastName) {
+      this.name = lastName.slice(0, 3).toLocaleUpperCase();
+    }
+  }
 }
 
 @NgModule({

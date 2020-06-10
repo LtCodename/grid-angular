@@ -44,7 +44,7 @@ $white: #FFFFFF;
 
 .info-panel {
     background: $pink;
-    padding: 20px 40px;;
+    padding: 25px 10px 10px 20px;
     border-radius: 50px;
     font-size: 1.25rem;
     color: $white;
@@ -54,6 +54,7 @@ $white: #FFFFFF;
     top: 49px;
     left: 50%;
     transform: translateX(-50%);
+    max-width: 650px;
 }
 
 .tab-holder {

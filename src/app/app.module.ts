@@ -8,6 +8,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { DriverModule } from './components/driver/driver.component';
+import { CloudPanelComponent } from './components/cloud-panel/cloud-panel.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBySqoOBscXNukfZu9wLROMXHEBASoMEjI",
@@ -22,7 +23,8 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CloudPanelComponent
   ],
   imports: [
     BrowserModule,

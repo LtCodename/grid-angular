@@ -16,11 +16,8 @@
           class="info-panel"
           (mouseenter)="panelMouseEnter(tab.id)"
           (mouseleave)="panelMouseLeave(tab.id)">
-          <div class="column">
-            <span>{{tab.name}} Information</span>
-            <span>{{tab.name}} Information</span>
-            <span>{{tab.name}} Information</span>
-          </div>
+          <app-cloud-panel [mode]="tab.id">
+          </app-cloud-panel>
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ export interface IDriver {
     wins: string;
     id: string;
     color: string;
+    teamName: string;
     'date-of-birth': string;
     'team-id': string;
 }
