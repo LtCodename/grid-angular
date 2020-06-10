@@ -37,6 +37,7 @@ export class DriversService {
           const teamData: ITeam[] = teamsData.filter((team: ITeam) => team.id === driver['team-id']);
           driver.color = teamData[0] ? teamData[0].color : "";
           driver.teamName = teamData[0] ? teamData[0].name : "";
+          driver.url = `/drivers/${driver.id}`;
         });
         return driversData;
       })

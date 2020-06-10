@@ -9,11 +9,13 @@
         <span>{{mode}} Information</span>
         <span>{{mode}} Information</span>
     </div>
+    <!-- Drivers -->
     <div *ngIf="mode === 'drivers'" class="column">
         <div *ngIf="showPanel" class="row row-center-horizontal">
             <app-driver *ngFor="let driver of driversToDisplay"
                 [name]="driver.name"
                 [teamColor]="driver.color"
+                [url]="driver.url"
                 [small]="true"
                 [carNumber]="driver.number">
             </app-driver>

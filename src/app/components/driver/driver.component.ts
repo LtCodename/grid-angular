@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, NgModule, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-driver',
@@ -12,6 +13,7 @@ export class DriverComponent implements OnInit, OnChanges {
   @Input() name: string = "";
   @Input() carNumber: string = "";
   @Input() teamColor: string = "";
+  @Input() url: string = "";
   
   constructor() { }
 
@@ -35,7 +37,9 @@ export class DriverComponent implements OnInit, OnChanges {
 
 @NgModule({
   declarations: [DriverComponent],
-  imports: [CommonModule
+  imports: [
+    CommonModule,
+    RouterModule
   ],
   exports: [DriverComponent]
 })
