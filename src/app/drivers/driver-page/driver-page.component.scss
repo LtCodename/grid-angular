@@ -129,3 +129,35 @@ $white: #FFFFFF;
 .property-container {
     width: 50%;
 }
+
+.summary-text {
+    font-size: 1.25rem;
+    color: $blue;
+    font-weight: bold;
+}
+
+.arrow {
+    text-align: center;
+}
+
+.summary-cloud {
+    background: $blue;
+    font-size: 1.25rem;
+    color: $white;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    border-radius: 50px;
+    padding: 8px 20px;
+    margin: 0 5px;
+    width: fit-content;
+}
+
+.arrow-right {
+    height: fit-content;
+    margin: 0 10px;
+}
+
+.summary-row {
+    align-items: center;
+}

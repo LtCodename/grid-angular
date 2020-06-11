@@ -62,7 +62,27 @@
         </div>
         <!-- Career Summary Info -->
         <div *ngIf="tabName === 'sum'">
-            Career Summary Info
+           <div class="column" *ngFor="let element of driver.summary; let last = last">
+                <div [ngSwitch]="element.type">
+                    <div class="row row-center-horizontal summary-row" *ngSwitchCase="'text'">
+                        <span class="summary-text">{{element.text}}</span>
+                    </div>
+                    <div class="row row-center-horizontal summary-row" *ngSwitchCase="'year'">
+                        <span class="summary-cloud">{{element.year}}</span>
+                        <span class="summary-cloud">{{element.team}}</span>
+                    </div>
+                    <div class="row row-center-horizontal summary-row" *ngSwitchCase="'transfer'">
+                        <span class="summary-cloud">{{element.from}}</span>
+                        <span class="arrow-right" [innerHTML]="arrowIconRight">
+                            {{arrowIconRight}}
+                        </span>
+                        <span class="summary-cloud">{{element.to}}</span>
+                    </div>
+                </div>
+                <span class="arrow" *ngIf="!last" [innerHTML]="arrowIconDown">
+                    {{arrowIconDown}}
+                </span>
+           </div>
         </div>
     </div>
 </div>

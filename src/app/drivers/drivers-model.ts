@@ -1,3 +1,7 @@
+interface ISummary {
+    type: string;
+}
+
 export interface IDriver {
     championships: string;
     debut: string;
@@ -11,6 +15,7 @@ export interface IDriver {
     color: string;
     teamName: string;
     url: string;
+    summary: ISummary[]
     'date-of-birth': string;
     'team-id': string;
 }
