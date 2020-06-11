@@ -4,13 +4,23 @@ $orange: #f8b24f;
 $grey: #e5e5e5;
 $white: #FFFFFF;
 
-.page-content-wrapper {
+.career-content-wrapper {
     background: $grey;
     width: fit-content;
     border-radius: 80px;
     padding: 20px;
     justify-content: center;
     min-width: 560px;
+}
+
+.profile-content-wrapper {
+    background: $grey;
+    width: fit-content;
+    border-radius: 80px;
+    padding: 20px 40px;
+    justify-content: center;
+    margin-bottom: 20px;
+    align-items: center;
 }
 
 .tab-button {
@@ -54,53 +64,8 @@ $white: #FFFFFF;
     margin-left: 10px;
 }
 
-.name {
-    background: $grey;
-    font-size: 1.25rem;
-    color: $blue;
-    font-weight: bold;
-    transition: 0.2s all;
-    text-align: center;
-    display: block;
-    outline: none;
-    border-radius: 50px;
-    padding: 8px 20px;
-    margin-bottom: 10px;
-}
-
-.grey-cloud {
-    background: $grey;
-    font-size: 1.25rem;
-    color: $blue;
-    font-weight: bold;
-    transition: 0.2s all;
-    text-align: center;
-    display: block;
-    outline: none;
-    border-radius: 50px;
-    padding: 8px 20px;
-}
-
-.car-number {
-    margin-right: 5px;
-}
-
-.team-name{
-    margin-left: 5px;
-}
-
 .number-and-team {
     margin-bottom: 10px;
-}
-
-.dob {
-    margin-right: 5px;
-}
-
-.personal-data {
-    color: #31395f;
-    margin-bottom: 10px;
-    font-style: italic;
 }
 
 .property {
@@ -160,4 +125,33 @@ $white: #FFFFFF;
 
 .summary-row {
     align-items: center;
+}
+
+.profile-text {
+    font-size: 1.25rem;
+    color: $blue;
+    font-weight: bold;
+    text-align: center;
+}
+
+.profile-text-small {
+    font-size: 1rem;
+    color: $blue;
+}
+
+.profile-car-number {
+    margin-right: 10px;
+}
+
+.profile-age {
+    margin-bottom: 10px;
+}
+
+.profile-icon {
+    margin-right: 10px;
+    height: fit-content;
+}
+
+.driver-name {
+    margin-bottom: 10px;
 }

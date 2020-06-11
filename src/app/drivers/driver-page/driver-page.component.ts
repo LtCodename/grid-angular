@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IDriver } from '../drivers-model';
 import { DriversService } from '../drivers.service';
-import { ArrowDown, ArrowRight } from 'src/iconsService';
+import { ArrowDown, ArrowRight, Profile } from 'src/iconsService';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -20,6 +20,7 @@ export class DriverPageComponent implements OnInit {
   driverAge: number = 0;
   readonly arrowIconDown = this.sanitized.bypassSecurityTrustHtml(ArrowDown);
   readonly arrowIconRight = this.sanitized.bypassSecurityTrustHtml(ArrowRight);
+  readonly profileIcon = this.sanitized.bypassSecurityTrustHtml(Profile);
 
   constructor(private route: ActivatedRoute, private driversService: DriversService, private sanitized: DomSanitizer) {
 

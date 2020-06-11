@@ -1,13 +1,19 @@
 <div *ngIf="showData" class="column column-center-horizontal">
-    <span class="name">{{driver.name}}</span>
-    <div class="row number-and-team">
-        <span class="grey-cloud car-number">{{driver.number}}</span>
-        <span class="grey-cloud team-name">{{driver.teamName}}</span>
+    <div class="profile-content-wrapper row">
+        <span class="profile-icon" [innerHTML]="profileIcon"></span>
+        <div class="column">
+            <span class="profile-text driver-name">{{driver.name}}</span>
+            <div class="row row-center-horizontal number-and-team"> 
+                <span class="property profile-car-number">{{driver.number}}</span>
+                <span class="property">{{driver.teamName}}</span>
+            </div>
+            <div class="column column-center-horizontal">
+                <span class="profile-text-small profile-age">Age: {{driverAge}}</span>
+                <span class="profile-text-small">Nationality: {{driver.nationality}}</span>
+            </div> 
+        </div>
     </div>
-    <div class="row personal-data">
-        <span class="dob">{{driverAge}} years old,</span>
-        <span class="nationality">{{driver.nationality}}.</span>
-    </div>
+    <!-- Career Ach and Sum -->
     <div class="buttons-row row">
         <button
             [ngClass]="{'active-tab': tabName === 'ach'}"
@@ -24,15 +30,15 @@
             Summary
         </button>
     </div>
-    <div class="page-content-wrapper">
+    <div class="career-content-wrapper">
         <!-- Career Acheivements Info -->
         <div *ngIf="tabName === 'ach'" class="column">
             <div class="property-row row row-center-horizontal">
                 <div class="property-container row row-center-right">
-                    <span class="row property">Debut</span>
+                    <span class="row property">Poles</span>
                 </div>
                 <div class="property-container row row-center-left">
-                    <span class="row property">{{driver.debut}}</span>
+                    <span class="row property">{{driver.poles}}</span>
                 </div>
             </div>
             <div class="property-row row row-center-horizontal">
@@ -41,14 +47,6 @@
                 </div>
                 <div class="property-container row row-center-left">
                     <span class="row property">{{driver.podiums}}</span>
-                </div>
-            </div>
-            <div class="property-row row row-center-horizontal">
-                <div class="property-container row row-center-right">
-                    <span class="row property">Poles</span>
-                </div>
-                <div class="property-container row row-center-left">
-                    <span class="row property">{{driver.poles}}</span>
                 </div>
             </div>
             <div class="property-row row row-center-horizontal">
@@ -73,15 +71,11 @@
                     </div>
                     <div class="row row-center-horizontal summary-row" *ngSwitchCase="'transfer'">
                         <span class="summary-cloud">{{element.from}}</span>
-                        <span class="arrow-right" [innerHTML]="arrowIconRight">
-                            {{arrowIconRight}}
-                        </span>
+                        <span class="arrow-right" [innerHTML]="arrowIconRight"></span>
                         <span class="summary-cloud">{{element.to}}</span>
                     </div>
                 </div>
-                <span class="arrow" *ngIf="!last" [innerHTML]="arrowIconDown">
-                    {{arrowIconDown}}
-                </span>
+                <span class="arrow" *ngIf="!last" [innerHTML]="arrowIconDown"></span>
            </div>
         </div>
     </div>
