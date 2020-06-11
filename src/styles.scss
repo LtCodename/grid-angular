@@ -21,6 +21,14 @@ body {
     justify-content: center;
 }
 
+.row-center-right {
+    justify-content: flex-end;
+}
+
+.row-center-left {
+    justify-content: flex-start;
+}
+
 .row-center-vertical {
     align-items: center;
 }

@@ -1,3 +1,68 @@
-<div *ngIf="showData">
-    <p>{{driver.name}}</p>
+<div *ngIf="showData" class="column column-center-horizontal">
+    <span class="name">{{driver.name}}</span>
+    <div class="row number-and-team">
+        <span class="grey-cloud car-number">{{driver.number}}</span>
+        <span class="grey-cloud team-name">{{driver.teamName}}</span>
+    </div>
+    <div class="row personal-data">
+        <span class="dob">{{driverAge}} years old,</span>
+        <span class="nationality">{{driver.nationality}}.</span>
+    </div>
+    <div class="buttons-row row">
+        <button
+            [ngClass]="{'active-tab': tabName === 'ach'}"
+            type="button"
+            (click)="toggleTab()"
+            class="tab-button tab-button-left">
+            Acheivements
+        </button>
+        <button
+            [ngClass]="{'active-tab': tabName === 'sum'}"
+            type="button" 
+            (click)="toggleTab()"
+            class="tab-button tab-button-right">
+            Summary
+        </button>
+    </div>
+    <div class="page-content-wrapper">
+        <!-- Career Acheivements Info -->
+        <div *ngIf="tabName === 'ach'" class="column">
+            <div class="property-row row row-center-horizontal">
+                <div class="property-container row row-center-right">
+                    <span class="row property">Debut</span>
+                </div>
+                <div class="property-container row row-center-left">
+                    <span class="row property">{{driver.debut}}</span>
+                </div>
+            </div>
+            <div class="property-row row row-center-horizontal">
+                <div class="property-container row row-center-right">
+                    <span class="row property">Podiums</span>
+                </div>
+                <div class="property-container row row-center-left">
+                    <span class="row property">{{driver.podiums}}</span>
+                </div>
+            </div>
+            <div class="property-row row row-center-horizontal">
+                <div class="property-container row row-center-right">
+                    <span class="row property">Poles</span>
+                </div>
+                <div class="property-container row row-center-left">
+                    <span class="row property">{{driver.poles}}</span>
+                </div>
+            </div>
+            <div class="property-row row row-center-horizontal">
+                <div class="property-container row row-center-right">
+                    <span class="row property">Wins</span>
+                </div>
+                <div class="property-container row row-center-left">
+                    <span class="row property">{{driver.wins}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- Career Summary Info -->
+        <div *ngIf="tabName === 'sum'">
+            Career Summary Info
+        </div>
+    </div>
 </div>
