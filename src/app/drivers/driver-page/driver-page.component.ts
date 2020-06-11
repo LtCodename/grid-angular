@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IDriver } from '../drivers-model';
 import { DriversService } from '../drivers.service';
-import { ArrowDown, ArrowRight, Profile } from 'src/iconsService';
+import { ArrowDown, ArrowRight, Profile, Trophie } from 'src/iconsService';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -18,9 +18,12 @@ export class DriverPageComponent implements OnInit {
   showData: boolean = false;
   tabName: string = "ach";
   driverAge: number = 0;
+  champs = [];
+
   readonly arrowIconDown = this.sanitized.bypassSecurityTrustHtml(ArrowDown);
   readonly arrowIconRight = this.sanitized.bypassSecurityTrustHtml(ArrowRight);
   readonly profileIcon = this.sanitized.bypassSecurityTrustHtml(Profile);
+  readonly trophieIcon = this.sanitized.bypassSecurityTrustHtml(Trophie);
 
   constructor(private route: ActivatedRoute, private driversService: DriversService, private sanitized: DomSanitizer) {
 
@@ -33,6 +36,10 @@ export class DriverPageComponent implements OnInit {
         const dob: number = parseInt(this.driver["date-of-birth"]);
         const currentYear: number = new Date().getFullYear();
         this.driverAge = currentYear - dob;
+        
+        for (let i = parseInt(this.driver.championships); i > 0; i--) {
+          this.champs.push(i);
+        }
 
         this.showData = true;
         console.log(this.driver);

@@ -33,6 +33,9 @@
     <div class="career-content-wrapper">
         <!-- Career Acheivements Info -->
         <div *ngIf="tabName === 'ach'" class="column">
+            <div class="row row-center-horizontal trophies" *ngIf="champs.length">
+                <span class="trophie" *ngFor="let champ of champs" [innerHTML]="trophieIcon"></span>
+            </div>
             <div class="property-row row row-center-horizontal">
                 <div class="property-container row row-center-right">
                     <span class="row property">Poles</span>
