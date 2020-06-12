@@ -1,0 +1,174 @@
+$blue: #303960;
+$pink: #ea9a96;
+$orange: #f8b24f;
+$grey: #e5e5e5;
+$white: #FFFFFF;
+
+.profile-content-wrapper {
+    background: $grey;
+    width: fit-content;
+    border-radius: 80px;
+    padding: 20px 40px;
+    justify-content: center;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.profile-icon {
+    margin-right: 10px;
+    height: fit-content;
+}
+
+.profile-text {
+    font-size: 1.25rem;
+    color: $blue;
+    font-weight: bold;
+    text-align: center;
+}
+
+.team-name {
+    margin-bottom: 10px;
+}
+
+.profile-text-small {
+    font-size: 1rem;
+    color: $blue;
+}
+
+.profile-text-small:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.country {
+    margin-bottom: 10px;
+}
+
+.property {
+    background: $blue;
+    font-size: 1.25rem;
+    color: $white;
+    font-weight: bold;
+    transition: 0.2s all;
+    text-align: center;
+    display: block;
+    outline: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    width: fit-content;
+}
+
+.tab-button {
+    background: $grey;
+    font-size: 1.25rem;
+    color: $blue;
+    font-weight: bold;
+    transition: 0.2s all;
+    cursor: pointer;
+    min-width: 115px;
+    text-align: center;
+    display: block;
+    outline: none;
+    border-top: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: none;
+    border-radius: 50px 50px 0 0;
+    padding: 8px 25px 8px 25px;
+    width: 195px;
+}
+
+.tab-button:hover, .tab-button:focus  {
+    outline: none;
+    border-top: 5px solid #31395f;
+    border-left: 5px solid #31395f;
+    border-right: 5px solid #31395f;
+}
+
+.active-tab {
+    border-top: 5px solid #31395f;
+    border-left: 5px solid #31395f;
+    border-right: 5px solid #31395f;
+}
+
+.tab-button-left {
+    margin-right: 10px;
+}
+
+.tab-button-right {
+    margin-left: 10px;
+}
+
+.career-content-wrapper {
+    background: $grey;
+    width: fit-content;
+    border-radius: 80px;
+    padding: 20px;
+    justify-content: center;
+    width: 560px;
+}
+
+.trophies {
+    margin-bottom: 5px;
+    padding: 0 20px;
+}
+
+.trophie {
+    margin: 0 5px 5px 0;
+}
+
+.property-row {
+    align-items: baseline;
+}
+
+.property-row:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.property {
+    background: $blue;
+    font-size: 1.25rem;
+    color: $white;
+    font-weight: bold;
+    transition: 0.2s all;
+    text-align: center;
+    display: block;
+    outline: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    margin: 0 5px;
+    width: fit-content;
+}
+
+.summary-row {
+    align-items: center;
+}
+
+.summary-text {
+    font-size: 1.25rem;
+    color: $blue;
+    font-weight: bold;
+}
+
+.summary-cloud {
+    font-size: 1.25rem;
+    color: $white;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    border-radius: 50px;
+    padding: 8px 20px;
+    margin: 0 5px 5px 5px;
+    width: fit-content;
+}
+
+.not-champions {
+    background: $blue;
+}
+
+.champions {
+    background: $orange;
+}
+
+.arrow {
+    text-align: center;
+}

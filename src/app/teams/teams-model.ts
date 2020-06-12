@@ -6,6 +6,8 @@ export interface ITeam {
     poles: string;
     wins: string;
     id: string;
+    podiums: string;
+    summary: [];
     "constructors-championships": string;
     "debut-year": string;
     "drivers-championships": string;

@@ -1,3 +1,80 @@
 <div *ngIf="showData" class="column column-center-horizontal">
-    {{team.name}}
+    <div class="profile-content-wrapper row">
+        <span class="profile-icon" [innerHTML]="profileIcon"></span>
+        <div class="column">
+            <span class="profile-text team-name">{{team['name-full']}}</span>
+            <div class="row row-center-horizontal country"> 
+                <span class="property profile-car-number">{{team.country}}</span>
+            </div>
+            <div class="column column-center-horizontal">
+                <span class="profile-text-small">Team Principal: {{team['team-principal']}}</span>
+                <span class="profile-text-small">Power Unit: {{team.engine}}</span>
+            </div> 
+        </div>
+    </div>
+    <!-- Career Ach and Sum -->
+    <div class="buttons-row row">
+        <button
+            [ngClass]="{'active-tab': tabName === 'ach'}"
+            type="button"
+            (click)="toggleTab()"
+            class="tab-button tab-button-left">
+            Acheivements
+        </button>
+        <button
+            [ngClass]="{'active-tab': tabName === 'sum'}"
+            type="button" 
+            (click)="toggleTab()"
+            class="tab-button tab-button-right">
+            Summary
+        </button>
+    </div>
+    <div class="career-content-wrapper">
+        <!-- Career Acheivements Info -->
+        <div *ngIf="tabName === 'ach'" class="column">
+            <div class="row row-center-horizontal trophies" *ngIf="champs.length">
+                <span class="trophie" *ngFor="let champ of champs" [innerHTML]="trophieIcon"></span>
+            </div>
+            <div class="property-row row row-center-horizontal">
+                <div class="property-container row row-center-right">
+                    <span class="row property">Poles</span>
+                </div>
+                <div class="property-container row row-center-left">
+                    <span class="row property">{{team.poles}}</span>
+                </div>
+            </div>
+            <div class="property-row row row-center-horizontal">
+                <div class="property-container row row-center-right">
+                    <span class="row property">Podiums</span>
+                </div>
+                <div class="property-container row row-center-left">
+                    <span class="row property">{{team.podiums}}</span>
+                </div>
+            </div>
+            <div class="property-row row row-center-horizontal">
+                <div class="property-container row row-center-right">
+                    <span class="row property">Wins</span>
+                </div>
+                <div class="property-container row row-center-left">
+                    <span class="row property">{{team.wins}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- Career Summary Info -->
+        <div *ngIf="tabName === 'sum'">
+            <div class="column" *ngFor="let element of team.summary; let last = last">
+                 <div [ngSwitch]="element.type">
+                     <div class="row row-center-horizontal summary-row" *ngSwitchCase="'text'">
+                            <span class="summary-text">{{element.text}}</span>
+                     </div>
+                     <div class="row row-center-horizontal summary-row" *ngSwitchCase="'years'">
+                            <span [ngClass]="{'champions': year.champ, 'not-champions': !year.champ}" class="summary-cloud" *ngFor="let year of element.years">
+                                {{year.name}}
+                            </span>
+                     </div>
+                 </div>
+                 <span class="arrow" *ngIf="!last" [innerHTML]="arrowIconDown"></span>
+            </div>
+         </div>
+    </div>
 </div>

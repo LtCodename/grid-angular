@@ -58,7 +58,7 @@ export class AppComponent {
       if (!this.activePanels[panelName]) {
         this.showPanels[panelName] = false;
       }
-    }, 1000);
+    }, 500);
   }
 
   panelMouseEnter(panelName: string): void {
@@ -69,6 +69,6 @@ export class AppComponent {
     setTimeout(() => {
       this.activePanels[panelName] = false;
       this.showPanels[panelName] = false;
-    }, 1000);
+    }, 500);
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ITeam } from '../teams-model';
 import { TeamsService } from '../teams.service';
+import { TeamProfile, Trophie, ArrowDown } from 'src/iconsService';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-team-page',
@@ -15,8 +17,13 @@ export class TeamPageComponent implements OnInit {
   teamId: string;
   showData: boolean = false;
   champs = [];
+  tabName: string = "ach";
 
-  constructor(private route: ActivatedRoute, private teamsService: TeamsService) {
+  readonly profileIcon = this.sanitized.bypassSecurityTrustHtml(TeamProfile);
+  readonly trophieIcon = this.sanitized.bypassSecurityTrustHtml(Trophie);
+  readonly arrowIconDown = this.sanitized.bypassSecurityTrustHtml(ArrowDown);
+
+  constructor(private route: ActivatedRoute, private teamsService: TeamsService, private sanitized: DomSanitizer) {
     this.getQueryParam();
 
     this.teamsService.teams$.subscribe(data => {
@@ -38,6 +45,14 @@ export class TeamPageComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.teamId = params.get("team");
     });
+  }
+
+  toggleTab(): void {
+    if (this.tabName === "ach") {
+      this.tabName = "sum";
+    } else {
+      this.tabName = "ach";
+    }
   }
 
   ngOnInit(): void {
