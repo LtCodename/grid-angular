@@ -32,7 +32,7 @@ export class DriverPageComponent implements OnInit {
     this.driversService.getDriversData().subscribe(data => {
       this.allDrivers = data;
       this.driver = this.allDrivers.find((dr: IDriver) => dr.id === this.driverId);
-      if(this.driver){
+      if(this.driver) {
         const dob: number = parseInt(this.driver["date-of-birth"]);
         const currentYear: number = new Date().getFullYear();
         this.driverAge = currentYear - dob;

@@ -1,7 +1,8 @@
 <div class="row row-center-horizontal row-center-vertical">
     <div *ngIf="!showPreloader" class="row page-content-wrapper">
         <app-team *ngFor="let team of teams"
-            [name]="team.name">
+            [name]="team.name"
+            [url]="team.url">
         </app-team>
     </div>
 </div>
