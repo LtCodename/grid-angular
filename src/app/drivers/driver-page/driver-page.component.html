@@ -5,7 +5,10 @@
             <span class="profile-text driver-name">{{driver.name}}</span>
             <div class="row row-center-horizontal number-and-team"> 
                 <span class="property profile-car-number">{{driver.number}}</span>
-                <span class="property">{{driver.teamName}}</span>
+                <a class="team-link"
+                    [routerLink]="url">
+                    <span class="property hoverable">{{driver.teamName}}</span>
+                </a>
             </div>
             <div class="column column-center-horizontal">
                 <span class="profile-text-small profile-age">Age: {{driverAge}}</span>

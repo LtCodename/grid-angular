@@ -83,6 +83,15 @@ $white: #FFFFFF;
     width: fit-content;
 }
 
+.hoverable {
+    transition: 0.2s all;
+}
+
+.hoverable:hover {
+    transform: scale(1.1);
+    background: $orange;
+}
+
 .property-row {
     align-items: baseline;
 }
@@ -158,4 +167,8 @@ $white: #FFFFFF;
 
 .trophie {
     margin: 0 5px;
+}
+
+.team-link {
+    text-decoration: none;
 }

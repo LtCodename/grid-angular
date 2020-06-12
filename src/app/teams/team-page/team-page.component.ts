@@ -31,14 +31,13 @@ export class TeamPageComponent implements OnInit {
       this.team = this.allTeams.find((tm: ITeam) => tm.id === this.teamId);
 
       if(this.team) {
-        console.log(this.team);
         for (let i = parseInt(this.team["constructors-championships"]); i > 0; i--) {
           this.champs.push(i);
         }
 
         this.showData = true;
       }
-    })
+    });
   }
 
   getQueryParam(): void {

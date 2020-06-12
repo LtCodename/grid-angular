@@ -18,6 +18,7 @@ export class DriverPageComponent implements OnInit {
   showData: boolean = false;
   tabName: string = "ach";
   driverAge: number = 0;
+  url: string = "";
   champs = [];
 
   readonly arrowIconDown = this.sanitized.bypassSecurityTrustHtml(ArrowDown);
@@ -36,6 +37,7 @@ export class DriverPageComponent implements OnInit {
         const dob: number = parseInt(this.driver["date-of-birth"]);
         const currentYear: number = new Date().getFullYear();
         this.driverAge = currentYear - dob;
+        this.url = `/teams/${this.driver["team-id"]}`;
         
         for (let i = parseInt(this.driver.championships); i > 0; i--) {
           this.champs.push(i);
