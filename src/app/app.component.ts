@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ITab } from './model';
+import { ITab } from './app-model';
 
 @Component({
   selector: 'app-root',
@@ -41,6 +41,11 @@ export class AppComponent {
   timeout: any = 0;
   
   tabMouseEnter(panelName: string): void {
+    //Temp
+    if(panelName === "seasons") {
+      return;
+    }
+
     this.timeout = setTimeout(() => {
       this.showPanels[panelName] = true;
     }, 1000);

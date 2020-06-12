@@ -9,6 +9,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { DriverModule } from './components/driver/driver.component';
 import { CloudPanelComponent } from './components/cloud-panel/cloud-panel.component';
+import { TeamModule } from './components/team/team.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBySqoOBscXNukfZu9wLROMXHEBASoMEjI",
@@ -34,7 +35,8 @@ const firebaseConfig = {
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    DriverModule
+    DriverModule,
+    TeamModule
   ],
   providers: [],
   bootstrap: [AppComponent]

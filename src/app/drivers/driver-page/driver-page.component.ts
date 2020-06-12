@@ -42,7 +42,6 @@ export class DriverPageComponent implements OnInit {
         }
 
         this.showData = true;
-        console.log(this.driver);
       }
     });
   }

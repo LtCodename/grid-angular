@@ -26,7 +26,7 @@ export class TeamsPageComponent implements OnInit {
       if(this.teams.length) {
         this.showPreloader = false;
       }
-    })
+    });
   }
 
   ngOnInit(): void {
