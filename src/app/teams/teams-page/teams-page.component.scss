@@ -1,0 +1,15 @@
+$blue: #303960;
+$pink: #ea9a96;
+$orange: #f8b24f;
+$grey: #e5e5e5;
+$white: #FFFFFF;
+
+.page-content-wrapper {
+    background: $grey;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 80px;
+    padding: 30px 30px 20px 30px;
+    justify-content: center;
+    max-width: 630px;
+}

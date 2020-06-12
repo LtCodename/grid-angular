@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ITeam } from '../teams-model';
+import { TeamsService } from '../teams.service';
 
 @Component({
   selector: 'app-teams-page',
@@ -7,7 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamsPageComponent implements OnInit {
 
-  constructor() { }
+  teams: ITeam[] = [];
+  showPreloader: boolean = true;
+
+  constructor(private teamsService: TeamsService) { 
+    this.teamsService.teams$.subscribe(data => {
+      this.teams = data.sort((a: ITeam, b: ITeam) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+      });
+      if(this.teams.length) {
+        this.showPreloader = false;
+      }
+    })
+  }
 
   ngOnInit(): void {
   }

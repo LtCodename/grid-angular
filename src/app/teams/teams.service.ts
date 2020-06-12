@@ -30,6 +30,7 @@ export class TeamsService {
   private processSnapshot(data) {
     return data.map((e) => ({
       id: e.payload.doc.id,
+      url: `/teams/${e.payload.doc.id}`,
       ...e.payload.doc.data()
     }));
   }
