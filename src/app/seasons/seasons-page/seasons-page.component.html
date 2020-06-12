@@ -1,1 +1,37 @@
-<p>seasons-page works!</p>
+<div *ngIf="showData" class="column column-center-horizontal">
+    <div class="events-wrapper column column-center-horizontal">
+        <span class="grey-cloud">Events Calendar</span>
+        <!-- Events Buttons -->
+        <div class="buttons-row row">
+            <button
+                [ngClass]="{'active-tab': eventsTabName === 'upcoming'}"
+                type="button"
+                (click)="toggleEventsTab()"
+                class="tab-button tab-button-left">
+                Upcoming
+            </button>
+            <button
+                [ngClass]="{'active-tab': eventsTabName === 'past'}"
+                type="button" 
+                (click)="toggleEventsTab()"
+                class="tab-button tab-button-right">
+                Past
+            </button>
+        </div>
+        <!-- Events -->
+        <div class="events-content-wrapper">
+            <!-- Upcoming Events -->
+            <div *ngIf="eventsTabName === 'upcoming'" class="row">
+                <span *ngFor="let upcomingRace of upcomingRaces">
+                    {{upcomingRace.name}}
+                </span>
+            </div>
+            <!-- Past Events -->
+            <div *ngIf="eventsTabName === 'past'" class="row">
+                <span *ngFor="let pastRace of pastRaces">
+                    {{pastRace.name}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

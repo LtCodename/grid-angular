@@ -100,8 +100,8 @@ export class CloudPanelComponent implements OnInit {
                 return 1;
               }
               return 0;
-            })
-          })
+            });
+          });
         }
         
         if(this.driversToDisplay.length) {
