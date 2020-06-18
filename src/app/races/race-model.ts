@@ -12,3 +12,10 @@ export interface IRace {
     "name-full": string;
     "lap-team": string;
 }
+
+export interface IPlace {
+    driver: string;
+    team: string;
+}
+
+

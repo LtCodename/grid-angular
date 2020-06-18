@@ -21,16 +21,23 @@
         <!-- Events -->
         <div class="events-content-wrapper">
             <!-- Upcoming Events -->
-            <div *ngIf="eventsTabName === 'upcoming'" class="row">
-                <span *ngFor="let upcomingRace of upcomingRaces">
-                    {{upcomingRace.name}}
-                </span>
+            <div *ngIf="eventsTabName === 'upcoming'" class="row row-center-horizontal">
+                <app-race 
+                    *ngFor="let upcomingRace of upcomingRaces"
+                    [mode]="'upcoming'"
+                    [date]="upcomingRace.date"
+                    [name]="upcomingRace.name">
+                </app-race>
             </div>
             <!-- Past Events -->
-            <div *ngIf="eventsTabName === 'past'" class="row">
-                <span *ngFor="let pastRace of pastRaces">
-                    {{pastRace.name}}
-                </span>
+            <div *ngIf="eventsTabName === 'past'" class="row row-center-horizontal">
+                <app-race 
+                    *ngFor="let pastRace of pastRaces"
+                    [mode]="'past'"
+                    [places]="pastRace.places"
+                    [date]="pastRace.date"
+                    [name]="pastRace.name">
+                </app-race>
             </div>
         </div>
     </div>

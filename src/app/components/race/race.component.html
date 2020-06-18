@@ -1,0 +1,9 @@
+<div class="column race" [ngClass]="{'regular-padding': mode === 'upcoming', 'additional-padding': mode === 'past'}">
+    <span class="race-name">{{name}}</span>
+    <span class="race-date">{{date}}</span>
+    <div class="row podium-places" *ngIf="mode === 'past'">
+        <span class="podium first-place">{{podiumPlaces[0]}}</span>
+        <span class="podium second-place">{{podiumPlaces[1]}}</span>
+        <span class="podium third-place">{{podiumPlaces[2]}}</span>
+    </div>
+</div>
