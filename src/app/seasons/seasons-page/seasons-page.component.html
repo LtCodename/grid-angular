@@ -1,17 +1,18 @@
 <div *ngIf="showData" class="column column-center-horizontal">
     <div class="events-wrapper column column-center-horizontal">
+        <!-- Events Section -->
         <span class="grey-cloud">Events Calendar</span>
         <!-- Events Buttons -->
         <div class="buttons-row row">
             <button
-                [ngClass]="{'active-tab': eventsTabName === 'upcoming'}"
+                [ngClass]="{'active-events-tab': eventsTabName === 'upcoming'}"
                 type="button"
                 (click)="toggleEventsTab()"
                 class="tab-button tab-button-left">
                 Upcoming
             </button>
             <button
-                [ngClass]="{'active-tab': eventsTabName === 'past'}"
+                [ngClass]="{'active-events-tab': eventsTabName === 'past'}"
                 type="button" 
                 (click)="toggleEventsTab()"
                 class="tab-button tab-button-right">
@@ -38,6 +39,36 @@
                     [date]="pastRace.date"
                     [name]="pastRace.name">
                 </app-race>
+            </div>
+        </div>
+        <!-- Standings Section -->
+        <span class="grey-cloud">Standings</span>
+        <!-- Standings Buttons -->
+        <div class="buttons-row row">
+            <button
+                [ngClass]="{'active-standings-tab': standingsTabName === 'drivers'}"
+                type="button"
+                (click)="toggleStandingsTab()"
+                class="tab-button tab-button-left">
+                Drivers
+            </button>
+            <button
+                [ngClass]="{'active-standings-tab': standingsTabName === 'teams'}"
+                type="button" 
+                (click)="toggleStandingsTab()"
+                class="tab-button tab-button-right">
+                Teams
+            </button>
+        </div>
+        <!-- Standings -->
+        <div class="events-content-wrapper">
+            <!-- Drivers Standings -->
+            <div *ngIf="standingsTabName === 'drivers'" class="row row-center-horizontal">
+                <span>Drivers</span>
+            </div>
+            <!-- Teams Standings-->
+            <div *ngIf="standingsTabName === 'teams'" class="row row-center-horizontal">
+                <span>Teams</span>
             </div>
         </div>
     </div>
