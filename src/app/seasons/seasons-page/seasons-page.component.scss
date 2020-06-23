@@ -72,3 +72,31 @@ $white: #FFFFFF;
     min-width: 560px;
     margin-bottom: 10px;
 }
+
+.standings-cell {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: $blue;
+    text-align: center;
+    padding-bottom: 5px;
+    margin-right: 10px;
+}
+
+.standings-cell-driver {
+    min-width: 85px;
+}
+
+.standings-cell-team {
+    min-width: 150px;
+}
+
+.standings-points {
+    min-width: 25px;
+    text-align: center;
+}
+
+.standings-row {
+    margin-bottom: 5px;
+    border-bottom: 5px solid #303960;
+    border-radius: 5px;
+}

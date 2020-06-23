@@ -4,6 +4,11 @@ import { ISeason } from '../seasons-model';
 import { IRace } from 'src/app/races/race-model';
 import { RacesService } from 'src/app/races/races.service';
 import { PointsSystem } from 'src/app/app-model';
+import { mergeMap, map } from 'rxjs/operators';
+import { DriversService } from 'src/app/drivers/drivers.service';
+import { IDriver } from 'src/app/drivers/drivers-model';
+import { TeamsService } from 'src/app/teams/teams.service';
+import { ITeam } from 'src/app/teams/teams-model';
 
 @Component({
   selector: 'app-seasons-page',
@@ -19,42 +24,49 @@ export class SeasonsPageComponent implements OnInit {
   pastRaces: IRace[] = [];
   currentSeason: ISeason;
   driversStandings = [];
+  teamsStandings = [];
   showData: boolean = false;
   eventsTabName: string = "upcoming";
   standingsTabName: string = "drivers";
 
-  constructor(private seasonsService: SeasonsService, private racesService: RacesService) { 
-    //Get all seasons
-    this.seasonsService.seasons$.subscribe(data => {
-      this.allSeasons = data;
-      //Determine current season
-      this.currentSeason = this.setCurrentSeason(this.allSeasons);
+  constructor(
+    private seasonsService: SeasonsService,
+    private racesService: RacesService,
+    private driversService: DriversService,
+    private teamsService: TeamsService
+  ) {
+    this.seasonsService.seasons$.pipe(
+      mergeMap((allSeasons: ISeason[]) => this.racesService.races$.pipe(map((allRaces: IRace[]): [ISeason[], IRace[]] => [allSeasons, allRaces]))),
+      mergeMap(([allSeasons, allRaces]) => this.driversService.drivers$.pipe(map((allDrivers: IDriver[]): [ISeason[], IRace[], IDriver[]] => [allSeasons, allRaces, allDrivers]))),
+      mergeMap(([allSeasons, allRaces, allDrivers]) => this.teamsService.teams$.pipe(map((allTeams: ITeam[]): [ISeason[], IRace[], IDriver[], ITeam[]] => [allSeasons, allRaces, allDrivers, allTeams])))
+    ).subscribe(([allSeasons, allRaces, allDrivers, allTeams]) => {
+      if (allSeasons.length && allRaces.length && allDrivers.length) {
+        this.allSeasons = allSeasons;
+        this.currentSeason = this.setCurrentSeason(this.allSeasons);
 
-      if(this.currentSeason) {
-        //Get all races
-        this.racesService.races$.subscribe(races => {
-          this.allRaces = races;
+        this.allRaces = allRaces;
+        //Determine this season races
+        this.seasonRaces = this.setSeasonRaces(this.allRaces);
 
-          //Determine this season races
-          this.seasonRaces = this.setSeasonRaces(this.allRaces);
-          
-          if (this.seasonRaces) {
-            //Determine upcoming races
-            this.upcomingRaces = this.setUpcomingRaces(this.seasonRaces);
+        //Determine upcoming races
+        this.upcomingRaces = this.setUpcomingRaces(this.seasonRaces);
 
-            //Determine past races
-            this.pastRaces = this.setPastRaces(this.seasonRaces);
+        //Determine past races
+        this.pastRaces = this.setPastRaces(this.seasonRaces);
 
-            // Caclulate drivers standings
-            this.driversStandings = this.calculateDriversStandings(this.pastRaces);
-            console.log(this.driversStandings);
+        // Caclulate drivers standings
+        this.driversStandings = this.calculateDriversStandings(this.pastRaces, allDrivers);
 
-            this.showData = true;
-          }
-        });
+        // Caclulate teams standings
+        this.teamsStandings = this.calculateTeamsStandings(this.pastRaces, allTeams);
+        console.log(this.teamsStandings);
       }
+
+      this.showData = true;
+    }, () => {
+      this.showData = true;
     });
-  }
+  };
 
   setCurrentSeason(seasonsData: ISeason[]): ISeason {
     return seasonsData.find((season: ISeason) => season.current);
@@ -88,17 +100,19 @@ export class SeasonsPageComponent implements OnInit {
     });
   }
 
-  calculateDriversStandings(racesData: IRace[]): IRace[] {
+  calculateDriversStandings(racesData: IRace[], drivers: IDriver[]) {
     let standingsHash = {};
     let standings = [];
 
     racesData.forEach((race: IRace) => {
       if (race.places) {
         for (let place in race.places) {
+          let driver: IDriver = drivers.find((dr: IDriver) => dr.id === race.places[place].driver);
+
           if (standingsHash[race.places[place].driver]) {
-            standingsHash[race.places[place].driver] += PointsSystem[place];
+            standingsHash[driver.name] += PointsSystem[place];
           } else {
-            standingsHash[race.places[place].driver] = PointsSystem[place];
+            standingsHash[driver.name] = PointsSystem[place];
           }
         }
       }
@@ -109,16 +123,72 @@ export class SeasonsPageComponent implements OnInit {
     });
 
     //Convert drivers standings hash table into an array
-    Object.keys(standingsHash).forEach((driverId: string) => {
+    Object.keys(standingsHash).forEach((driverName: string) => {
       standings.push({
-        id: driverId,
-        points: standingsHash[driverId]
+        name: this.shortenName(driverName),
+        points: standingsHash[driverName]
       })
-    })
+    });
 
-    //TODO change id's to names in array
+    return standings.sort((a: any, b: any) => {
+      if (a.points < b.points) {
+        return 1;
+      }
+      if (a.points > b.points) {
+        return -1;
+      }
+      return 0;
+    });
+  }
 
-    return standings;
+  calculateTeamsStandings(racesData: IRace[], teams: ITeam[]) {
+    let standingsHash = {};
+
+    racesData.forEach((race: IRace) => {
+      if (race.places) {
+        for (let place in race.places) {
+          let constructor: ITeam = teams.find((tm: ITeam) => tm.id === race.places[place].team);
+
+          if (standingsHash[race.places[place].team]) {
+              standingsHash[constructor.name] += PointsSystem[place];
+          } else {
+              standingsHash[constructor.name] = PointsSystem[place];
+          }
+        }
+      }
+
+      if (race['lap-team'] && race['lap-team'] !== 'Not selected') {
+        standingsHash[race['lap-team']] ++;
+      }
+    });
+
+    let filteredStandings = [];
+
+    for (let i in standingsHash) {
+      filteredStandings.push({
+        team: i,
+        points: standingsHash[i] || 0
+      })
+    }
+
+    return filteredStandings.sort((a, b) => {
+      const pointsA = a.points;
+      const pointsB = b.points;
+
+      if (pointsA < pointsB) {
+        return 1;
+      }
+      if (pointsA > pointsB) {
+        return -1;
+      }
+      return 0;
+  });
+  }
+
+  shortenName(name: string): string {
+    const nameArray = name.split(" ");
+    const lastName: string = nameArray[1];
+    return lastName.slice(0, 3).toLocaleUpperCase();
   }
 
   toggleEventsTab(): void {
