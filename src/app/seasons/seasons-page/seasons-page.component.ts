@@ -59,7 +59,6 @@ export class SeasonsPageComponent implements OnInit {
 
         // Caclulate teams standings
         this.teamsStandings = this.calculateTeamsStandings(this.pastRaces, allTeams);
-        console.log(this.teamsStandings);
       }
 
       this.showData = true;
@@ -130,7 +129,20 @@ export class SeasonsPageComponent implements OnInit {
       })
     });
 
-    return standings.sort((a: any, b: any) => {
+    let completeStandings = [...standings];
+
+    drivers.forEach((driversData: IDriver) => {
+      let driverId: any = driversData.id;
+      let foundElement = standings.find(elem => (elem.name === this.shortenName(driversData.name)));
+      if (!foundElement && this.currentSeason.drivers.indexOf(driverId) !== -1) {
+        completeStandings.push({
+          name: this.shortenName(driversData.name),
+          points: 0
+        });
+      }
+    });
+
+    return completeStandings.sort((a: any, b: any) => {
       if (a.points < b.points) {
         return 1;
       }
@@ -150,9 +162,9 @@ export class SeasonsPageComponent implements OnInit {
           let constructor: ITeam = teams.find((tm: ITeam) => tm.id === race.places[place].team);
 
           if (standingsHash[race.places[place].team]) {
-              standingsHash[constructor.name] += PointsSystem[place];
+            standingsHash[constructor.name] += PointsSystem[place];
           } else {
-              standingsHash[constructor.name] = PointsSystem[place];
+            standingsHash[constructor.name] = PointsSystem[place];
           }
         }
       }
@@ -162,16 +174,28 @@ export class SeasonsPageComponent implements OnInit {
       }
     });
 
-    let filteredStandings = [];
+    let standings = [];
 
     for (let i in standingsHash) {
-      filteredStandings.push({
+      standings.push({
         team: i,
         points: standingsHash[i] || 0
-      })
+      });
     }
 
-    return filteredStandings.sort((a, b) => {
+    let completeStandings = [...standings];
+
+    teams.forEach((teamData: ITeam) => {
+      let foundElement = standings.find(elem => elem.team === teamData.name);
+      if (!foundElement) {
+        completeStandings.push({
+          team: teamData.name,
+          points: 0
+        });
+      }
+    });
+
+    return completeStandings.sort((a, b) => {
       const pointsA = a.points;
       const pointsB = b.points;
 
