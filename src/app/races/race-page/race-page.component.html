@@ -1,1 +1,16 @@
-<p *ngIf="showData">{{race.name}}</p>
+<div *ngIf="showData" class="column column-center-horizontal">
+    <div class="profile-content-wrapper row">
+        <span class="profile-icon" [innerHTML]="flagIcon"></span>
+        <div class="column">
+            <span class="profile-text driver-name">{{race.fullName}}</span>
+            <div class="row row-center-horizontal number-and-team"> 
+                <span class="property profile-car-number">{{race.circuit}}</span>
+                <span class="property profile-car-number">{{race.location}}</span>
+            </div>
+            <div class="column column-center-horizontal">
+                <span class="profile-text-small profile-age">Date: {{race.date}}</span>
+                <span class="profile-text-small">Round: {{race.round}}</span>
+            </div> 
+        </div>
+    </div>
+</div>

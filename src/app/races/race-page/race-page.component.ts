@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RacesService } from '../races.service';
 import { IRace } from '../race-model';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ChequeredFlag } from 'src/iconsService';
 
 @Component({
   selector: 'app-race-page',
@@ -15,7 +17,9 @@ export class RacePageComponent implements OnInit {
   race: IRace;
   showData: boolean = false;
 
-  constructor(private route: ActivatedRoute, private racesService: RacesService) { 
+  readonly flagIcon = this.sanitized.bypassSecurityTrustHtml(ChequeredFlag);
+
+  constructor(private route: ActivatedRoute, private racesService: RacesService, private sanitized: DomSanitizer) { 
     this.getQueryParam();
 
     this.racesService.races$.subscribe(data => {
