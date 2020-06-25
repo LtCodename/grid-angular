@@ -30,6 +30,7 @@ export class RacesService {
   private processSnapshot(data) {
     return data.map((e) => ({
       id: e.payload.doc.id,
+      url: `/race/${e.payload.doc.id}`,
       ...e.payload.doc.data()
     }));
   }

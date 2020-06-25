@@ -27,6 +27,7 @@
                     *ngFor="let upcomingRace of upcomingRaces"
                     [mode]="'upcoming'"
                     [date]="upcomingRace.date"
+                    [url]="upcomingRace.url"
                     [name]="upcomingRace.name">
                 </app-race>
             </div>
@@ -37,6 +38,7 @@
                     [mode]="'past'"
                     [places]="pastRace.places"
                     [date]="pastRace.date"
+                    [url]="pastRace.url"
                     [name]="pastRace.name">
                 </app-race>
             </div>

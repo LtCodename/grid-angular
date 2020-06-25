@@ -8,6 +8,7 @@ export interface IRace {
     pole: string;
     round: string;
     finished: boolean;
+    url: string;
     "season-id": string;
     "name-full": string;
     "lap-team": string;

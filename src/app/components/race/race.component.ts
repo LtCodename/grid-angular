@@ -18,6 +18,7 @@ export class RaceComponent implements OnInit {
   @Input() date: string;
   @Input() mode: string;
   @Input() places: IPlace[];
+  @Input() url: string = "";
 
   constructor(private driversService: DriversService) { }
 
