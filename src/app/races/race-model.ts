@@ -22,4 +22,10 @@ export interface IPlace {
     team: string;
 }
 
+export interface IRaceResult {
+    driver: string;
+    team: string;
+    points: number;
+}
+
 

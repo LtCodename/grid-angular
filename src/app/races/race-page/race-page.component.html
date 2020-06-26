@@ -1,16 +1,42 @@
 <div *ngIf="showData" class="column column-center-horizontal">
-    <div class="profile-content-wrapper row">
-        <span class="profile-icon" [innerHTML]="flagIcon"></span>
+    <div class="race-info-wrapper row">
+        <span class="icon" [innerHTML]="flagIcon"></span>
         <div class="column">
-            <span class="profile-text driver-name">{{race.fullName}}</span>
-            <div class="row row-center-horizontal number-and-team"> 
-                <span class="property profile-car-number">{{race.circuit}}</span>
-                <span class="property profile-car-number">{{race.location}}</span>
+            <span class="header race-name">{{race.fullName}}</span>
+            <div class="row row-center-horizontal curcuit-and-location"> 
+                <span class="property">{{race.circuit}}</span>
+                <span class="property">{{race.location}}</span>
             </div>
             <div class="column column-center-horizontal">
-                <span class="profile-text-small profile-age">Date: {{race.date}}</span>
+                <span class="profile-text-small date">Date: {{race.date}}</span>
                 <span class="profile-text-small">Round: {{race.round}}</span>
             </div> 
+        </div>
+    </div>
+    <div class="buttons-row row">
+        <span
+            type="button"
+            class="tab">
+            Grand Prix Summary
+        </span>
+    </div>
+    <div class="results-wrapper column">
+        <div class="row pole-and-lap">
+            <div class="row row-center-vertical pole-row">
+                <span class="profile-text-small">Pole Position:</span>
+                <span class="property">{{poleSitter}}</span>
+            </div>
+            <div class="row row-center-vertical">
+                <span class="profile-text-small">Fastest Lap:</span>
+                <span class="property">{{fastestDriver}}</span>
+            </div>
+        </div>
+        <div class="column results-table">
+            <div class="row results-row" *ngFor="let result of raceResults">
+                <span class="result-text results-driver">{{result.driver}}</span>
+                <span class="result-text results-team">{{result.team}}</span>
+                <span class="result-text results-points">{{result.points}}</span>
+            </div>
         </div>
     </div>
 </div>

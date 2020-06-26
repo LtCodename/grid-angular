@@ -4,7 +4,7 @@ $orange: #f8b24f;
 $grey: #e5e5e5;
 $white: #FFFFFF;
 
-.profile-content-wrapper {
+.race-info-wrapper {
     background: $grey;
     width: fit-content;
     border-radius: 80px;
@@ -14,23 +14,23 @@ $white: #FFFFFF;
     align-items: center;
 }
 
-.profile-icon {
+.icon {
     margin-right: 10px;
     height: fit-content;
 }
 
-.profile-text {
+.header {
     font-size: 1.25rem;
     color: $blue;
     font-weight: bold;
     text-align: center;
 }
 
-.driver-name {
+.race-name {
     margin-bottom: 10px;
 }
 
-.number-and-team {
+.curcuit-and-location {
     margin-bottom: 10px;
 }
 
@@ -49,15 +49,76 @@ $white: #FFFFFF;
     width: fit-content;
 }
 
-.profile-car-number {
-    margin-right: 10px;
-}
-
 .profile-text-small {
     font-size: 1rem;
     color: $blue;
+    height: fit-content;
 }
 
-.profile-age {
+.date {
     margin-bottom: 10px;
+}
+
+.tab {
+    background: $grey;
+    font-size: 1.25rem;
+    color: $blue;
+    font-weight: bold;
+    transition: 0.2s all;
+    text-align: center;
+    display: block;
+    border-top: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: none;
+    border-radius: 50px 50px 0 0;
+    padding: 8px 25px 8px 25px;
+}
+
+.results-wrapper {
+    background: $grey;
+    width: fit-content;
+    border-radius: 80px;
+    padding: 20px 40px 20px 40px;
+    justify-content: center;
+}
+
+.pole-row {
+    margin-right: 10px;
+}
+
+.pole-and-lap {
+    margin: 0 20px 10px 20px;
+}
+
+.result-text {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #303960;
+    text-align: center;
+    padding-bottom: 5px;
+    margin-right: 10px;
+}
+
+.results-row {
+    margin-bottom: 5px;
+    border-bottom: 5px solid #303960;
+    border-radius: 5px;
+}
+
+.results-driver {
+    min-width: 180px;
+}
+
+.results-team {
+    min-width: 150px;
+}
+
+.results-points {
+    min-width: 30px;
+}
+
+.results-table {
+    margin-bottom: 20px;
+    margin-top: 10px;
 }

@@ -212,7 +212,10 @@ export class SeasonsPageComponent implements OnInit {
   shortenName(name: string): string {
     const nameArray = name.split(" ");
     const lastName: string = nameArray[1];
-    return lastName.slice(0, 3).toLocaleUpperCase();
+    if  (lastName) {
+      return lastName.slice(0, 3).toLocaleUpperCase();
+    }
+    return "";
   }
 
   toggleEventsTab(): void {
