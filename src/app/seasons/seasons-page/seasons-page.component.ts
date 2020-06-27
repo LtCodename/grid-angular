@@ -102,12 +102,12 @@ export class SeasonsPageComponent implements OnInit {
   calculateDriversStandings(racesData: IRace[], drivers: IDriver[]) {
     let standingsHash = {};
     let standings = [];
-
+    
     racesData.forEach((race: IRace) => {
       if (race.places) {
         for (let place in race.places) {
           let driver: IDriver = drivers.find((dr: IDriver) => dr.id === race.places[place].driver);
-
+          
           if (standingsHash[race.places[place].driver]) {
             standingsHash[driver.name] += PointsSystem[place];
           } else {
@@ -117,7 +117,12 @@ export class SeasonsPageComponent implements OnInit {
       }
 
       if (race.lap) {
-        standingsHash[race.lap] ++;
+        let fastestDriver: IDriver = drivers.find((dr: IDriver) => dr.id === race.lap);
+        if (standingsHash[fastestDriver.name]) {
+          standingsHash[fastestDriver.name] ++;
+        } else {
+          standingsHash[fastestDriver.name] = 1;
+        }
       }
     });
 
@@ -130,7 +135,7 @@ export class SeasonsPageComponent implements OnInit {
     });
 
     let completeStandings = [...standings];
-
+    
     drivers.forEach((driversData: IDriver) => {
       let driverId: any = driversData.id;
       let foundElement = standings.find(elem => (elem.name === this.shortenName(driversData.name)));
@@ -170,7 +175,12 @@ export class SeasonsPageComponent implements OnInit {
       }
 
       if (race['lap-team'] && race['lap-team'] !== 'Not selected') {
-        standingsHash[race['lap-team']] ++;
+        let fastestTeam: ITeam = teams.find((tm: ITeam) => tm.id === race['lap-team']);
+        if (standingsHash[fastestTeam.name]) {
+          standingsHash[fastestTeam.name] ++;
+        } else {
+          standingsHash[fastestTeam.name] = 1;
+        }
       }
     });
 

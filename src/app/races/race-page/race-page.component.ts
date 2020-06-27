@@ -22,8 +22,8 @@ export class RacePageComponent implements OnInit {
   allRaces: IRace[];
   allDrivers: IDriver[];
   allTeams: ITeam[];
-  poleSitter: string;
-  fastestDriver: string;
+  poleSitter: string = "";
+  fastestDriver: string = "";
   race: IRace;
   raceResults: IRaceResult[] = [];
   showData: boolean = false;
@@ -48,9 +48,9 @@ export class RacePageComponent implements OnInit {
       this.race = this.allRaces.find((rc: IRace) => rc.id === this.raceId);
 
       if(this.race && this.allDrivers.length && this.allRaces.length) {
-        this.poleSitter = this.shortenName(this.allDrivers.find((dr: IDriver) => dr.id === this.race.pole).name);
-        this.fastestDriver = this.shortenName(this.allDrivers.find((dr: IDriver) => dr.id === this.race.lap).name);
-        this.raceResults = this.calculateResults();
+        this.race.pole ? this.poleSitter = this.shortenName(this.allDrivers.find((dr: IDriver) => dr.id === this.race.pole).name) : this.poleSitter = "No Data";
+        this.race.lap ? this.fastestDriver = this.shortenName(this.allDrivers.find((dr: IDriver) => dr.id === this.race.lap).name) : this.fastestDriver = "No Data";
+        this.raceResults = this.race.places ? this.calculateResults() : [];
         this.showData = true;
       }
     }, () => {
