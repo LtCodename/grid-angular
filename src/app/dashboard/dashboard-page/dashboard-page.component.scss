@@ -1,0 +1,85 @@
+$blue: #303960;
+$pink: #ea9a96;
+$orange: #f8b24f;
+$grey: #e5e5e5;
+$white: #FFFFFF;
+
+.page-content-wrapper {
+    background: $grey;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 80px;
+    padding: 30px;
+    justify-content: center;
+    max-width: 630px;
+}
+
+.auth-label {
+    font-size: 1rem;
+    color: #303960;
+    margin: 10px 0;
+}
+
+.auth-input {
+    background: $blue;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    border: none;
+    min-width: 285px;
+}
+
+.auth-input:hover,
+.auth-input:focus,
+.auth-input:active {
+    outline: none;
+}
+
+.auth-input:-webkit-autofill,
+.auth-input:-webkit-autofill:hover, 
+.auth-input:-webkit-autofill:focus, 
+.auth-input:-webkit-autofill:active  {
+    -webkit-text-fill-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 0px 1000px $blue inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.auth-input:-webkit-autofill::first-line {
+    font-size: 1.25rem; 
+    font-weight: bold;
+}
+
+.auth-button {
+    background: $orange;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    font-weight: bold;
+    transition: 0.2s all;
+    cursor: pointer;
+    min-width: 115px;
+    text-align: center;
+    display: block;
+    border: none;
+    outline: none;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+.auth-button:hover,
+.auth-button:focus,
+.auth-button:active {
+    outline: none;
+}
+
+.auth-button:hover {
+    transform: scale(1.1);
+    background: $blue;
+}
+
+

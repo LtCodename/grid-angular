@@ -23,6 +23,11 @@ export class AppComponent {
       id: "teams",
       name: "Teams",
       url: "/teams"
+    },
+    {
+      id: "dashboard",
+      name: "Dashboard",
+      url: "/dashboard"
     }
   ]
 
@@ -41,8 +46,7 @@ export class AppComponent {
   timeout: any = 0;
   
   tabMouseEnter(panelName: string): void {
-    //Temp
-    if(panelName === "seasons") {
+    if(panelName === "seasons" || panelName === "dashboard") {
       return;
     }
 
