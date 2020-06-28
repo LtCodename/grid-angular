@@ -9,7 +9,7 @@ export class DashboardService {
 
   authToken$: Observable<any>;
 
-  private tokenSubject: BehaviorSubject<any> = new BehaviorSubject(null);
+  private tokenSubject: BehaviorSubject<any> = new BehaviorSubject('first');
 
   constructor(public fireAuth: AngularFireAuth) {
     this.authToken$ = this.tokenSubject.asObservable();
