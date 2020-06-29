@@ -4,12 +4,10 @@
         <input class="auth-input" type="text" name="email" [(ngModel)]="email">
         <label class="auth-label">Password</label>
         <input class="auth-input" type="password" name="password" [(ngModel)]="password">
-        <button 
-            class="auth-button login-button" 
-            (click)="login()"
-            type="submit">
-        Login
-        </button>
+        <app-button 
+            [buttonText]="'Login'"
+            (click)="login()">
+        </app-button>
     </div>
 </form>
 
@@ -17,10 +15,9 @@
     <div class="column page-content-wrapper">
         <span>Edit Rules</span>
     </div>
-    <button 
-        class="auth-button logout-button" 
-        (click)="logout()"
-        type="button">
-        Logout
-    </button>
+    <app-button 
+        class="logout-button" 
+        [buttonText]="'Logout'"
+        (click)="logout()">
+    </app-button>
 </div>

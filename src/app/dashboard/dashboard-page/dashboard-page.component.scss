@@ -54,34 +54,6 @@ $white: #FFFFFF;
     font-weight: bold;
 }
 
-.auth-button {
-    background: $orange;
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 1.25rem;
-    color: #FFFFFF;
-    font-weight: bold;
-    transition: 0.2s all;
-    cursor: pointer;
-    min-width: 115px;
-    text-align: center;
-    display: block;
-    border: none;
-    outline: none;
-    width: fit-content;
-}
-
-.auth-button:hover,
-.auth-button:focus,
-.auth-button:active {
-    outline: none;
-}
-
-.auth-button:hover {
-    transform: scale(1.1);
-    background: $blue;
-}
-
 .logout-button {
     margin-top: 10px;
 }
