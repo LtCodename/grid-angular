@@ -14,6 +14,8 @@ export class DashboardPageComponent implements OnInit {
   user: any = undefined;
   showLoginPanel: boolean = false;
   showEditPanel: boolean = false;
+  loginButtonText: string = "Login";
+  logoutButtonText: string = "Logout";
 
   constructor(private dashboardService: DashboardService, private ngZone: NgZone) {
     this.dashboardService.authToken$
@@ -28,7 +30,7 @@ export class DashboardPageComponent implements OnInit {
             this.showLoginPanel = true;
             this.showEditPanel = false;
           }
-          console.log(this.user);
+          //console.log(this.user);
         });
       });
   }
@@ -37,19 +39,36 @@ export class DashboardPageComponent implements OnInit {
   }
 
   login(): void {
-    console.log(this.email);
+    this.loginButtonText = "Wait...";
     this.dashboardService.loginUser(this.email, this.password).then(res => {
       console.log(res);
+      this.loginButtonText = "Done";
+      setTimeout(() => {
+        this.loginButtonText = "Login";
+      }, 1000);
     }).catch(error => {
       console.log(error);
+      this.loginButtonText = "Error!";
+      setTimeout(() => {
+        this.loginButtonText = "Login";
+      }, 2000);
     })
   }
 
   logout(): void {
+    this.logoutButtonText = "Wait...";
     this.dashboardService.logoutUser().then(res => {
       console.log(res);
+      this.logoutButtonText = "Done";
+      setTimeout(() => {
+        this.logoutButtonText = "Logout";
+      }, 1000);
     }).catch(error => {
       console.log(error);
+      this.logoutButtonText = "Error!";
+      setTimeout(() => {
+        this.logoutButtonText = "Logout";
+      }, 2000);
     })
   }
 }

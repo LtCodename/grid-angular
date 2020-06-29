@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+$blue: #303960;
+$pink: #ea9a96;
+$orange: #f8b24f;
+$grey: #e5e5e5;
+$white: #FFFFFF;
+
 html, body { height: 100%; }
 
 body { 
@@ -45,4 +51,71 @@ body {
 
 .column-center-vertical {
     justify-content: center;
+}
+
+/* Button */
+
+.grid-button {
+    background: $orange;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    font-weight: bold;
+    transition: 0.2s all;
+    cursor: pointer;
+    min-width: 115px;
+    text-align: center;
+    display: block;
+    border: none;
+    outline: none;
+    width: fit-content;
+}
+
+.grid-button:hover,
+.grid-button:focus,
+.grid-button:active {
+    outline: none;
+}
+
+.grid-button:hover {
+    transform: scale(1.1);
+    background: $blue;
+}
+
+/* Input */
+
+.grid-input {
+    background: $blue;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    border: none;
+    min-width: 285px;
+    margin-bottom: 10px;
+}
+
+.grid-input:hover,
+.grid-input:focus,
+.grid-input:active {
+    outline: none;
+}
+
+.grid-input:-webkit-autofill,
+.grid-input:-webkit-autofill:hover, 
+.grid-input:-webkit-autofill:focus, 
+.grid-input:-webkit-autofill:active  {
+    -webkit-text-fill-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 0px 1000px $blue inset;
+    box-shadow: 0 0 0px 1000px $blue inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.grid-input:-webkit-autofill::first-line {
+    font-size: 1.25rem; 
+    font-weight: bold;
 }

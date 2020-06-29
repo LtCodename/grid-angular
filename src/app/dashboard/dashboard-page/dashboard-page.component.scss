@@ -20,40 +20,6 @@ $white: #FFFFFF;
     margin-bottom: 10px;
 }
 
-.auth-input {
-    background: $blue;
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 1.25rem;
-    color: #FFFFFF;
-    font-weight: bold;
-    text-align: center;
-    display: block;
-    border: none;
-    min-width: 285px;
-    margin-bottom: 10px;
-}
-
-.auth-input:hover,
-.auth-input:focus,
-.auth-input:active {
-    outline: none;
-}
-
-.auth-input:-webkit-autofill,
-.auth-input:-webkit-autofill:hover, 
-.auth-input:-webkit-autofill:focus, 
-.auth-input:-webkit-autofill:active  {
-    -webkit-text-fill-color: #FFFFFF;
-    -webkit-box-shadow: 0 0 0px 1000px $blue inset;
-    transition: background-color 5000s ease-in-out 0s;
-}
-
-.auth-input:-webkit-autofill::first-line {
-    font-size: 1.25rem; 
-    font-weight: bold;
-}
-
 .logout-button {
     margin-top: 10px;
 }

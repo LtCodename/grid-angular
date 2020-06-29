@@ -1,13 +1,15 @@
 <form *ngIf="showLoginPanel" class="column page-content-wrapper">
     <div class="column column-center-horizontal">
         <label class="auth-label">Email</label>
-        <input class="auth-input" type="text" name="email" [(ngModel)]="email">
+        <input class="grid-input" type="text" name="email" [(ngModel)]="email">
         <label class="auth-label">Password</label>
-        <input class="auth-input" type="password" name="password" [(ngModel)]="password">
-        <app-button 
-            [buttonText]="'Login'"
-            (click)="login()">
-        </app-button>
+        <input class="grid-input" type="password" name="password" [(ngModel)]="password">
+        <button 
+            class="grid-button"
+            (click)="login()"
+            type="submit">
+            {{loginButtonText}}
+        </button>
     </div>
 </form>
 
@@ -15,9 +17,10 @@
     <div class="column page-content-wrapper">
         <span>Edit Rules</span>
     </div>
-    <app-button 
-        class="logout-button" 
-        [buttonText]="'Logout'"
-        (click)="logout()">
-    </app-button>
+    <button 
+        class="grid-button logout-button"
+        (click)="logout()"
+        type="submit">
+        {{logoutButtonText}}
+    </button>
 </div>
