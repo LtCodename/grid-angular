@@ -14,8 +14,31 @@
 </form>
 
 <div *ngIf="showEditPanel" class="column column-center-horizontal">
+    <!-- Mode Selection -->
     <div class="column page-content-wrapper">
-        <span>Edit Rules</span>
+        <span class="question">What data do you want to change?</span>
+        <div class="row">
+            <span class="edit-option" (click)="changeMode('driver')">Driver</span>
+            <span class="edit-option" (click)="changeMode('team')">Team</span>
+            <span class="edit-option" (click)="changeMode('race')">Race</span>
+            <span class="edit-option" (click)="changeMode('season')">Season</span>
+        </div>
+    </div>
+    <!-- Driver Mode -->
+    <div *ngIf="editMode==='driver'" class="column page-content-wrapper edit-mode-wrapper">
+        Driver Mode
+    </div>
+    <!-- Team Mode -->
+    <div *ngIf="editMode==='team'" class="column page-content-wrapper edit-mode-wrapper">
+        Team Mode
+    </div>
+    <!-- Race Mode -->
+    <div *ngIf="editMode==='race'" class="column page-content-wrapper edit-mode-wrapper">
+        Race Mode
+    </div>
+    <!-- Season Mode -->
+    <div *ngIf="editMode==='season'" class="column page-content-wrapper edit-mode-wrapper">
+        Season Mode
     </div>
     <button 
         class="grid-button logout-button"

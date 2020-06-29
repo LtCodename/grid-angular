@@ -16,6 +16,7 @@ export class DashboardPageComponent implements OnInit {
   showEditPanel: boolean = false;
   loginButtonText: string = "Login";
   logoutButtonText: string = "Logout";
+  editMode: string = "";
 
   constructor(private dashboardService: DashboardService, private ngZone: NgZone) {
     this.dashboardService.authToken$
@@ -70,5 +71,9 @@ export class DashboardPageComponent implements OnInit {
         this.logoutButtonText = "Logout";
       }, 2000);
     })
+  }
+
+  changeMode(mode: string): void {
+    this.editMode = mode;
   }
 }

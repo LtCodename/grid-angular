@@ -24,3 +24,33 @@ $white: #FFFFFF;
     margin-top: 10px;
 }
 
+.question {
+    font-size: 1.25rem;
+    color: #303960;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.edit-option {
+    margin: 0 10px;
+    background: $blue;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    color: $white;
+    font-weight: bold;
+    transition: 0.2s all;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+}
+
+.edit-option:hover {
+    transform: scale(1.1);
+    background: $orange;
+}
+
+.edit-mode-wrapper {
+    margin-top: 10px;
+}
