@@ -16,7 +16,7 @@
 <div *ngIf="showEditPanel" class="column column-center-horizontal">
     <!-- Mode Selection -->
     <div class="column page-content-wrapper">
-        <span class="question">What data do you want to change?</span>
+        <span class="question">What data do you want to edit?</span>
         <div class="row">
             <span class="edit-option" (click)="changeMode('driver')">Driver</span>
             <span class="edit-option" (click)="changeMode('team')">Team</span>
@@ -25,20 +25,55 @@
         </div>
     </div>
     <!-- Driver Mode -->
-    <div *ngIf="editMode==='driver'" class="column page-content-wrapper edit-mode-wrapper">
-        Driver Mode
+    <div *ngIf="editMode==='driver'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
+        <span class="question">What driver do you want to edit?</span>
+        <div class="row row-center-horizontal">
+            <span class="edit-selection" *ngFor="let driver of allDrivers">{{driver.name}}</span>
+        </div>
+        <button 
+            class="grid-button add-button"
+            type="submit">
+            Add
+        </button>
     </div>
     <!-- Team Mode -->
-    <div *ngIf="editMode==='team'" class="column page-content-wrapper edit-mode-wrapper">
-        Team Mode
+    <div *ngIf="editMode==='team'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
+        <span class="question">What team do you want to edit?</span>
+        <div class="row row-center-horizontal">
+            <span class="edit-selection" *ngFor="let team of allTeams">{{team.name}}</span>
+        </div>
+        <button 
+            class="grid-button add-button"
+            type="submit">
+            Add
+        </button>
     </div>
     <!-- Race Mode -->
-    <div *ngIf="editMode==='race'" class="column page-content-wrapper edit-mode-wrapper">
-        Race Mode
+    <div *ngIf="editMode==='race'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
+        <span class="question">What race do you want to edit?</span>
+        <div class="row row-center-horizontal">
+            <div class="race-edit-selection column" *ngFor="let race of allRaces">
+                <span class="race-name">{{race.name}}</span>
+                <span class="race-date">{{race.date}}</span>
+            </div>
+        </div>
+        <button 
+            class="grid-button add-button"
+            type="submit">
+            Add
+        </button>
     </div>
     <!-- Season Mode -->
-    <div *ngIf="editMode==='season'" class="column page-content-wrapper edit-mode-wrapper">
-        Season Mode
+    <div *ngIf="editMode==='season'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
+        <span class="question">What season do you want to edit?</span>
+        <div class="row row-center-horizontal">
+            <span class="edit-selection" *ngFor="let season of allSeasons">{{season.name}}</span>
+        </div>
+        <button 
+            class="grid-button add-button"
+            type="submit">
+            Add
+        </button>
     </div>
     <button 
         class="grid-button logout-button"

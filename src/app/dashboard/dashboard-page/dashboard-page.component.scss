@@ -11,7 +11,8 @@ $white: #FFFFFF;
     border-radius: 80px;
     padding: 30px;
     justify-content: center;
-    max-width: 630px;
+    max-width: 1000px;
+    margin: 0 20px;
 }
 
 .auth-label {
@@ -33,7 +34,7 @@ $white: #FFFFFF;
 }
 
 .edit-option {
-    margin: 0 10px;
+    margin: 0 5px;
     background: $blue;
     padding: 8px 16px;
     border-radius: 50px;
@@ -51,6 +52,50 @@ $white: #FFFFFF;
     background: $orange;
 }
 
+.edit-selection {
+    margin: 0 5px 10px 5px;
+    background: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    color: $blue;
+    font-weight: bold;
+    transition: 0.2s all;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+}
+
+.edit-selection:hover {
+    background: $blue;
+    color: #FFFFFF;
+}
+
 .edit-mode-wrapper {
     margin-top: 10px;
+}
+
+.add-button {
+    margin-left: 5px;
+}
+
+.race-edit-selection {
+    margin: 0 5px 10px 5px;
+    background: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 50px;
+    color: $blue;
+    transition: 0.2s all;
+    cursor: pointer;
+    text-align: center;
+}
+
+.race-edit-selection:hover {
+    background: $blue;
+    color: #FFFFFF;
+}
+
+.race-name {
+    font-weight: bold;
+    font-size: 1.25rem;
 }

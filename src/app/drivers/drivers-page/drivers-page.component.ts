@@ -29,7 +29,7 @@ export class DriversPageComponent implements OnInit {
           return 1;
         }
         return 0;
-      })
+      });
 
       if(this.drivers.length) {
         this.showPreloader = false;
