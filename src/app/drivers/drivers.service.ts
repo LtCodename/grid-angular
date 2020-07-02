@@ -44,6 +44,11 @@ export class DriversService {
     );
   }
 
+  edit(data: any) {
+    console.log(data)
+    return this.firestore.collection('drivers').doc(data.id).update({ ...data });
+  }
+
   private processSnapshot(data) {
     return data.map((e) => ({
       id: e.payload.doc.id,

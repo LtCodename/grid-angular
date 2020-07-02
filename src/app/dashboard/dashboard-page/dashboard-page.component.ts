@@ -27,6 +27,8 @@ export class DashboardPageComponent implements OnInit {
   editMode: string = "";
   showData: boolean = false;
 
+  selectedDriver: IDriver = null
+
   allSeasons: ISeason[] = [];
   allRaces: IRace[] = [];
   allTeams: ITeam[] = [];
@@ -138,10 +140,17 @@ export class DashboardPageComponent implements OnInit {
       setTimeout(() => {
         this.logoutButtonText = "Logout";
       }, 2000);
-    })
+    });
   }
 
   changeMode(mode: string): void {
+    this.selectedDriver = null;
     this.editMode = mode;
+  }
+
+  setSelectedData(data: any): void {
+    if(this.editMode === 'driver') {
+      this.selectedDriver = data;
+    }
   }
 }

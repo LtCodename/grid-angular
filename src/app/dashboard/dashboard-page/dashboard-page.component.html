@@ -25,16 +25,24 @@
         </div>
     </div>
     <!-- Driver Mode -->
-    <div *ngIf="editMode==='driver'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
-        <span class="question">What driver do you want to edit?</span>
-        <div class="row row-center-horizontal">
-            <span class="edit-selection" *ngFor="let driver of allDrivers">{{driver.name}}</span>
+    <div class="column column-center-horizontal">
+        <div *ngIf="editMode==='driver'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
+            <span class="question">What driver do you want to edit?</span>
+            <div class="row row-center-horizontal">
+                <span 
+                    class="edit-selection"
+                    *ngFor="let driver of allDrivers"
+                    (click)="setSelectedData(driver)">
+                    {{driver.name}}
+                </span>
+            </div>
+            <button 
+                class="grid-button add-button"
+                type="submit">
+                Add
+            </button>
         </div>
-        <button 
-            class="grid-button add-button"
-            type="submit">
-            Add
-        </button>
+        <app-driver-edit-form *ngIf="selectedDriver" [driverData]='selectedDriver'></app-driver-edit-form>
     </div>
     <!-- Team Mode -->
     <div *ngIf="editMode==='team'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">

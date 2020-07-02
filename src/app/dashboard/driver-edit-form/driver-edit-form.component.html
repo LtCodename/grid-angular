@@ -1,0 +1,40 @@
+<div class="column page-content-wrapper column-center-horizontal">
+    <div class="row row-center-vertical">
+        <label class="edit-label">Name</label>
+        <input class="grid-input" type="text" name="name" [(ngModel)]="driverName">
+    </div>
+    <div class="row row-center-vertical">
+        <label class="edit-label">Number</label>
+        <input class="grid-input" type="text" name="name" [(ngModel)]="driverNumber">  
+    </div>
+    <div class="row row-center-vertical">
+        <label class="edit-label">Birth Year</label>
+        <input class="grid-input" type="text" name="name" [(ngModel)]="driverDob">
+    </div>
+    <div class="row row-center-vertical">
+        <label class="edit-label">Nationality</label>
+        <input class="grid-input" type="text" name="name" [(ngModel)]="driverNationality">
+    </div>
+    <div class="row row-center-vertical">
+        <label class="edit-label">Poles</label>
+        <input class="grid-input" type="text" name="name" [(ngModel)]="driverPoles">
+    </div>
+    <div class="row row-center-vertical">
+        <label class="edit-label">Podiums</label>
+        <input class="grid-input" type="text" name="name" [(ngModel)]="driverPodiums">
+    </div>
+    <div class="row row-center-vertical">
+        <label class="edit-label">Wins</label>
+        <input class="grid-input" type="text" name="name" [(ngModel)]="driverWins">
+    </div>
+    <div class="row row-center-vertical">
+        <label class="edit-label">Titles</label>
+        <input class="grid-input" type="text" name="name" [(ngModel)]="driverChamps">
+    </div>
+    <button 
+        class="grid-button add-button"
+        type="submit"
+        (click)="submitData()">
+        Submit
+    </button>
+</div>
