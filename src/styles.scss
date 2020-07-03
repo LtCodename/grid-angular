@@ -87,11 +87,10 @@ body {
 /* Input */
 
 .grid-input {
-    background: $blue;
-    padding: 8px 16px;
+    padding: 5px 16px;
     border-radius: 50px;
     font-size: 1.25rem;
-    color: #FFFFFF;
+    color: #303960;
     font-weight: bold;
     text-align: center;
     display: block;
@@ -119,4 +118,14 @@ body {
 .grid-input:-webkit-autofill::first-line {
     font-size: 1.25rem; 
     font-weight: bold;
+}
+
+select::-ms-expand { display: none; }
+select{
+    -webkit-appearance: none;
+    appearance: none;
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+    cursor: pointer;
 }

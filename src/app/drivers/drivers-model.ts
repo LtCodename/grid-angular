@@ -1,5 +1,10 @@
-interface ISummary {
+export interface ISummary {
     type: string;
+    text?: string;
+    team?: string;
+    year?: string;
+    from?: string;
+    to?: string;
 }
 
 export interface IDriver {

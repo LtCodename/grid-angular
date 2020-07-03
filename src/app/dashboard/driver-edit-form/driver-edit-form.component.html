@@ -1,36 +1,158 @@
 <div class="column page-content-wrapper column-center-horizontal">
-    <div class="row row-center-vertical">
-        <label class="edit-label">Name</label>
-        <input class="grid-input" type="text" name="name" [(ngModel)]="driverName">
+    <div class="row">
+        <!-- Left Part -->
+        <div class="column-center-horizontal column info-column">
+            <span class="question">Racing Profile</span>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Name</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="driverName">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Number</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="driverNumber">  
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Birth Year</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="driverDob">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Nationality</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="driverNationality">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Poles</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="driverPoles">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Podiums</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="driverPodiums">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Wins</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="driverWins">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Titles</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="driverChamps">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Team</label>
+                <select class="grid-input" [(ngModel)]="driverTeam">
+                    <option [value]="team.id" *ngFor="let team of allTeams">{{team.name}}</option>
+                </select>
+            </div>
+        </div>
+        <!-- Right Part -->
+        <div class="column-center-horizontal column">
+            <span class="question">Summary</span>
+            <div class="column-center-horizontal column">
+                <div *ngFor="let element of driverSummary; let last = last; let index = index;" class="summary-element column-center-horizontal column">
+                    <div class="row row-center-vertical">
+                        <label class="edit-label-summary">Type</label>
+                        <select class="grid-input" [(ngModel)]="element.type">
+                            <option [value]="'text'">Text</option>
+                            <option [value]="'year'">Year</option>
+                            <option [value]="'transfer'">Transfer</option>
+                        </select>
+                    </div>
+                    <div [ngSwitch]="element.type">
+                        <div *ngSwitchCase="'text'">
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Text</label>
+                                <input class="grid-input" type="text" [(ngModel)]="element.text">
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'year'">
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Team</label>
+                                <input class="grid-input" type="text" [(ngModel)]="element.team">
+                            </div>
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Year</label>
+                                <input class="grid-input" type="text" [(ngModel)]="element.year">
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'transfer'">
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">From</label>
+                                <input class="grid-input" type="text" [(ngModel)]="element.from">
+                            </div>
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">To</label>
+                                <input class="grid-input" type="text" [(ngModel)]="element.to">
+                            </div> 
+                        </div>
+                    </div>
+                    <button 
+                        class="grid-button"
+                        type="button"
+                        (click)="deleteSummaryItem(index)">
+                        Delete
+                    </button>
+                </div>
+                <!-- Add Button -->
+                <button 
+                    *ngIf="!addSummary"
+                    class="grid-button"
+                    type="button"
+                    (click)="toggleAddSummaryMode()">
+                    Add
+                </button>
+                <!-- Add Panel -->
+                <div class="column column-center-horizontal" *ngIf="addSummary">
+                    <div class="row row-center-vertical">
+                        <label class="edit-label-summary">Type</label>
+                        <select class="grid-input" [(ngModel)]="newSummaryType">
+                            <option [value]="'text'">Text</option>
+                            <option [value]="'year'">Year</option>
+                            <option [value]="'transfer'">Transfer</option>
+                        </select>
+                    </div>
+                    <div [ngSwitch]="newSummaryType">
+                        <div *ngSwitchCase="'text'">
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Text</label>
+                                <input class="grid-input" type="text" [(ngModel)]="newSummaryText">
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'year'">
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Team</label>
+                                <input class="grid-input" type="text" [(ngModel)]="newSummaryTeam">
+                            </div>
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Year</label>
+                                <input class="grid-input" type="text" [(ngModel)]="newSummaryYear">
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'transfer'">
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">From</label>
+                                <input class="grid-input" type="text" [(ngModel)]="newSummaryFrom">
+                            </div>
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">To</label>
+                                <input class="grid-input" type="text" [(ngModel)]="newSummaryTo">
+                            </div> 
+                        </div>
+                    </div>
+                    <button
+                        class="grid-button push-button"
+                        type="button"
+                        (click)="addSummaryElement()">
+                        Push
+                    </button>
+                    <button
+                        class="grid-button"
+                        type="button"
+                        (click)="toggleAddSummaryMode()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row row-center-vertical">
-        <label class="edit-label">Number</label>
-        <input class="grid-input" type="text" name="name" [(ngModel)]="driverNumber">  
-    </div>
-    <div class="row row-center-vertical">
-        <label class="edit-label">Birth Year</label>
-        <input class="grid-input" type="text" name="name" [(ngModel)]="driverDob">
-    </div>
-    <div class="row row-center-vertical">
-        <label class="edit-label">Nationality</label>
-        <input class="grid-input" type="text" name="name" [(ngModel)]="driverNationality">
-    </div>
-    <div class="row row-center-vertical">
-        <label class="edit-label">Poles</label>
-        <input class="grid-input" type="text" name="name" [(ngModel)]="driverPoles">
-    </div>
-    <div class="row row-center-vertical">
-        <label class="edit-label">Podiums</label>
-        <input class="grid-input" type="text" name="name" [(ngModel)]="driverPodiums">
-    </div>
-    <div class="row row-center-vertical">
-        <label class="edit-label">Wins</label>
-        <input class="grid-input" type="text" name="name" [(ngModel)]="driverWins">
-    </div>
-    <div class="row row-center-vertical">
-        <label class="edit-label">Titles</label>
-        <input class="grid-input" type="text" name="name" [(ngModel)]="driverChamps">
-    </div>
+    <!-- Submit -->
     <button 
         class="grid-button add-button"
         type="submit"

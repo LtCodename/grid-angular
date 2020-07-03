@@ -45,7 +45,6 @@ export class DriversService {
   }
 
   edit(data: any) {
-    console.log(data)
     return this.firestore.collection('drivers').doc(data.id).update({ ...data });
   }
 
