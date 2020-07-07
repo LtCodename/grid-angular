@@ -21,6 +21,10 @@ export class TeamsService {
     });
   }
 
+  edit(data: any) {
+    return this.firestore.collection('teams').doc(data.id).update({ ...data });
+  }
+
   private getTeams() {
     return this.firestore.collection('teams')
       .snapshotChanges()

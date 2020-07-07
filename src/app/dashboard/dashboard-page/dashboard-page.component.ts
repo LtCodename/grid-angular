@@ -28,6 +28,7 @@ export class DashboardPageComponent implements OnInit {
   showData: boolean = false;
 
   selectedDriver: IDriver = null
+  selectedTeam: ITeam = null
 
   allSeasons: ISeason[] = [];
   allRaces: IRace[] = [];
@@ -145,12 +146,19 @@ export class DashboardPageComponent implements OnInit {
 
   changeMode(mode: string): void {
     this.selectedDriver = null;
+    this.selectedTeam = null;
+    console.log(mode)
     this.editMode = mode;
   }
 
   setSelectedData(data: any): void {
     if(this.editMode === 'driver') {
       this.selectedDriver = data;
+      this.selectedTeam = null;
+    }
+    if(this.editMode === 'team') {
+      this.selectedTeam = data;
+      this.selectedDriver = null;
     }
   }
 }

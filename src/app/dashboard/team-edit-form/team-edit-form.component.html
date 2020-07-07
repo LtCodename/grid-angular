@@ -1,0 +1,202 @@
+<div class="column page-content-wrapper column-center-horizontal">
+    <div class="row">
+        <!-- Left Part -->
+        <div class="column-center-horizontal column info-column">
+            <span class="question">Racing Profile</span>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Name</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="teamName">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Full Name</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="teamNameFull">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Country</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="teamCountry">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Team Principal</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="teamPrincipal">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Power Unit</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="teamEngine">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Championships</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="teamChamps">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Wins</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="teamWins">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Podiums</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="teamPodiums">
+            </div>
+            <div class="row row-center-vertical">
+                <label class="edit-label">Poles</label>
+                <input class="grid-input" type="text" name="name" [(ngModel)]="teamPoles">
+            </div>
+        </div>
+        <!-- Right Part -->
+        <div class="column-center-horizontal column">
+            <span class="question">Summary</span>
+            <!-- All Properties Column -->
+            <div class="column-center-horizontal column">
+                <!-- Display Props -->
+                <div *ngFor="let element of teamSummary; let last = last; let index = index;" class="summary-element column-center-horizontal column">
+                    <!-- Summary Item Type -->
+                    <div class="row row-center-vertical">
+                        <label class="edit-label-summary">Type</label>
+                        <select class="grid-input" [(ngModel)]="element.type">
+                            <option [value]="'text'">Text</option>
+                            <option [value]="'years'">Years</option>
+                        </select>
+                    </div>
+                    <!-- Text Or Years -->
+                    <div [ngSwitch]="element.type">
+                        <!-- Text -->
+                        <div *ngSwitchCase="'text'">
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Text</label>
+                                <input class="grid-input" type="text" [(ngModel)]="element.text">
+                            </div>
+                        </div>
+                        <!-- Years -->
+                        <div *ngSwitchCase="'years'" class="column column-center-horizontal">
+                            <!-- Display Years -->
+                            <div class="column column-center-horizontal summary-year"  *ngFor="let year of element.years; let last = last; let index = index;">
+                                <!-- Champion -->
+                                <div class="row row-center-vertical">
+                                    <label class="edit-label-summary">Champion</label>
+                                    <select class="grid-input small-input" [(ngModel)]="year.champ">
+                                        <option [value]="true">Yes</option>
+                                        <option [value]="false">No</option>
+                                    </select>
+                                </div>
+                                <!-- Name -->
+                                <div class="row row-center-vertical">
+                                    <label class="edit-label-summary">Year</label>
+                                    <input class="grid-input small-input" type="text" [(ngModel)]="year.name">
+                                </div>
+                                <!-- Delete Year Button -->
+                                <button 
+                                    class="grid-button"
+                                    type="button"
+                                    (click)="deleteSummaryYearItem()">
+                                    Delete Year
+                                </button>
+                            </div>
+                            <!-- Add Year Button -->
+                            <button 
+                                *ngIf="!addSummaryYear"
+                                class="grid-button add-summary-year"
+                                type="button"
+                                (click)="toggleAddSummaryYearItemMode()">
+                                Add Year
+                            </button>
+                            <!-- Add Year Form -->
+                            <div *ngIf="addSummaryYear" class="column column-center-horizontal">
+                                <!-- Champion -->
+                                <div class="row row-center-vertical">
+                                    <label class="edit-label-summary">Champion</label>
+                                    <select class="grid-input small-input" [(ngModel)]="newYearChamp">
+                                        <option [value]="true">Yes</option>
+                                        <option [value]="false">No</option>
+                                    </select>
+                                </div>
+                                <!-- Year Name -->
+                                <div class="row row-center-vertical">
+                                    <label class="edit-label-summary">Year</label>
+                                    <input class="grid-input small-input" type="text" [(ngModel)]="newYearName">
+                                </div>
+                                <!-- Confirm Or Cancel Adding Year Buttons -->
+                                <div class="row">
+                                    <button
+                                        class="grid-button add-summary-year cancel-button"
+                                        type="button"
+                                        (click)="toggleAddSummaryYearItemMode()">
+                                        Cancel
+                                    </button>
+                                    <button
+                                        class="grid-button add-summary-year"
+                                        type="button"
+                                        (click)="addSummaryYearItem()">
+                                        Push
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Delete Summary Item Button -->
+                    <button 
+                        class="grid-button"
+                        type="button"
+                        (click)="deleteSummaryItem(index)">
+                        Delete
+                    </button>
+                </div>
+                <!-- Add Summary Item Button -->
+                <button 
+                    *ngIf="!addSummary"
+                    class="grid-button"
+                    type="button"
+                    (click)="toggleAddSummaryMode()">
+                    Add
+                </button>
+                <!-- Add Summary Item Panel -->
+                <div class="column column-center-horizontal" *ngIf="addSummary">
+                    <!-- Summary Type -->
+                    <div class="row row-center-vertical">
+                        <label class="edit-label-summary">Type</label>
+                        <select class="grid-input" [(ngModel)]="newSummaryType">
+                            <option [value]="'text'">Text</option>
+                            <option [value]="'years'">Year</option>
+                        </select>
+                    </div>
+                    <!-- Text Or Year -->
+                    <div [ngSwitch]="newSummaryType">
+                        <div *ngSwitchCase="'text'">
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Text</label>
+                                <input class="grid-input" type="text" [(ngModel)]="newSummaryText">
+                            </div>
+                        </div>
+                        <!-- <div *ngSwitchCase="'year'">
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Team</label>
+                                <input class="grid-input" type="text" [(ngModel)]="newSummaryTeam">
+                            </div>
+                            <div class="row row-center-vertical">
+                                <label class="edit-label-summary">Year</label>
+                                <input class="grid-input" type="text" [(ngModel)]="newSummaryYear">
+                            </div>
+                        </div> -->
+                    </div>
+                    <!-- Confirm Or Abort Adding Summary Item -->
+                    <button
+                        class="grid-button push-button"
+                        type="button"
+                        (click)="addSummaryElement()">
+                        Push
+                    </button>
+                    <button
+                        class="grid-button"
+                        type="button"
+                        (click)="toggleAddSummaryMode()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Submit Data -->
+    <button 
+        class="grid-button add-button"
+        type="submit"
+        (click)="submitData()">
+        Submit
+    </button>
+</div>

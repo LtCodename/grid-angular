@@ -73,7 +73,7 @@ export class DriverEditFormComponent implements OnInit, OnChanges {
       wins: this.driverWins,
       championships: this.driverChamps,
       "team-id": this.driverTeam,
-      summary: this.driverSummary
+      summary: this.driverSummary || []
     }).then(() => {
       console.log("Data updated succesfully!");
     }).catch(() => {
