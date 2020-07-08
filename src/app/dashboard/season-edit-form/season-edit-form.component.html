@@ -1,0 +1,47 @@
+<div class="column page-content-wrapper column-center-horizontal">
+    <div class="column-center-horizontal column">
+        <span class="question">Season Information</span>
+        <div class="row row-center-vertical">
+            <label class="edit-label">Name</label>
+            <input class="grid-input" type="text" name="name" [(ngModel)]="seasonName">
+        </div>
+        <div class="row row-center-vertical">
+            <label class="edit-label">Current</label>
+            <select class="grid-input" [(ngModel)]="seasonCurrent">
+                <option [value]="true">Yes</option>
+                <option [value]="false">No</option>
+            </select>
+        </div>
+        <span class="question">Grid</span>
+        <div class="column">
+            <div class="row driver-row" *ngFor="let driver of driversToDisplay; let index = index;">
+                <span class="driver">{{driver.name}}</span>
+                <button 
+                    class="grid-button add-button"
+                    type="submit"
+                    (click)="deleteDriver(index)">
+                    Remove
+                </button>
+            </div>
+            <span class="question">Add Driver</span>
+            <div class="row row-center-vertical">
+                <select class="grid-input" [(ngModel)]="driverToAdd">
+                    <option [value]="driver.id" *ngFor="let driver of driversToSelect">{{driver.name}}</option>
+                </select>
+                <button 
+                    class="grid-button add-button"
+                    type="submit"
+                    (click)="addDriver()">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Submit -->
+    <button 
+        class="grid-button add-button"
+        type="submit"
+        (click)="submitData()">
+        Submit
+    </button>
+</div>

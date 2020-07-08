@@ -67,7 +67,7 @@
                         <!-- Years -->
                         <div *ngSwitchCase="'years'" class="column column-center-horizontal">
                             <!-- Display Years -->
-                            <div class="column column-center-horizontal summary-year"  *ngFor="let year of element.years; let last = last; let index = index;">
+                            <div class="column column-center-horizontal summary-year" *ngFor="let year of element.years; let last = last; let yearIndex = index;">
                                 <!-- Champion -->
                                 <div class="row row-center-vertical">
                                     <label class="edit-label-summary">Champion</label>
@@ -85,7 +85,7 @@
                                 <button 
                                     class="grid-button"
                                     type="button"
-                                    (click)="deleteSummaryYearItem()">
+                                    (click)="deleteSummaryYearItem(index, yearIndex)">
                                     Delete Year
                                 </button>
                             </div>
@@ -123,7 +123,7 @@
                                     <button
                                         class="grid-button add-summary-year"
                                         type="button"
-                                        (click)="addSummaryYearItem()">
+                                        (click)="addSummaryYearItem(index)">
                                         Push
                                     </button>
                                 </div>
@@ -153,7 +153,7 @@
                         <label class="edit-label-summary">Type</label>
                         <select class="grid-input" [(ngModel)]="newSummaryType">
                             <option [value]="'text'">Text</option>
-                            <option [value]="'years'">Year</option>
+                            <option [value]="'years'">Years</option>
                         </select>
                     </div>
                     <!-- Text Or Year -->
@@ -164,16 +164,6 @@
                                 <input class="grid-input" type="text" [(ngModel)]="newSummaryText">
                             </div>
                         </div>
-                        <!-- <div *ngSwitchCase="'year'">
-                            <div class="row row-center-vertical">
-                                <label class="edit-label-summary">Team</label>
-                                <input class="grid-input" type="text" [(ngModel)]="newSummaryTeam">
-                            </div>
-                            <div class="row row-center-vertical">
-                                <label class="edit-label-summary">Year</label>
-                                <input class="grid-input" type="text" [(ngModel)]="newSummaryYear">
-                            </div>
-                        </div> -->
                     </div>
                     <!-- Confirm Or Abort Adding Summary Item -->
                     <button

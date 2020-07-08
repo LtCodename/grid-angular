@@ -1,0 +1,54 @@
+$blue: #303960;
+$pink: #ea9a96;
+$orange: #f8b24f;
+$grey: #e5e5e5;
+$white: #FFFFFF;
+
+.page-content-wrapper {
+    background: $grey;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 80px;
+    padding: 30px 30px 20px 30px;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 10px 20px 0 20px;
+}
+
+.question {
+    font-size: 1.25rem;
+    color: #303960;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.edit-label {
+    color: $blue;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    min-width: 55px;
+}
+
+.driver {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    background: #303960;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 20px;
+    color: #FFFFFF;
+    font-weight: bold;
+    transition: 0.2s all;
+    text-align: center;
+    display: block;
+}
+
+.driver-row {
+    justify-content: space-between;
+}
+
+.add-button {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}

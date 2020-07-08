@@ -3,6 +3,7 @@ export interface ISummary {
     text?: string;
     team?: string;
     year?: string;
+    years?: any[];
     from?: string;
     to?: string;
 }

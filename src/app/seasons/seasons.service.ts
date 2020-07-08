@@ -27,6 +27,10 @@ export class SeasonsService {
       .pipe(map(this.processSnapshot));
   }
 
+  edit(data: any) {
+    return this.firestore.collection('seasons').doc(data.id).update({ ...data });
+  }
+
   private processSnapshot(data) {
     return data.map((e) => ({
       id: e.payload.doc.id,

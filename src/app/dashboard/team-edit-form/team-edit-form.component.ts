@@ -25,7 +25,7 @@ export class TeamEditFormComponent implements OnInit {
   addSummaryYear: boolean = false;
   teamSummary: ISummary[];
 
-  newYearChamp: boolean = false;
+  newYearChamp: string = "false";
   newYearName: string = "";
   newSummaryType: string = "text";
   newSummaryText: string = "";
@@ -85,14 +85,24 @@ export class TeamEditFormComponent implements OnInit {
     this.teamSummary = fakeSummary;
   }
 
-  deleteSummaryYearItem(): void {
-    // let fakeSummary: ISummary[] = [...this.teamSummary];
-    // fakeSummary.splice(index, 1);
-    // this.teamSummary = fakeSummary;
+  deleteSummaryYearItem(index: number, yearIndex: number): void {
+    let fakeSummary: ISummary[] = [...this.teamSummary];
+    fakeSummary[index].years.splice(yearIndex, 1);
+    this.teamSummary = fakeSummary;
   }
 
-  addSummaryYearItem(): void {
-    //?
+  addSummaryYearItem(index: number): void {
+    console.log(this.teamSummary);
+    let fakeSummary: ISummary[] = [...this.teamSummary];
+    fakeSummary[index].years.push({
+      champ: this.newYearChamp === 'true',
+      name: this.newYearName
+    });
+
+    this.teamSummary = fakeSummary;
+    this.newYearChamp = "false";
+    this.newYearName = "";
+    this.addSummaryYear = false;
   }
 
   toggleAddSummaryYearItemMode(): void {
@@ -111,18 +121,17 @@ export class TeamEditFormComponent implements OnInit {
           text: this.newSummaryText
         });
       break;
-      // case ("years"): 
-      //   this.driverSummary.push({
-      //     type: this.newSummaryType,
-      //     team: this.newSummaryTeam,
-      //     year: this.newSummaryYear
-      //   });
-      // break;
+      case ("years"): 
+        this.teamSummary.push({
+          type: this.newSummaryType,
+          years: []
+        });
+      break;
     }
 
     this.newSummaryType = "text";
     this.newSummaryText = "";
-    this.newYearChamp = false;
+    this.newYearChamp = "false";
     this.newYearName = "";
   }
 }

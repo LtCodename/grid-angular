@@ -79,16 +79,24 @@
         </button>
     </div>
     <!-- Season Mode -->
-    <div *ngIf="editMode==='season'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
-        <span class="question">What season do you want to edit?</span>
-        <div class="row row-center-horizontal">
-            <span class="edit-selection" *ngFor="let season of allSeasons">{{season.name}}</span>
+    <div class="column column-center-horizontal">
+        <div *ngIf="editMode==='season'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
+            <span class="question">What season do you want to edit?</span>
+            <div class="row row-center-horizontal">
+                <span 
+                    class="edit-selection" 
+                    *ngFor="let season of allSeasons"
+                    (click)="setSelectedData(season)">
+                    {{season.name}}
+                </span>
+            </div>
+            <button 
+                class="grid-button add-button"
+                type="submit">
+                Add
+            </button>
         </div>
-        <button 
-            class="grid-button add-button"
-            type="submit">
-            Add
-        </button>
+        <app-season-edit-form *ngIf="selectedSeason" [seasonData]='selectedSeason'></app-season-edit-form>
     </div>
     <button 
         class="grid-button logout-button"
