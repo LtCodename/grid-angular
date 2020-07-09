@@ -27,6 +27,11 @@ export class RacesService {
       .pipe(map(this.processSnapshot));
   }
 
+  edit(data: any) {
+    console.log(data);
+    return this.firestore.collection('races').doc(data.id).update({ ...data });
+  }
+
   private processSnapshot(data) {
     return data.map((e) => ({
       id: e.payload.doc.id,

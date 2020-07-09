@@ -1,0 +1,85 @@
+<div class="column page-content-wrapper column-center-horizontal">
+    <!-- Left Part -->
+    <div class="column-center-horizontal column info-column">
+        <span class="question">Race Details</span>
+        <!-- Name -->
+        <div class="row row-center-vertical">
+            <label class="edit-label">Name</label>
+            <input class="grid-input" type="text" name="name" [(ngModel)]="raceName">
+        </div>
+        <!-- Full Name -->
+        <div class="row row-center-vertical">
+            <label class="edit-label">Full Name</label>
+            <input class="grid-input" type="text" name="name" [(ngModel)]="raceNameFull">
+        </div>
+        <!-- Round -->
+        <div class="row row-center-vertical">
+            <label class="edit-label">Round</label>
+            <input class="grid-input" type="text" name="name" [(ngModel)]="raceRound">
+        </div>
+        <!-- Finished -->
+        <div class="row row-center-vertical">
+            <label class="edit-label">Finished</label>
+            <select class="grid-input" [(ngModel)]="raceFinished">
+                <option [value]="'true'">Yes</option>
+                <option [value]="'false'">No</option>
+            </select>
+        </div>
+        <!-- Location -->
+        <div class="row row-center-vertical">
+            <label class="edit-label">Location</label>
+            <input class="grid-input" type="text" name="name" [(ngModel)]="raceLocation">
+        </div>
+        <!-- Circuit -->
+        <div class="row row-center-vertical">
+            <label class="edit-label">Circuit</label>
+            <input class="grid-input" type="text" name="name" [(ngModel)]="raceCircuit">
+        </div>
+        <!-- Date -->
+        <div class="row row-center-vertical">
+            <label class="edit-label">Date</label>
+            <input class="grid-input" type="text" name="name" [(ngModel)]="raceDate">
+        </div>
+        <!-- Season -->
+        <div class="row row-center-vertical">
+            <label class="edit-label">Season</label>
+            <select class="grid-input" [(ngModel)]="raceSeason">
+                <option [value]="season.id" *ngFor="let season of allSeasons">{{season.name}}</option>
+            </select>
+        </div>
+        <span class="question">Pole Position</span>
+        <!-- Pole Position -->
+        <div class="row row-center-vertical">
+            <label class="edit-label">Pole Sitter</label>
+            <select class="grid-input" [(ngModel)]="racePole">
+                <option [value]="driver.id" *ngFor="let driver of seasonDrivers">{{driver.name}}</option>
+            </select>
+        </div>
+        <span class="question">Fastest Lap</span>
+        <!-- Fastest Lap -->
+        <div class="column">
+            <!-- Driver -->
+            <div class="row row-center-vertical">
+                <label class="edit-label">Driver</label>
+                <select class="grid-input" [(ngModel)]="raceLap">
+                    <option [value]="driver.id" *ngFor="let driver of seasonDrivers">{{driver.name}}</option>
+                </select>
+            </div>
+            <!-- Team -->
+            <div class="row row-center-vertical">
+                <label class="edit-label">Team</label>
+                <select class="grid-input" [(ngModel)]="raceLapTeam">
+                    <option [value]="team.id" *ngFor="let team of allTeams">{{team.name}}</option>
+                </select>
+            </div>
+        </div>
+        <span class="question">Race Results</span>
+    </div>
+    <!-- Submit -->
+    <button 
+        class="grid-button add-button"
+        type="submit"
+        (click)="submitData()">
+        Submit
+    </button>
+</div>

@@ -10,7 +10,7 @@ export interface IRace {
     round: string;
     fullName: string;
     circuit: string;
-    finished: boolean;
+    finished: any;
     url: string;
     "season-id": string;
     "name-full": string;

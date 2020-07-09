@@ -64,19 +64,22 @@
         <app-team-edit-form *ngIf="selectedTeam" [teamData]='selectedTeam'></app-team-edit-form>
     </div>
     <!-- Race Mode -->
-    <div *ngIf="editMode==='race'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
-        <span class="question">What race do you want to edit?</span>
-        <div class="row row-center-horizontal">
-            <div class="race-edit-selection column" *ngFor="let race of allRaces">
-                <span class="race-name">{{race.name}}</span>
-                <span class="race-date">{{race.date}}</span>
+    <div  class="column column-center-horizontal">
+        <div *ngIf="editMode==='race'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
+            <span class="question">What race do you want to edit?</span>
+            <div class="row row-center-horizontal">
+                <div class="race-edit-selection column" *ngFor="let race of allRaces" (click)="setSelectedData(race)">
+                    <span class="race-name">{{race.name}}</span>
+                    <span class="race-date">{{race.date}}</span>
+                </div>
             </div>
+            <button 
+                class="grid-button add-button"
+                type="submit">
+                Add
+            </button>
         </div>
-        <button 
-            class="grid-button add-button"
-            type="submit">
-            Add
-        </button>
+        <app-race-edit-form *ngIf="selectedRace" [raceData]='selectedRace'></app-race-edit-form>
     </div>
     <!-- Season Mode -->
     <div class="column column-center-horizontal">
