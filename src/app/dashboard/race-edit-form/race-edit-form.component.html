@@ -73,7 +73,34 @@
                 </select>
             </div>
         </div>
+        <!-- Race Results -->
         <span class="question">Race Results</span>
+        <div class="race-result" *ngFor="let result of raceResults">
+            <!-- Place -->
+            <div class="row row-center-vertical">
+                <label class="edit-label">Place</label>
+                <span class="simple-text">{{result.place}}</span>
+            </div>
+            <!-- Points -->
+            <div class="row row-center-vertical">
+                <label class="edit-label">Points</label>
+                <span class="simple-text">+ {{result.points}}</span>
+            </div>
+            <!-- Driver -->
+            <div class="row row-center-vertical">
+                <label class="edit-label">Driver</label>
+                <select class="grid-input" [(ngModel)]="result.driver">
+                    <option [value]="driver.id" *ngFor="let driver of seasonDrivers">{{driver.name}}</option>
+                </select>
+            </div>
+            <!-- Team -->
+            <div class="row row-center-vertical">
+                <label class="edit-label">Team</label>
+                <select class="grid-input" [(ngModel)]="result.team">
+                    <option [value]="team.id" *ngFor="let team of allTeams">{{team.name}}</option>
+                </select>
+            </div>
+        </div>
     </div>
     <!-- Submit -->
     <button 

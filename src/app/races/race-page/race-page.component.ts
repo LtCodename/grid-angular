@@ -74,9 +74,10 @@ export class RacePageComponent implements OnInit {
       results.push({
         driver: this.allDrivers.find((driver: IDriver) => driver.id === this.race.places[elem.place].driver).name,
         team: this.allTeams.find((team: ITeam) => team.id === this.race.places[elem.place].team).name,
-        points: elem.points
+        points: elem.points,
+        place: elem.place
       })
-    })
+    });
 
     return results;
   }

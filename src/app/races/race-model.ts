@@ -26,6 +26,7 @@ export interface IRaceResult {
     driver: string;
     team: string;
     points: number;
+    place: number;
 }
 
 

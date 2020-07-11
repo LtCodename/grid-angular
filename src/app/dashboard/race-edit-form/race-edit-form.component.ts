@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IRace } from 'src/app/races/race-model';
+import { IRace, IRaceResult, IPlace } from 'src/app/races/race-model';
 import { SeasonsService } from 'src/app/seasons/seasons.service';
 import { ISeason } from 'src/app/seasons/seasons-model';
 import { IDriver } from 'src/app/drivers/drivers-model';
@@ -8,6 +8,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { ITeam } from 'src/app/teams/teams-model';
 import { RacesService } from 'src/app/races/races.service';
+import { PositionsBlueprint } from 'src/app/app-model';
 
 @Component({
   selector: 'app-race-edit-form',
@@ -29,12 +30,14 @@ export class RaceEditFormComponent implements OnInit {
   racePole: string = "";
   raceFinished: string = "false";
   raceCircuit: string = "";
+  racePlaces = {};
   
   allSeasons: ISeason[] = [];
   allDrivers: IDriver[] = [];
   allTeams: ITeam[] = [];
   currentSeason: ISeason;
   seasonDrivers: IDriver[] = [];
+  raceResults: IRaceResult[] = [];
 
   constructor(
       private seasonsService: SeasonsService, 
@@ -78,29 +81,9 @@ export class RaceEditFormComponent implements OnInit {
     this.raceFinished = this.raceData.finished ? "true" : "false";
     this.racePole = this.raceData.pole;
     this.raceCircuit = this.raceData.circuit;
+    this.racePlaces = this.raceData.places;
 
     this.setInformation();
-  }
-
-  submitData(): void {
-    this.racesService.edit({
-      id: this.raceData.id,
-      name: this.raceName,
-      fullName: this.raceNameFull || "",
-      circuit: this.raceCircuit || "",
-      location: this.raceLocation,
-      date: this.raceDate,
-      "season-id": this.raceSeason,
-      lap: this.raceLap ,
-      "lap-team": this.raceLapTeam,
-      round: this.raceRound,
-      finished: this.raceFinished === 'true',
-      pole: this.racePole
-    }).then(() => {
-      console.log("Data updated succesfully!");
-    }).catch(() => {
-      console.log("Error!");
-    });
   }
 
   setInformation(): void {
@@ -113,6 +96,60 @@ export class RaceEditFormComponent implements OnInit {
       if (this.currentSeason.drivers.indexOf(dr.id) !== -1) {
         this.seasonDrivers.push(dr);
       }
-    })
+    });
+
+    //Race results
+    this.raceResults = [];
+    if (!this.racePlaces) {
+      PositionsBlueprint.forEach(elem => {
+        this.raceResults.push({
+          driver: "",
+          team: "",
+          points: elem.points,
+          place: elem.place
+        });
+      });
+    } else {
+      PositionsBlueprint.forEach(elem => {
+        this.raceResults.push({
+          driver: this.racePlaces[elem.place].driver,
+          team: this.racePlaces[elem.place].team,
+          points: elem.points,
+          place: elem.place
+        });
+      });
+    }
+  }
+
+  submitData(): void {
+    
+    this.racePlaces = {};
+
+    this.raceResults.forEach((result: IRaceResult) => {
+      this.racePlaces[result.place] = {
+        driver: result.driver,
+        team: result.team
+      }
+    });
+
+    this.racesService.edit({
+      id: this.raceData.id,
+      name: this.raceName,
+      fullName: this.raceNameFull || "",
+      circuit: this.raceCircuit || "",
+      location: this.raceLocation,
+      date: this.raceDate,
+      "season-id": this.raceSeason,
+      lap: this.raceLap || "",
+      "lap-team": this.raceLapTeam || "",
+      round: this.raceRound,
+      finished: this.raceFinished === 'true',
+      pole: this.racePole,
+      places: this.racePlaces || {}
+    }).then(() => {
+      console.log("Data updated succesfully!");
+    }).catch(() => {
+      console.log("Error!");
+    });
   }
 }

@@ -67,10 +67,18 @@
     <div  class="column column-center-horizontal">
         <div *ngIf="editMode==='race'" class="column page-content-wrapper edit-mode-wrapper column-center-horizontal">
             <span class="question">What race do you want to edit?</span>
+            <span class="question">Season 2020</span>
             <div class="row row-center-horizontal">
-                <div class="race-edit-selection column" *ngFor="let race of allRaces" (click)="setSelectedData(race)">
-                    <span class="race-name">{{race.name}}</span>
-                    <span class="race-date">{{race.date}}</span>
+                <div class="race-edit-selection column" *ngFor="let race2020 of races2020" (click)="setSelectedData(race2020)">
+                    <span class="race-name">{{race2020.name}}</span>
+                    <span class="race-date">{{race2020.date}}</span>
+                </div>
+            </div>
+            <span class="question">Season 2019</span>
+            <div class="row row-center-horizontal">
+                <div class="race-edit-selection column" *ngFor="let race2019 of races2019" (click)="setSelectedData(race2019)">
+                    <span class="race-name">{{race2019.name}}</span>
+                    <span class="race-date">{{race2019.date}}</span>
                 </div>
             </div>
             <button 

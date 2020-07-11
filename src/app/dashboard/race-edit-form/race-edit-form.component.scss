@@ -29,3 +29,15 @@ $white: #FFFFFF;
     margin-right: 10px;
     min-width: 80px;
 }
+
+.simple-text {
+    color: $blue;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.race-result {
+    border-bottom: 5px solid $blue;
+    margin-bottom: 10px;
+}

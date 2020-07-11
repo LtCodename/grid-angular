@@ -34,6 +34,8 @@ export class DashboardPageComponent implements OnInit {
 
   allSeasons: ISeason[] = [];
   allRaces: IRace[] = [];
+  races2019: IRace[] = [];
+  races2020: IRace[] = [];
   allTeams: ITeam[] = [];
   allDrivers: IDriver[] = [];
 
@@ -65,6 +67,7 @@ export class DashboardPageComponent implements OnInit {
       mergeMap(([allSeasons, allRaces, allDrivers]) => this.teamsService.teams$.pipe(map((allTeams: ITeam[]): [ISeason[], IRace[], IDriver[], ITeam[]] => [allSeasons, allRaces, allDrivers, allTeams])))
     ).subscribe(([allSeasons, allRaces, allDrivers, allTeams]) => {
       if (allSeasons.length && allRaces.length && allDrivers.length && allTeams.length) {
+        //seasons
         this.allSeasons = allSeasons.sort((a: ISeason, b: ISeason) => {
           if (a.name < b.name) {
             return -1;
@@ -74,6 +77,7 @@ export class DashboardPageComponent implements OnInit {
           }
           return 0;
         });
+        //drivers
         this.allDrivers = allDrivers.sort((a: IDriver, b: IDriver) => {
           if (a.name < b.name) {
             return -1;
@@ -83,6 +87,7 @@ export class DashboardPageComponent implements OnInit {
           }
           return 0;
         });
+        //teams
         this.allTeams = allTeams.sort((a: ITeam, b: ITeam) => {
           if (a.name < b.name) {
             return -1;
@@ -92,14 +97,15 @@ export class DashboardPageComponent implements OnInit {
           }
           return 0;
         });
-        this.allRaces = allRaces.sort((a: IRace, b: IRace) => {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
+        //races
+        this.allRaces = allRaces;
+
+        this.races2019 = this.allRaces.filter((race: IRace) => race["season-id"] === "6kkEVCFphZzoFUxEg564").sort((a: IRace, b: IRace) => {
+          return parseFloat(a.round) - parseFloat(b.round);
+        });
+
+        this.races2020 = this.allRaces.filter((race: IRace) => race["season-id"] === "HaYN7zcCFJXEjs9lfYaU").sort((a: IRace, b: IRace) => {
+          return parseFloat(a.round) - parseFloat(b.round);
         });
       }
 
