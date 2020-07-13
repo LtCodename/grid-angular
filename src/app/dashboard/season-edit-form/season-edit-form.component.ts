@@ -25,6 +25,9 @@ export class SeasonEditFormComponent implements OnInit {
   allDrivers: IDriver[] = [];
   driversToDisplay: IDriverToDisplay[] = [];
   driversToSelect: IDriver[] = [];
+  buttonName: string = "Submit";
+  mode: string = "edit";
+  tempId:string = "";
 
   constructor(private driversService: DriversService, private seasonService: SeasonsService) { 
     this.driversService.drivers$.subscribe(data => {
@@ -49,28 +52,54 @@ export class SeasonEditFormComponent implements OnInit {
 
     this.driversToDisplay = [];
     if(this.allDrivers) {
-      this.seasonDrivers.forEach((driverId: string) => {
-        this.driversToDisplay.push({
-          id: driverId,
-          name: this.allDrivers.find((driver: IDriver) => driver.id === driverId).name
+      if(this.seasonDrivers) {
+        this.seasonDrivers.forEach((driverId: string) => {
+          this.driversToDisplay.push({
+            id: driverId,
+            name: this.allDrivers.find((driver: IDriver) => driver.id === driverId).name
+          });
         });
-      });
+      }
 
       this.recalculateDriversToAdd();
+    }
+
+    if (typeof(this.seasonData) === 'string') {
+      this.buttonName = "Add";
+      this.mode = "add";
+    } else {
+      this.buttonName = "Submit";
+      this.mode = "edit";
     }
   }
 
   submitData(): void {
-    this.seasonService.edit({
-      id: this.seasonData.id,
-      name: this.seasonName,
-      current: this.seasonCurrent,
-      drivers: this.seasonDrivers || []
-    }).then(() => {
-      console.log("Data updated succesfully!");
-    }).catch(() => {
-      console.log("Error!");
-    });
+    if(this.mode === "edit") { 
+      this.seasonService.edit({
+        id: this.seasonData.id || this.tempId,
+        name: this.seasonName,
+        current: this.seasonCurrent,
+        drivers: this.seasonDrivers || []
+      }).then(() => {
+        console.log("Data updated succesfully!");
+      }).catch(() => {
+        console.log("Error!");
+      });
+    } else {
+      this.seasonService.add({
+        name: this.seasonName,
+        current: this.seasonCurrent,
+        drivers: this.seasonDrivers || []
+      }).then((res) => {
+        this.tempId = res.id;
+        this.mode = "edit";
+        this.buttonName = "Submit";
+        console.log("Data updated succesfully!");
+      }).catch(() => {
+        console.log("Error!");
+      });
+    }
+    
   }
 
   deleteDriver(index: number):void {
