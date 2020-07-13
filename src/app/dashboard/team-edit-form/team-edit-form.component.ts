@@ -24,11 +24,13 @@ export class TeamEditFormComponent implements OnInit {
   addSummary: boolean = false;
   addSummaryYear: boolean = false;
   teamSummary: ISummary[];
-
+  buttonName: string = "Submit";
+  mode: string = "edit";
   newYearChamp: string = "false";
   newYearName: string = "";
   newSummaryType: string = "text";
   newSummaryText: string = "";
+  tempId:string = "";
 
   constructor(private teamsService: TeamsService) { }
 
@@ -53,26 +55,56 @@ export class TeamEditFormComponent implements OnInit {
     this.teamPodiums = this.teamData.podiums;
     this.teamPoles = this.teamData.poles;
     this.teamSummary = this.teamData.summary;
+
+    if (typeof(this.teamData) === 'string') {
+      this.buttonName = "Add";
+      this.mode = "add";
+    } else {
+      this.buttonName = "Submit";
+      this.mode = "edit";
+    }
   }
 
   submitData(): void {
-    this.teamsService.edit({
-      id: this.teamData.id,
-      name: this.teamName,
-      "name-full": this.teamNameFull,
-      country: this.teamCountry,
-      "team-principal": this.teamPrincipal,
-      engine: this.teamEngine,
-      "constructors-championships": this.teamChamps,
-      wins: this.teamWins,
-      podiums: this.teamPodiums,
-      poles: this.teamPoles,
-      summary: this.teamSummary || []
-    }).then(() => {
-      console.log("Data updated succesfully!");
-    }).catch(() => {
-      console.log("Error!");
-    });
+    if(this.mode === "edit") {
+      this.teamsService.edit({
+        id: this.teamData.id || this.tempId,
+        name: this.teamName,
+        "name-full": this.teamNameFull,
+        country: this.teamCountry,
+        "team-principal": this.teamPrincipal,
+        engine: this.teamEngine,
+        "constructors-championships": this.teamChamps,
+        wins: this.teamWins,
+        podiums: this.teamPodiums,
+        poles: this.teamPoles,
+        summary: this.teamSummary || []
+      }).then(() => {
+        console.log("Data updated succesfully!");
+      }).catch(() => {
+        console.log("Error!");
+      });
+    } else {
+      this.teamsService.add({
+        name: this.teamName,
+        "name-full": this.teamNameFull,
+        country: this.teamCountry,
+        "team-principal": this.teamPrincipal,
+        engine: this.teamEngine,
+        "constructors-championships": this.teamChamps,
+        wins: this.teamWins,
+        podiums: this.teamPodiums,
+        poles: this.teamPoles,
+        summary: this.teamSummary || []
+      }).then((res) => {
+        console.log("Data updated succesfully!");
+        this.tempId = res.id;
+        this.mode = "edit";
+        this.buttonName = "Submit";
+      }).catch(() => {
+        console.log("Error!");
+      });
+    }
   }
 
   toggleAddSummaryMode(): void {
@@ -92,7 +124,6 @@ export class TeamEditFormComponent implements OnInit {
   }
 
   addSummaryYearItem(index: number): void {
-    console.log(this.teamSummary);
     let fakeSummary: ISummary[] = [...this.teamSummary];
     fakeSummary[index].years.push({
       champ: this.newYearChamp === 'true',
