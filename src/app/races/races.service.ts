@@ -28,8 +28,12 @@ export class RacesService {
   }
 
   edit(data: any) {
-    console.log(data);
     return this.firestore.collection('races').doc(data.id).update({ ...data });
+  }
+
+  add(data: any) {
+    console.log(data)
+    return this.firestore.collection('races').add({ ...data });
   }
 
   private processSnapshot(data) {

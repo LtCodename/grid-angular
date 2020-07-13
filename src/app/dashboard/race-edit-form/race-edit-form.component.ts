@@ -31,6 +31,9 @@ export class RaceEditFormComponent implements OnInit {
   raceFinished: string = "false";
   raceCircuit: string = "";
   racePlaces = {};
+  buttonName: string = "Submit";
+  mode: string = "edit";
+  tempId:string = "";
   
   allSeasons: ISeason[] = [];
   allDrivers: IDriver[] = [];
@@ -84,6 +87,14 @@ export class RaceEditFormComponent implements OnInit {
     this.racePlaces = this.raceData.places;
 
     this.setInformation();
+
+    if (typeof(this.raceData) === 'string') {
+      this.buttonName = "Add";
+      this.mode = "add";
+    } else {
+      this.buttonName = "Submit";
+      this.mode = "edit";
+    }
   }
 
   setInformation(): void {
@@ -93,7 +104,7 @@ export class RaceEditFormComponent implements OnInit {
     //Season drivers
     this.seasonDrivers = [];
     this.allDrivers.forEach((dr: IDriver) => {
-      if (this.currentSeason.drivers.indexOf(dr.id) !== -1) {
+      if (this.currentSeason && this.currentSeason.drivers.length && this.currentSeason.drivers.indexOf(dr.id) !== -1) {
         this.seasonDrivers.push(dr);
       }
     });
@@ -132,24 +143,51 @@ export class RaceEditFormComponent implements OnInit {
       }
     });
 
-    this.racesService.edit({
-      id: this.raceData.id,
-      name: this.raceName,
-      fullName: this.raceNameFull || "",
-      circuit: this.raceCircuit || "",
-      location: this.raceLocation,
-      date: this.raceDate,
-      "season-id": this.raceSeason,
-      lap: this.raceLap || "",
-      "lap-team": this.raceLapTeam || "",
-      round: this.raceRound,
-      finished: this.raceFinished === 'true',
-      pole: this.racePole,
-      places: this.racePlaces || {}
-    }).then(() => {
-      console.log("Data updated succesfully!");
-    }).catch(() => {
-      console.log("Error!");
-    });
+    if(this.mode === "edit") {
+      this.racesService.edit({
+        id: this.raceData.id || this.tempId,
+        name: this.raceName,
+        fullName: this.raceNameFull || "",
+        circuit: this.raceCircuit || "",
+        location: this.raceLocation,
+        date: this.raceDate,
+        "season-id": this.raceSeason,
+        lap: this.raceLap || "",
+        "lap-team": this.raceLapTeam || "",
+        round: this.raceRound,
+        finished: this.raceFinished === 'true',
+        pole: this.racePole || "",
+        places: this.racePlaces || {}
+      }).then(() => {
+        console.log("Data updated succesfully!");
+      }).catch(() => {
+        console.log("Error!");
+      });
+    } else {
+      this.racesService.add({
+        name: this.raceName,
+        fullName: this.raceNameFull || "",
+        circuit: this.raceCircuit || "",
+        location: this.raceLocation,
+        date: this.raceDate,
+        "season-id": this.raceSeason,
+        lap: this.raceLap || "",
+        "lap-team": this.raceLapTeam || "",
+        round: this.raceRound,
+        finished: this.raceFinished === 'true',
+        pole: this.racePole || "",
+        places: this.racePlaces || {}
+      }).then((res) => {
+        this.tempId = res.id;
+        this.mode = "edit";
+        this.buttonName = "Submit";
+        console.log("Data updated succesfully!");
+      }).catch(() => {
+        console.log("Error!");
+      });
+    }
+
+
+    
   }
 }
