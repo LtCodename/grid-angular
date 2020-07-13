@@ -97,10 +97,10 @@ export class TeamEditFormComponent implements OnInit {
         poles: this.teamPoles,
         summary: this.teamSummary || []
       }).then((res) => {
-        console.log("Data updated succesfully!");
         this.tempId = res.id;
         this.mode = "edit";
         this.buttonName = "Submit";
+        console.log("Data updated succesfully!");
       }).catch(() => {
         console.log("Error!");
       });

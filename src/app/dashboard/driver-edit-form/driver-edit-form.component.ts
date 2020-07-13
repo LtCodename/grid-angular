@@ -33,6 +33,7 @@ export class DriverEditFormComponent implements OnInit, OnChanges {
   newSummaryTo: string = "";
   buttonName: string = "Submit";
   mode: string = "edit";
+  tempId:string = "";
 
   constructor(private driversService: DriversService, private teamsService: TeamsService) {
     this.teamsService.teams$.subscribe(data => {
@@ -74,7 +75,7 @@ export class DriverEditFormComponent implements OnInit, OnChanges {
   submitData(): void {
     if(this.mode === "edit") {
       this.driversService.edit({
-        id: this.driverData.id,
+        id: this.driverData.id || this.tempId,
         name: this.driverName,
         number: this.driverNumber,
         "date-of-birth": this.driverDob,
@@ -102,7 +103,10 @@ export class DriverEditFormComponent implements OnInit, OnChanges {
         championships: this.driverChamps,
         "team-id": this.driverTeam,
         summary: this.driverSummary || []
-      }).then(() => {
+      }).then((res) => {
+        this.tempId = res.id;
+        this.mode = "edit";
+        this.buttonName = "Submit";
         console.log("Data updated succesfully!");
       }).catch(() => {
         console.log("Error!");
