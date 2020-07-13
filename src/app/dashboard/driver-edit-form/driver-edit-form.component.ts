@@ -31,6 +31,8 @@ export class DriverEditFormComponent implements OnInit, OnChanges {
   newSummaryYear: string = "";
   newSummaryFrom: string = "";
   newSummaryTo: string = "";
+  buttonName: string = "Submit";
+  mode: string = "edit";
 
   constructor(private driversService: DriversService, private teamsService: TeamsService) {
     this.teamsService.teams$.subscribe(data => {
@@ -59,26 +61,53 @@ export class DriverEditFormComponent implements OnInit, OnChanges {
     this.driverChamps = this.driverData.championships;
     this.driverTeam = this.driverData["team-id"];
     this.driverSummary = this.driverData.summary;
+
+    if (typeof(this.driverData) === 'string') {
+      this.buttonName = "Add";
+      this.mode = "add";
+    } else {
+      this.buttonName = "Submit";
+      this.mode = "edit";
+    }
   }
 
   submitData(): void {
-    this.driversService.edit({
-      id: this.driverData.id,
-      name: this.driverName,
-      number: this.driverNumber,
-      "date-of-birth": this.driverDob,
-      nationality: this.driverNationality,
-      poles: this.driverPoles,
-      podiums: this.driverPodiums,
-      wins: this.driverWins,
-      championships: this.driverChamps,
-      "team-id": this.driverTeam,
-      summary: this.driverSummary || []
-    }).then(() => {
-      console.log("Data updated succesfully!");
-    }).catch(() => {
-      console.log("Error!");
-    });
+    if(this.mode === "edit") {
+      this.driversService.edit({
+        id: this.driverData.id,
+        name: this.driverName,
+        number: this.driverNumber,
+        "date-of-birth": this.driverDob,
+        nationality: this.driverNationality,
+        poles: this.driverPoles,
+        podiums: this.driverPodiums,
+        wins: this.driverWins,
+        championships: this.driverChamps,
+        "team-id": this.driverTeam,
+        summary: this.driverSummary || []
+      }).then(() => {
+        console.log("Data updated succesfully!");
+      }).catch(() => {
+        console.log("Error!");
+      });
+    } else {
+      this.driversService.add({
+        name: this.driverName,
+        number: this.driverNumber,
+        "date-of-birth": this.driverDob,
+        nationality: this.driverNationality,
+        poles: this.driverPoles,
+        podiums: this.driverPodiums,
+        wins: this.driverWins,
+        championships: this.driverChamps,
+        "team-id": this.driverTeam,
+        summary: this.driverSummary || []
+      }).then(() => {
+        console.log("Data updated succesfully!");
+      }).catch(() => {
+        console.log("Error!");
+      });
+    }
   }
 
   deleteSummaryItem(index: number): void {
