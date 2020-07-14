@@ -3,8 +3,16 @@ import { ISeason } from 'src/app/seasons/seasons-model';
 import { DriversService } from 'src/app/drivers/drivers.service';
 import { IDriver } from 'src/app/drivers/drivers-model';
 import { SeasonsService } from 'src/app/seasons/seasons.service';
+import { ITeam } from 'src/app/teams/teams-model';
+import { mergeMap, map } from 'rxjs/operators';
+import { TeamsService } from 'src/app/teams/teams.service';
 
 interface IDriverToDisplay {
+  id: string;
+  name: string;
+}
+
+interface ITeamToDisplay {
   id: string;
   name: string;
 }
@@ -20,18 +28,26 @@ export class SeasonEditFormComponent implements OnInit {
 
   seasonName: string = "";
   driverToAdd: string = "";
+  teamToAdd: string = "";
   seasonCurrent: boolean = false;
   seasonDrivers: string[] = [];
+  seasonTeams: string[] = [];
   allDrivers: IDriver[] = [];
+  allTeams: ITeam[] = [];
   driversToDisplay: IDriverToDisplay[] = [];
   driversToSelect: IDriver[] = [];
+  teamsToDisplay: ITeamToDisplay[] = [];
+  teamsToSelect: ITeam[] = [];
   buttonName: string = "Submit";
   mode: string = "edit";
   tempId:string = "";
 
-  constructor(private driversService: DriversService, private seasonService: SeasonsService) { 
-    this.driversService.drivers$.subscribe(data => {
-      this.allDrivers = data;
+  constructor(private driversService: DriversService, private seasonService: SeasonsService, private teamsService: TeamsService) { 
+    this.driversService.drivers$.pipe(
+      mergeMap((allDrivers: IDriver[]) => this.teamsService.teams$.pipe(map((allTeams: ITeam[]): [IDriver[], ITeam[]] => [allDrivers, allTeams]))),
+    ).subscribe(([allDrivers, allTeams]) => {
+      this.allDrivers = allDrivers;
+      this.allTeams = allTeams;
     });
   }
 
@@ -49,7 +65,9 @@ export class SeasonEditFormComponent implements OnInit {
     this.seasonName = this.seasonData.name;
     this.seasonCurrent = this.seasonData.current;
     this.seasonDrivers = this.seasonData.drivers;
+    this.seasonTeams = this.seasonData.teams;
 
+    //drivers
     this.driversToDisplay = [];
     if(this.allDrivers) {
       if(this.seasonDrivers) {
@@ -62,6 +80,21 @@ export class SeasonEditFormComponent implements OnInit {
       }
 
       this.recalculateDriversToAdd();
+    }
+
+    //teams
+    this.teamsToDisplay = [];
+    if(this.allTeams) {
+      if(this.seasonTeams) {
+        this.seasonTeams.forEach((teamId: string) => {
+          this.teamsToDisplay.push({
+            id: teamId,
+            name: this.allTeams.find((team: ITeam) => team.id === teamId).name
+          });
+        });
+      }
+
+      this.recalculateTeamsToAdd();
     }
 
     if (typeof(this.seasonData) === 'string') {
@@ -79,7 +112,8 @@ export class SeasonEditFormComponent implements OnInit {
         id: this.seasonData.id || this.tempId,
         name: this.seasonName,
         current: this.seasonCurrent,
-        drivers: this.seasonDrivers || []
+        drivers: this.seasonDrivers || [],
+        teams: this.seasonTeams || []
       }).then(() => {
         console.log("Data updated succesfully!");
       }).catch(() => {
@@ -89,7 +123,8 @@ export class SeasonEditFormComponent implements OnInit {
       this.seasonService.add({
         name: this.seasonName,
         current: this.seasonCurrent,
-        drivers: this.seasonDrivers || []
+        drivers: this.seasonDrivers || [],
+        teams: this.seasonTeams || []
       }).then((res) => {
         this.tempId = res.id;
         this.mode = "edit";
@@ -99,7 +134,6 @@ export class SeasonEditFormComponent implements OnInit {
         console.log("Error!");
       });
     }
-    
   }
 
   deleteDriver(index: number):void {
@@ -107,6 +141,13 @@ export class SeasonEditFormComponent implements OnInit {
     fakeDrivers.splice(index, 1);
     this.driversToDisplay = fakeDrivers;
     this.recalculateDriversToAdd();
+  }
+
+  deleteTeam(index: number):void {
+    let fakeTeams: ITeamToDisplay[] = [...this.teamsToDisplay];
+    fakeTeams.splice(index, 1);
+    this.teamsToDisplay = fakeTeams;
+    this.recalculateTeamsToAdd();
   }
 
   addDriver():void {
@@ -118,6 +159,17 @@ export class SeasonEditFormComponent implements OnInit {
     });
 
     this.recalculateDriversToAdd();
+  }
+
+  addTeam():void {
+    if (this.teamToAdd === "") return;
+
+    this.teamsToDisplay.push({
+      id: this.teamToAdd,
+      name: this.allTeams.find((team: ITeam) => team.id === this.teamToAdd).name
+    });
+
+    this.recalculateTeamsToAdd();
   }
 
   recalculateDriversToAdd():void {
@@ -132,10 +184,27 @@ export class SeasonEditFormComponent implements OnInit {
 
    this.driverToAdd = this.driversToSelect.length ? this.driversToSelect[0].id : "" || "";
 
-
    this.seasonDrivers = [];
    this.driversToDisplay.forEach((displayDriver: IDriverToDisplay) => {
      this.seasonDrivers.push(displayDriver.id);
    })
   }
+
+  recalculateTeamsToAdd():void {
+    this.teamsToSelect = [];
+ 
+    this.allTeams.forEach((team: ITeam) => {
+      let found = this.teamsToDisplay.find(tm => tm.id === team.id);
+      if  (!found) {
+        this.teamsToSelect.push(team);
+      }
+    });
+ 
+    this.teamToAdd = this.teamsToSelect.length ? this.teamsToSelect[0].id : "" || "";
+ 
+    this.seasonTeams = [];
+    this.teamsToDisplay.forEach((displayTeam: ITeamToDisplay) => {
+      this.seasonTeams.push(displayTeam.id);
+    })
+   }
 }

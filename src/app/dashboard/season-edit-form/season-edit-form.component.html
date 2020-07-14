@@ -12,6 +12,32 @@
                 <option [value]="false">No</option>
             </select>
         </div>
+        <!-- Teams -->
+        <span class="question">Teams</span>
+        <div class="column">
+            <div class="row driver-row" *ngFor="let team of teamsToDisplay; let index = index;">
+                <span class="driver">{{team.name}}</span>
+                <button 
+                    class="grid-button add-button"
+                    type="submit"
+                    (click)="deleteTeam(index)">
+                    Remove
+                </button>
+            </div>
+            <span class="question">Add Team</span>
+            <div class="row row-center-vertical">
+                <select class="grid-input" [(ngModel)]="teamToAdd">
+                    <option [value]="team.id" *ngFor="let team of teamsToSelect">{{team.name}}</option>
+                </select>
+                <button 
+                    class="grid-button add-button"
+                    type="submit"
+                    (click)="addTeam()">
+                    Add
+                </button>
+            </div>
+        </div>
+        <!-- Drivers -->
         <span class="question">Grid</span>
         <div class="column">
             <div class="row driver-row" *ngFor="let driver of driversToDisplay; let index = index;">
