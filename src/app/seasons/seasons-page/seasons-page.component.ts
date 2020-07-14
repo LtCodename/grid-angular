@@ -107,8 +107,7 @@ export class SeasonsPageComponent implements OnInit {
       if (race.places) {
         for (let place in race.places) {
           let driver: IDriver = drivers.find((dr: IDriver) => dr.id === race.places[place].driver);
-          
-          if (standingsHash[race.places[place].driver]) {
+          if (standingsHash[driver.name]) {
             standingsHash[driver.name] += PointsSystem[place];
           } else {
             standingsHash[driver.name] = PointsSystem[place];
@@ -166,7 +165,7 @@ export class SeasonsPageComponent implements OnInit {
         for (let place in race.places) {
           let constructor: ITeam = teams.find((tm: ITeam) => tm.id === race.places[place].team);
 
-          if (standingsHash[race.places[place].team]) {
+          if (standingsHash[constructor.name]) {
             standingsHash[constructor.name] += PointsSystem[place];
           } else {
             standingsHash[constructor.name] = PointsSystem[place];

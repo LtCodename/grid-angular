@@ -79,6 +79,15 @@ export class RacePageComponent implements OnInit {
           place: elem.place
         });
       });
+
+      if(this.race.lap){
+        const lapDriver: IDriver = this.allDrivers.find((driver: IDriver) => driver.id === this.race.lap);
+        results.forEach(elem => {
+          if(elem.driver === lapDriver.name) {
+            elem.points += 1;
+          }
+        })
+      }
     }
 
     return results;
