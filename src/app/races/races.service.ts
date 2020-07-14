@@ -32,7 +32,6 @@ export class RacesService {
   }
 
   add(data: any) {
-    console.log(data)
     return this.firestore.collection('races').add({ ...data });
   }
 

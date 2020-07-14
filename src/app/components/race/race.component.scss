@@ -9,7 +9,7 @@ $white: #FFFFFF;
     min-width: 185px;
     background: $white;
     color: $blue;
-    margin: 0 10px 5px 10px;
+    margin: 5px;
     cursor: pointer;
     transition: 0.2s all;
     position: relative;
@@ -24,7 +24,7 @@ $white: #FFFFFF;
 }
 
 .race:hover {
-    transform: scale(1.1);
+    //transform: scale(1.1);
 }
 
 .race-name {

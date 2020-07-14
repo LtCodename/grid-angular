@@ -58,7 +58,9 @@ export class SeasonsPageComponent implements OnInit {
         this.driversStandings = this.calculateDriversStandings(this.pastRaces, allDrivers);
 
         // Caclulate teams standings
-        this.teamsStandings = this.calculateTeamsStandings(this.pastRaces, allTeams);
+        const currentSeason: ISeason = this.allSeasons.find((season: ISeason) => season.current);
+        const seasonTeams: ITeam[] = allTeams.filter((team: ITeam) => currentSeason.teams.indexOf(team.id) != -1);
+        this.teamsStandings = this.calculateTeamsStandings(this.pastRaces, seasonTeams);
       }
 
       this.showData = true;
