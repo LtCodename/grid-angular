@@ -12,6 +12,7 @@ $white: #FFFFFF;
     margin: 0 10px 5px 10px;
     cursor: pointer;
     transition: 0.2s all;
+    position: relative;
 }
 
 .regular-padding {
@@ -64,4 +65,10 @@ $white: #FFFFFF;
 
 .race-url {
     text-decoration: none;
+}
+
+.icon {
+    position: absolute;
+    top: -10px;
+    left: 90%;
 }

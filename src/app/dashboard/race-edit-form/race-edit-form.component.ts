@@ -28,6 +28,7 @@ export class RaceEditFormComponent implements OnInit {
   raceLapTeam: string = "";
   raceRound: string = "";
   racePole: string = "";
+  raceOngoing: string = "false";
   raceFinished: string = "false";
   raceCircuit: string = "";
   racePlaces = {};
@@ -82,6 +83,7 @@ export class RaceEditFormComponent implements OnInit {
     this.raceLapTeam = this.raceData["lap-team"];
     this.raceRound = this.raceData.round;
     this.raceFinished = this.raceData.finished ? "true" : "false";
+    this.raceOngoing = this.raceData.ongoing ? "true" : "false";
     this.racePole = this.raceData.pole;
     this.raceCircuit = this.raceData.circuit;
     this.racePlaces = this.raceData.places;
@@ -156,6 +158,7 @@ export class RaceEditFormComponent implements OnInit {
         "lap-team": this.raceLapTeam || "",
         round: this.raceRound,
         finished: this.raceFinished === 'true',
+        ongoing: this.raceOngoing === 'true',
         pole: this.racePole || "",
         places: this.racePlaces || {}
       }).then(() => {
@@ -175,6 +178,7 @@ export class RaceEditFormComponent implements OnInit {
         "lap-team": this.raceLapTeam || "",
         round: this.raceRound,
         finished: this.raceFinished === 'true',
+        ongoing: this.raceOngoing === 'true',
         pole: this.racePole || "",
         places: this.racePlaces || {}
       }).then((res) => {

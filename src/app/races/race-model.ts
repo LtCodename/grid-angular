@@ -11,6 +11,7 @@ export interface IRace {
     fullName: string;
     circuit: string;
     finished: any;
+    ongoing: boolean;
     url: string;
     "season-id": string;
     "name-full": string;

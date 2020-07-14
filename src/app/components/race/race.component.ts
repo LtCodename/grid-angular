@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DriversService } from 'src/app/drivers/drivers.service';
 import { IDriver } from 'src/app/drivers/drivers-model';
 import { IPlace } from 'src/app/races/race-model';
+import { OngoingEvent } from 'src/iconsService';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-race',
@@ -17,10 +19,13 @@ export class RaceComponent implements OnInit {
   @Input() name: string;
   @Input() date: string;
   @Input() mode: string;
+  @Input() ongoing: boolean;
   @Input() places: IPlace[];
   @Input() url: string = "";
 
-  constructor(private driversService: DriversService) { }
+  readonly ongoingIcon = this.sanitized.bypassSecurityTrustHtml(OngoingEvent);
+
+  constructor(private driversService: DriversService, private sanitized: DomSanitizer) { }
 
   getDrivers(): void {
     this.driversService.getDriversData().subscribe(data => {

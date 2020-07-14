@@ -7,5 +7,6 @@
             <span class="podium second-place">{{podiumPlaces[1]}}</span>
             <span class="podium third-place">{{podiumPlaces[2]}}</span>
         </div>
+        <span *ngIf="ongoing" class="icon" [innerHTML]="ongoingIcon"></span>
     </div>
 </a>
