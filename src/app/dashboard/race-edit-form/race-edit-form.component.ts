@@ -135,6 +135,7 @@ export class RaceEditFormComponent implements OnInit {
   }
 
   submitData(): void {
+    this.buttonName = "...";
     
     this.racePlaces = {};
 
@@ -162,9 +163,9 @@ export class RaceEditFormComponent implements OnInit {
         pole: this.racePole || "",
         places: this.racePlaces || {}
       }).then(() => {
-        console.log("Data updated succesfully!");
+        this.buttonProgress("Done");
       }).catch(() => {
-        console.log("Error!");
+        this.buttonProgress("Error");
       });
     } else {
       this.racesService.add({
@@ -184,14 +185,17 @@ export class RaceEditFormComponent implements OnInit {
       }).then((res) => {
         this.tempId = res.id;
         this.mode = "edit";
-        this.buttonName = "Submit";
-        console.log("Data updated succesfully!");
+        this.buttonProgress("Done");
       }).catch(() => {
-        console.log("Error!");
+        this.buttonProgress("Error");
       });
     }
+  }
 
-
-    
+  buttonProgress(message: string): void {
+    this.buttonName = message;
+    setTimeout(() => {
+      this.buttonName = "Submit";
+    }, 1000);
   }
 }

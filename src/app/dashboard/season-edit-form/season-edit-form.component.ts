@@ -107,6 +107,8 @@ export class SeasonEditFormComponent implements OnInit {
   }
 
   submitData(): void {
+    this.buttonName = "...";
+
     if(this.mode === "edit") { 
       this.seasonService.edit({
         id: this.seasonData.id || this.tempId,
@@ -115,9 +117,9 @@ export class SeasonEditFormComponent implements OnInit {
         drivers: this.seasonDrivers || [],
         teams: this.seasonTeams || []
       }).then(() => {
-        console.log("Data updated succesfully!");
+        this.buttonProgress("Done");
       }).catch(() => {
-        console.log("Error!");
+        this.buttonProgress("Error");
       });
     } else {
       this.seasonService.add({
@@ -128,12 +130,18 @@ export class SeasonEditFormComponent implements OnInit {
       }).then((res) => {
         this.tempId = res.id;
         this.mode = "edit";
-        this.buttonName = "Submit";
-        console.log("Data updated succesfully!");
+        this.buttonProgress("Done");
       }).catch(() => {
-        console.log("Error!");
+        this.buttonProgress("Error");
       });
     }
+  }
+
+  buttonProgress(message: string): void {
+    this.buttonName = message;
+    setTimeout(() => {
+      this.buttonName = "Submit";
+    }, 1000);
   }
 
   deleteDriver(index: number):void {

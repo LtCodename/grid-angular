@@ -73,6 +73,8 @@ export class DriverEditFormComponent implements OnInit, OnChanges {
   }
 
   submitData(): void {
+    this.buttonName = "...";
+
     if(this.mode === "edit") {
       this.driversService.edit({
         id: this.driverData.id || this.tempId,
@@ -87,9 +89,9 @@ export class DriverEditFormComponent implements OnInit, OnChanges {
         "team-id": this.driverTeam,
         summary: this.driverSummary || []
       }).then(() => {
-        console.log("Data updated succesfully!");
+        this.buttonProgress("Done");
       }).catch(() => {
-        console.log("Error!");
+        this.buttonProgress("Error");
       });
     } else {
       this.driversService.add({
@@ -106,12 +108,18 @@ export class DriverEditFormComponent implements OnInit, OnChanges {
       }).then((res) => {
         this.tempId = res.id;
         this.mode = "edit";
-        this.buttonName = "Submit";
-        console.log("Data updated succesfully!");
+        this.buttonProgress("Done");
       }).catch(() => {
-        console.log("Error!");
+        this.buttonProgress("Error");
       });
     }
+  }
+
+  buttonProgress(message: string): void {
+    this.buttonName = message;
+    setTimeout(() => {
+      this.buttonName = "Submit";
+    }, 1000);
   }
 
   deleteSummaryItem(index: number): void {

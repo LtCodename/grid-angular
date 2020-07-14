@@ -66,6 +66,8 @@ export class TeamEditFormComponent implements OnInit {
   }
 
   submitData(): void {
+    this.buttonName = "...";
+
     if(this.mode === "edit") {
       this.teamsService.edit({
         id: this.teamData.id || this.tempId,
@@ -80,9 +82,9 @@ export class TeamEditFormComponent implements OnInit {
         poles: this.teamPoles,
         summary: this.teamSummary || []
       }).then(() => {
-        console.log("Data updated succesfully!");
+        this.buttonProgress("Done");
       }).catch(() => {
-        console.log("Error!");
+        this.buttonProgress("Error");
       });
     } else {
       this.teamsService.add({
@@ -99,12 +101,18 @@ export class TeamEditFormComponent implements OnInit {
       }).then((res) => {
         this.tempId = res.id;
         this.mode = "edit";
-        this.buttonName = "Submit";
-        console.log("Data updated succesfully!");
+        this.buttonProgress("Done");
       }).catch(() => {
-        console.log("Error!");
+        this.buttonProgress("Error");
       });
     }
+  }
+
+  buttonProgress(message: string): void {
+    this.buttonName = message;
+    setTimeout(() => {
+      this.buttonName = "Submit";
+    }, 1000);
   }
 
   toggleAddSummaryMode(): void {
