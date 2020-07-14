@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IDriver } from 'src/app/drivers/drivers-model';
 import { Subject } from 'rxjs';
 import { DriversService } from 'src/app/drivers/drivers.service';
-import { takeUntil } from 'rxjs/operators';
+import { mergeMap, map } from 'rxjs/operators';
 import { SeasonsService } from 'src/app/seasons/seasons.service';
 import { ISeason } from 'src/app/seasons/seasons-model';
 import { ITeam } from 'src/app/teams/teams-model';
@@ -35,13 +35,12 @@ export class CloudPanelComponent implements OnInit {
   }
 
   prepareTeams(): void {
-    //Get teams
-    this.teamsService.teams$.subscribe(data => {
-      this.teams = data;
-
-      //Only include current season teams
-      this.seasonsService.seasons$.subscribe(data => {
-        this.seasons = data;
+    this.teamsService.teams$.pipe(
+      mergeMap((allTeams: ITeam[]) => this.seasonsService.seasons$.pipe(map((allSeasons: ISeason[]): [ITeam[], ISeason[]] => [allTeams, allSeasons]))),
+    ).subscribe(([allTeams, allSeasons]) => {
+      this.teams = allTeams
+      this.seasons = allSeasons;
+      if (this.teams && this.seasons) {
         const currentSeason = this.seasons.find((season: ISeason) => season.current);
         const currentSeasonTeams = currentSeason ? currentSeason.teams : [];
 
@@ -62,28 +61,29 @@ export class CloudPanelComponent implements OnInit {
                 return 1;
               }
               return 0;
-            })
+            });
+
+            if(this.teamsToDisplay.length) {
+              this.showTeamsPanel = true;
+            }
           })
         }
-        
-        if(this.teamsToDisplay.length) {
-          this.showTeamsPanel = true;
-        }
-      });
+      }
+    }, () => {
     });
   }
 
   prepareDrivers(): void {
-    // Get drivers
-    this.driversService.getDriversData().pipe(takeUntil(this.notifier)).subscribe((driversData: IDriver[]) => {
-      this.drivers = driversData;
-      //Only include current season drivers
-      this.seasonsService.seasons$.subscribe(data => {
-        this.seasons = data;
-        const currentSeason = this.seasons.find((season: ISeason) => season.current);
-        const currentSeasonDrivers = currentSeason ? currentSeason.drivers : [];
+    this.driversService.drivers$.pipe(
+      mergeMap((allDrivers: IDriver[]) => this.seasonsService.seasons$.pipe(map((allSeasons: ISeason[]): [IDriver[], ISeason[]] => [allDrivers, allSeasons]))),
+    ).subscribe(([allDrivers, allSeasons]) => {
+      this.drivers = allDrivers
+      this.seasons = allSeasons;
+      
+      const currentSeason = this.seasons.find((season: ISeason) => season.current);
+      const currentSeasonDrivers = currentSeason ? currentSeason.drivers : [];
 
-        this.driversToDisplay = [];
+      this.driversToDisplay = [];
         if (currentSeasonDrivers) {
           currentSeasonDrivers.forEach((driverId: string) => {
             const foundDriver: IDriver = this.drivers.find((driver: IDriver) => driver.id === driverId);
@@ -107,7 +107,6 @@ export class CloudPanelComponent implements OnInit {
         if(this.driversToDisplay.length) {
           this.showDriversPanel = true;
         }
-      });
     }, () => {
     });
   }
