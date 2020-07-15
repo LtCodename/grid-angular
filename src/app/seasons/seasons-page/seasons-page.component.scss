@@ -78,12 +78,11 @@ $white: #FFFFFF;
     font-size: 1.25rem;
     color: $blue;
     text-align: center;
-    padding-bottom: 5px;
     margin: 0 5px;
 }
 
 .standings-cell-driver {
-    min-width: 85px;
+    min-width: 46px;
 }
 
 .standings-cell-team {
@@ -93,6 +92,7 @@ $white: #FFFFFF;
 .standings-points {
     min-width: 25px;
     text-align: center;
+    font-weight: normal;
 }
 
 .standings-row {
