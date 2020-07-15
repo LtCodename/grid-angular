@@ -79,7 +79,7 @@ $white: #FFFFFF;
     color: $blue;
     text-align: center;
     padding-bottom: 5px;
-    margin-right: 10px;
+    margin: 0 5px;
 }
 
 .standings-cell-driver {
@@ -101,6 +101,80 @@ $white: #FFFFFF;
     border-radius: 5px;
 }
 
+.statistics-row {
+    border-bottom: 5px solid #303960;
+    border-radius: 5px;
+    padding: 0 15px 0px 15px;
+    margin-bottom: 10px;
+}
+
+.headers-row {
+    padding: 0 15px 10px 15px;
+}
+
 .events-wrapper {
     padding: 0 10px 10px 10px;
+}
+
+.statistics-wrapper {
+    margin-top: 10px;
+    padding-bottom: 40px;
+}
+
+.standings-cell-header {
+    background: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 50px;
+    color: $blue;
+    cursor: pointer;
+    display: block;
+}
+
+.standings-name {
+    min-width: 87px;
+    text-align: center;
+}
+
+.standings-poles {
+    min-width: 84px;
+    text-align: center;
+}
+
+.standings-poles-season {
+    min-width: 140px;
+    text-align: center;
+}
+
+.standings-podiums {
+    min-width: 114px;
+    text-align: center;
+}
+
+.standings-podiums-season {
+    min-width: 170px;
+    text-align: center;
+}
+
+.standings-wins {
+    min-width: 80px;
+    text-align: center;
+}
+
+.standings-wins-season {
+    min-width: 136px;
+    text-align: center;
+}
+
+.standings-titles {
+    min-width: 85px;
+    text-align: center;
+}
+
+
+.stats-cell {
+    font-size: 1.25rem;
+    color: $blue;
+    text-align: center;
+    padding-bottom: 5px;
+    margin: 0 5px;
 }

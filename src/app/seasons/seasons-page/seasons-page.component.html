@@ -84,5 +84,35 @@
                 </div>
             </div>
         </div>
+        <!-- Statistics -->
+        <span class="grey-cloud">Statistics</span>
+        <div class="events-content-wrapper statistics-wrapper">
+            <div class="row row-center-horizontal">
+                <div class="column standings-table">
+                    <!-- Headers -->
+                    <div class="row standings-row headers-row">
+                        <span class="standings-cell standings-cell-header">Name</span>
+                        <span class="standings-cell standings-cell-header">Poles</span>
+                        <span class="standings-cell standings-cell-header">Poles 2020</span>
+                        <span class="standings-cell standings-cell-header">Podiums</span>
+                        <span class="standings-cell standings-cell-header">Podiums 2020</span>
+                        <span class="standings-cell standings-cell-header">Wins</span>
+                        <span class="standings-cell standings-cell-header">Wins 2020</span>
+                        <span class="standings-cell standings-cell-header">Titles</span>
+                    </div>
+                    <!-- Data -->
+                    <div class="row statistics-row" *ngFor="let stat of statistics">
+                        <span class="standings-cell standings-name">{{stat.name}}</span>
+                        <span class="stats-cell standings-poles">{{stat.poles}}</span>
+                        <span class="stats-cell standings-poles-season">{{stat.polesThisSeason}}</span>
+                        <span class="stats-cell standings-podiums">{{stat.podiums}}</span>
+                        <span class="stats-cell standings-podiums-season">{{stat.podiumsThisSeason}}</span>
+                        <span class="stats-cell standings-wins">{{stat.wins}}</span>
+                        <span class="stats-cell standings-wins-season">{{stat.winsThisSeason}}</span>
+                        <span class="stats-cell standings-titles">{{stat.champs}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

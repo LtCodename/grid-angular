@@ -10,6 +10,17 @@ import { IDriver } from 'src/app/drivers/drivers-model';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { ITeam } from 'src/app/teams/teams-model';
 
+interface IStatUnit {
+  name: string;
+  podiums: string;
+  podiumsThisSeason: string;
+  poles: string;
+  polesThisSeason: string;
+  wins: string;
+  winsThisSeason: string;
+  champs: string;
+}
+
 @Component({
   selector: 'app-seasons-page',
   templateUrl: './seasons-page.component.html',
@@ -25,6 +36,7 @@ export class SeasonsPageComponent implements OnInit {
   currentSeason: ISeason;
   driversStandings = [];
   teamsStandings = [];
+  statistics: IStatUnit[] = [];
   showData: boolean = false;
   eventsTabName: string = "upcoming";
   standingsTabName: string = "drivers";
@@ -61,6 +73,9 @@ export class SeasonsPageComponent implements OnInit {
         const currentSeason: ISeason = this.allSeasons.find((season: ISeason) => season.current);
         const seasonTeams: ITeam[] = allTeams.filter((team: ITeam) => currentSeason.teams.indexOf(team.id) != -1);
         this.teamsStandings = this.calculateTeamsStandings(this.pastRaces, seasonTeams);
+
+        //Calculate extended statistics
+        this.statistics = this.calculateStatistics(allDrivers, this.pastRaces);
       }
 
       this.showData = true;
@@ -68,6 +83,72 @@ export class SeasonsPageComponent implements OnInit {
       this.showData = true;
     });
   };
+
+  calculateStatistics(drivers: IDriver[], races: IRace[]): IStatUnit[] {
+    //Filter out current grid drivers
+    const seasonDrivers: IDriver[] = drivers.filter((dr: IDriver) => this.currentSeason.drivers.indexOf(dr.id) !== -1)
+    
+    function setSeasonPoles(driverId: string): string {
+      let result = 0;
+
+      races.forEach((race: IRace) => {
+        if(race.pole === driverId) {
+          result += 1;
+        }
+      });
+      
+      return result.toString();
+    }
+
+    function setSeasonWins(driverId: string): string {
+      let result = 0;
+
+      races.forEach((race: IRace) => {
+        if(race.places) {
+          if (race.places[1].driver === driverId) {
+            result += 1;
+          }
+        }
+      });
+      
+      return result.toString();
+    }
+
+    function setSeasonPodiums(driverId: string): string {
+      let result = 0;
+
+      races.forEach((race: IRace) => {
+        if(race.places) {
+          if (race.places[1].driver === driverId) {
+            result += 1;
+          }
+          if (race.places[2].driver === driverId) {
+            result += 1;
+          }
+          if (race.places[3].driver === driverId) {
+            result += 1;
+          }
+        }
+      });
+      
+      return result.toString();
+    }
+
+    seasonDrivers.forEach((driver: IDriver) => {
+      this.statistics.push({
+        name: this.shortenName(driver.name),
+        poles: driver.poles,
+        polesThisSeason: setSeasonPoles(driver.id),
+        wins: driver.wins,
+        winsThisSeason: setSeasonWins(driver.id),
+        podiums: driver.podiums,
+        podiumsThisSeason: setSeasonPodiums(driver.id),
+        champs: driver.championships
+      });
+    });
+
+    return this.statistics;
+  }
 
   setCurrentSeason(seasonsData: ISeason[]): ISeason {
     return seasonsData.find((season: ISeason) => season.current);
