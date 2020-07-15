@@ -91,14 +91,49 @@
                 <div class="column standings-table">
                     <!-- Headers -->
                     <div class="row standings-row headers-row">
-                        <span class="standings-cell standings-cell-header">Name</span>
-                        <span class="standings-cell standings-cell-header">Poles</span>
-                        <span class="standings-cell standings-cell-header">Poles 2020</span>
-                        <span class="standings-cell standings-cell-header">Podiums</span>
-                        <span class="standings-cell standings-cell-header">Podiums 2020</span>
-                        <span class="standings-cell standings-cell-header">Wins</span>
-                        <span class="standings-cell standings-cell-header">Wins 2020</span>
-                        <span class="standings-cell standings-cell-header">Titles</span>
+                        <span class="standings-cell standings-cell-header-name">Name</span>
+                        <span 
+                            [ngClass]="{'standings-cell-header-selected': filter === 'poles'}" 
+                            class="standings-cell standings-cell-header" 
+                            (click)="setFilter('poles')">
+                            Poles
+                        </span>
+                        <span
+                            [ngClass]="{'standings-cell-header-selected': filter === 'polesThisSeason'}"
+                            class="standings-cell standings-cell-header" 
+                            (click)="setFilter('polesThisSeason')">
+                            Poles 2020
+                        </span>
+                        <span 
+                            [ngClass]="{'standings-cell-header-selected': filter === 'podiums'}"
+                            class="standings-cell standings-cell-header" 
+                            (click)="setFilter('podiums')">
+                            Podiums
+                            </span>
+                        <span 
+                            [ngClass]="{'standings-cell-header-selected': filter === 'podiumsThisSeason'}"
+                            class="standings-cell standings-cell-header" 
+                            (click)="setFilter('podiumsThisSeason')">
+                            Podiums 2020
+                            </span>
+                        <span 
+                            [ngClass]="{'standings-cell-header-selected': filter === 'wins'}"
+                            class="standings-cell standings-cell-header" 
+                            (click)="setFilter('wins')">
+                            Wins
+                        </span>
+                        <span 
+                            [ngClass]="{'standings-cell-header-selected': filter === 'winsThisSeason'}"
+                            class="standings-cell standings-cell-header" 
+                            (click)="setFilter('winsThisSeason')">
+                            Wins 2020
+                        </span>
+                        <span 
+                            [ngClass]="{'standings-cell-header-selected': filter === 'champs'}"
+                            class="standings-cell standings-cell-header" 
+                            (click)="setFilter('champs')">
+                            Titles
+                        </span>
                     </div>
                     <!-- Data -->
                     <div class="row statistics-row" *ngFor="let stat of statistics">

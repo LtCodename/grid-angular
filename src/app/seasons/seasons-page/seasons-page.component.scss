@@ -102,8 +102,7 @@ $white: #FFFFFF;
 }
 
 .statistics-row {
-    border-bottom: 5px solid #303960;
-    border-radius: 5px;
+    border-bottom: 1px solid #303960;
     padding: 0 15px 0px 15px;
     margin-bottom: 10px;
 }
@@ -130,6 +129,18 @@ $white: #FFFFFF;
     display: block;
 }
 
+.standings-cell-header-selected {
+    background: $blue;
+    color: #FFFFFF;
+}
+
+.standings-cell-header-name {
+    background: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 50px;
+    color: $blue;
+    display: block;
+}
 .standings-name {
     min-width: 87px;
     text-align: center;

@@ -30,6 +30,7 @@ export class SeasonsPageComponent implements OnInit {
 
   allSeasons: ISeason[] = [];
   allRaces: IRace[] = [];
+  allDrivers: IDriver[] = [];
   seasonRaces: IRace[] = [];
   upcomingRaces: IRace[] = [];
   pastRaces: IRace[] = [];
@@ -40,6 +41,7 @@ export class SeasonsPageComponent implements OnInit {
   showData: boolean = false;
   eventsTabName: string = "upcoming";
   standingsTabName: string = "drivers";
+  filter: string = "wins";
 
   constructor(
     private seasonsService: SeasonsService,
@@ -53,6 +55,7 @@ export class SeasonsPageComponent implements OnInit {
       mergeMap(([allSeasons, allRaces, allDrivers]) => this.teamsService.teams$.pipe(map((allTeams: ITeam[]): [ISeason[], IRace[], IDriver[], ITeam[]] => [allSeasons, allRaces, allDrivers, allTeams])))
     ).subscribe(([allSeasons, allRaces, allDrivers, allTeams]) => {
       if (allSeasons.length && allRaces.length && allDrivers.length) {
+        this.allDrivers = allDrivers
         this.allSeasons = allSeasons;
         this.currentSeason = this.setCurrentSeason(this.allSeasons);
 
@@ -84,7 +87,14 @@ export class SeasonsPageComponent implements OnInit {
     });
   };
 
+  setFilter(newFilter:string) {
+    this.filter = newFilter;
+    this.calculateStatistics(this.allDrivers, this.pastRaces);
+  }
+
   calculateStatistics(drivers: IDriver[], races: IRace[]): IStatUnit[] {
+    this.statistics = [];
+
     //Filter out current grid drivers
     const seasonDrivers: IDriver[] = drivers.filter((dr: IDriver) => this.currentSeason.drivers.indexOf(dr.id) !== -1)
     
@@ -145,6 +155,16 @@ export class SeasonsPageComponent implements OnInit {
         podiumsThisSeason: setSeasonPodiums(driver.id),
         champs: driver.championships
       });
+    });
+
+    this.statistics.sort((a: IStatUnit, b: IStatUnit) => {
+      if (parseInt(a[this.filter]) < parseInt(b[this.filter])) {
+        return 1;
+      }
+      if (parseInt(a[this.filter]) > parseInt(b[this.filter])) {
+        return -1;
+      }
+      return 0;
     });
 
     return this.statistics;
