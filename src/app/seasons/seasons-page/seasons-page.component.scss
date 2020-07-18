@@ -59,18 +59,20 @@ $white: #FFFFFF;
     margin-left: 10px;
 }
 
-.buttons-row {
-    margin-top: 10px;
-}
-
 .events-content-wrapper {
     background: $grey;
     width: fit-content;
     border-radius: 80px;
-    padding: 20px 20px 15px 20px;
+    padding: 20px;
     justify-content: center;
-    min-width: 560px;
+    min-width: 350px;
     margin-bottom: 10px;
+}
+
+.races-wrapper {
+    width: 700px;
+    margin-right: 10px;
+    min-height: 202px;
 }
 
 .standings-cell {
@@ -116,8 +118,12 @@ $white: #FFFFFF;
 }
 
 .statistics-wrapper {
-    margin-top: 10px;
     padding-bottom: 40px;
+    min-height: 900px;
+}
+
+.standings-wrapper {
+    min-height: 370px;
 }
 
 .standings-cell-header {
@@ -166,6 +172,11 @@ $white: #FFFFFF;
     text-align: center;
 }
 
+.standings-points {
+    min-width: 92px;
+    text-align: center;
+}
+
 .standings-wins {
     min-width: 80px;
     text-align: center;
@@ -188,4 +199,8 @@ $white: #FFFFFF;
     text-align: center;
     padding-bottom: 5px;
     margin: 0 5px;
+}
+
+.section-title {
+    margin-bottom: 10px;
 }

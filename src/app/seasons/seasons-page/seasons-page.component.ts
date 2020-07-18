@@ -19,6 +19,7 @@ interface IStatUnit {
   wins: string;
   winsThisSeason: string;
   champs: string;
+  points: string;
 }
 
 @Component({
@@ -40,8 +41,8 @@ export class SeasonsPageComponent implements OnInit {
   statistics: IStatUnit[] = [];
   showData: boolean = false;
   eventsTabName: string = "upcoming";
-  standingsTabName: string = "drivers";
-  filter: string = "wins";
+  standingsTabName: string = "teams";
+  filter: string = "points";
 
   constructor(
     private seasonsService: SeasonsService,
@@ -144,6 +145,12 @@ export class SeasonsPageComponent implements OnInit {
       return result.toString();
     }
 
+    function setPoints(driverId: string, standings: any): string {
+      let driver = standings.find((dr: any) => dr.id === driverId);
+      
+      return driver.points.toString();
+    }
+
     seasonDrivers.forEach((driver: IDriver) => {
       this.statistics.push({
         name: this.shortenName(driver.name),
@@ -153,6 +160,7 @@ export class SeasonsPageComponent implements OnInit {
         winsThisSeason: setSeasonWins(driver.id),
         podiums: driver.podiums,
         podiumsThisSeason: setSeasonPodiums(driver.id),
+        points: setPoints(driver.id, this.driversStandings),
         champs: driver.championships
       });
     });
@@ -228,11 +236,14 @@ export class SeasonsPageComponent implements OnInit {
       }
     });
 
+    //
+
     //Convert drivers standings hash table into an array
     Object.keys(standingsHash).forEach((driverName: string) => {
       standings.push({
         name: this.shortenName(driverName),
-        points: standingsHash[driverName]
+        points: standingsHash[driverName],
+        id: this.allDrivers.find((dr: IDriver) => dr.name == driverName).id
       })
     });
 
@@ -244,7 +255,8 @@ export class SeasonsPageComponent implements OnInit {
       if (!foundElement && this.currentSeason.drivers.indexOf(driverId) !== -1) {
         completeStandings.push({
           name: this.shortenName(driversData.name),
-          points: 0
+          points: 0,
+          id: this.allDrivers.find((dr: IDriver) => dr.name == driversData.name).id
         });
       }
     });

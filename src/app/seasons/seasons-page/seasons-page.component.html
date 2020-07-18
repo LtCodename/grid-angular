@@ -1,97 +1,110 @@
 <div *ngIf="showData" class="column column-center-horizontal">
     <div class="events-wrapper column column-center-horizontal">
-        <!-- Events Section -->
-        <span class="grey-cloud">Events Calendar</span>
-        <!-- Events Buttons -->
-        <div class="buttons-row row">
-            <button
-                [ngClass]="{'active-events-tab': eventsTabName === 'upcoming'}"
-                type="button"
-                (click)="toggleEventsTab()"
-                class="tab-button tab-button-left">
-                Upcoming
-            </button>
-            <button
-                [ngClass]="{'active-events-tab': eventsTabName === 'past'}"
-                type="button" 
-                (click)="toggleEventsTab()"
-                class="tab-button tab-button-right">
-                Past
-            </button>
-        </div>
-        <!-- Events -->
-        <div class="events-content-wrapper">
-            <!-- Upcoming Events -->
-            <div *ngIf="eventsTabName === 'upcoming'" class="row row-center-horizontal">
-                <app-race 
-                    *ngFor="let upcomingRace of upcomingRaces"
-                    [mode]="'upcoming'"
-                    [date]="upcomingRace.date"
-                    [url]="upcomingRace.url"
-                    [ongoing]="upcomingRace.ongoing"
-                    [name]="upcomingRace.name">
-                </app-race>
-            </div>
-            <!-- Past Events -->
-            <div *ngIf="eventsTabName === 'past'" class="row row-center-horizontal">
-                <app-race 
-                    *ngFor="let pastRace of pastRaces"
-                    [mode]="'past'"
-                    [places]="pastRace.places"
-                    [date]="pastRace.date"
-                    [url]="pastRace.url"
-                    [name]="pastRace.name">
-                </app-race>
-            </div>
-        </div>
-        <!-- Standings Section -->
-        <span class="grey-cloud">Standings</span>
-        <!-- Standings Buttons -->
-        <div class="buttons-row row">
-            <button
-                [ngClass]="{'active-standings-tab': standingsTabName === 'drivers'}"
-                type="button"
-                (click)="toggleStandingsTab()"
-                class="tab-button tab-button-left">
-                Drivers
-            </button>
-            <button
-                [ngClass]="{'active-standings-tab': standingsTabName === 'teams'}"
-                type="button" 
-                (click)="toggleStandingsTab()"
-                class="tab-button tab-button-right">
-                Teams
-            </button>
-        </div>
-        <!-- Standings -->
-        <div class="events-content-wrapper">
-            <!-- Drivers Standings -->
-            <div *ngIf="standingsTabName === 'drivers'" class="row row-center-horizontal">
-                <div class="column standings-table">
-                    <div class="row standings-row" *ngFor="let driverPlace of driversStandings">
-                        <span class="standings-cell standings-cell-driver">{{driverPlace.name}}</span>
-                        <span class="standings-cell standings-points">{{driverPlace.points}}</span>
+        <!-- Events And Standings -->
+        <div class="row">
+            <!-- Events Section -->
+            <div class="column column-center-horizontal">
+                <span class="grey-cloud section-title">Events Calendar</span>
+                <!-- Events Buttons -->
+                <div class="buttons-row row">
+                    <button
+                        [ngClass]="{'active-events-tab': eventsTabName === 'upcoming'}"
+                        type="button"
+                        (click)="toggleEventsTab()"
+                        class="tab-button tab-button-left">
+                        Upcoming
+                    </button>
+                    <button
+                        [ngClass]="{'active-events-tab': eventsTabName === 'past'}"
+                        type="button" 
+                        (click)="toggleEventsTab()"
+                        class="tab-button tab-button-right">
+                        Past
+                    </button>
+                </div>
+                <!-- Events -->
+                <div class="events-content-wrapper races-wrapper">
+                    <!-- Upcoming Events -->
+                    <div *ngIf="eventsTabName === 'upcoming'" class="row row-center-horizontal">
+                        <app-race 
+                            *ngFor="let upcomingRace of upcomingRaces"
+                            [mode]="'upcoming'"
+                            [date]="upcomingRace.date"
+                            [url]="upcomingRace.url"
+                            [ongoing]="upcomingRace.ongoing"
+                            [name]="upcomingRace.name">
+                        </app-race>
+                    </div>
+                    <!-- Past Events -->
+                    <div *ngIf="eventsTabName === 'past'" class="row row-center-horizontal">
+                        <app-race 
+                            *ngFor="let pastRace of pastRaces"
+                            [mode]="'past'"
+                            [places]="pastRace.places"
+                            [date]="pastRace.date"
+                            [url]="pastRace.url"
+                            [name]="pastRace.name">
+                        </app-race>
                     </div>
                 </div>
             </div>
-            <!-- Teams Standings-->
-            <div *ngIf="standingsTabName === 'teams'" class="row row-center-horizontal">
-                <div class="column standings-table">
-                    <div class="row standings-row" *ngFor="let teamPlace of teamsStandings">
-                        <span class="standings-cell standings-cell-team">{{teamPlace.team}}</span>
-                        <span class="standings-cell standings-points">{{teamPlace.points}}</span>
+            <!-- Standings Section -->
+            <div class="column column-center-horizontal">
+                <span class="grey-cloud section-title">Standings</span>
+                <!-- Standings Buttons -->
+                <!-- <div class="buttons-row row">
+                    <button
+                        [ngClass]="{'active-standings-tab': standingsTabName === 'drivers'}"
+                        type="button"
+                        (click)="toggleStandingsTab()"
+                        class="tab-button tab-button-left">
+                        Drivers
+                    </button>
+                    <button
+                        [ngClass]="{'active-standings-tab': standingsTabName === 'teams'}"
+                        type="button" 
+                        (click)="toggleStandingsTab()"
+                        class="tab-button tab-button-right">
+                        Teams
+                    </button>
+                </div> -->
+                <!-- Standings -->
+                <div class="events-content-wrapper standings-wrapper">
+                    <!-- Drivers Standings -->
+                    <div *ngIf="standingsTabName === 'drivers'" class="row row-center-horizontal">
+                        <div class="column standings-table">
+                            <div class="row standings-row" *ngFor="let driverPlace of driversStandings">
+                                <span class="standings-cell standings-cell-driver">{{driverPlace.name}}</span>
+                                <span class="standings-cell standings-points">{{driverPlace.points}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Teams Standings-->
+                    <div *ngIf="standingsTabName === 'teams'" class="row row-center-horizontal">
+                        <div class="column standings-table">
+                            <div class="row standings-row" *ngFor="let teamPlace of teamsStandings">
+                                <span class="standings-cell standings-cell-team">{{teamPlace.team}}</span>
+                                <span class="standings-cell standings-points">{{teamPlace.points}}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Statistics -->
-        <span class="grey-cloud">Statistics</span>
+        <span class="grey-cloud section-title">Statistics</span>
         <div class="events-content-wrapper statistics-wrapper">
             <div class="row row-center-horizontal">
                 <div class="column standings-table">
                     <!-- Headers -->
                     <div class="row standings-row headers-row">
                         <span class="standings-cell standings-cell-header-name">Name</span>
+                        <span 
+                            [ngClass]="{'standings-cell-header-selected': filter === 'points'}" 
+                            class="standings-cell standings-cell-header" 
+                            (click)="setFilter('points')">
+                            Points
+                        </span>
                         <span 
                             [ngClass]="{'standings-cell-header-selected': filter === 'poles'}" 
                             class="standings-cell standings-cell-header" 
@@ -138,6 +151,7 @@
                     <!-- Data -->
                     <div class="row statistics-row" *ngFor="let stat of statistics">
                         <span class="standings-cell standings-name">{{stat.name}}</span>
+                        <span class="stats-cell standings-points">{{stat.points}}</span>
                         <span class="stats-cell standings-poles">{{stat.poles}}</span>
                         <span class="stats-cell standings-poles-season">{{stat.polesThisSeason}}</span>
                         <span class="stats-cell standings-podiums">{{stat.podiums}}</span>
