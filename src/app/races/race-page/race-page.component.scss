@@ -81,6 +81,18 @@ $white: #FFFFFF;
     border-radius: 80px;
     padding: 20px 40px 20px 40px;
     justify-content: center;
+    margin-right: 20px;
+    min-width: 495px;
+    min-height: 500px;
+}
+
+.notes-wrapper {
+    background: $grey;
+    width: fit-content;
+    border-radius: 80px;
+    padding: 30px 40px 20px 40px;
+    min-width: 495px;
+    align-items: flex-start;
 }
 
 .pole-row {
@@ -121,4 +133,44 @@ $white: #FFFFFF;
 .results-table {
     margin-bottom: 20px;
     margin-top: 10px;
+}
+
+.stage-bubble {
+    background: #303960;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    font-weight: bold;
+    transition: 0.2s all;
+    text-align: center;
+    display: block;
+    outline: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    margin-right: 15px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    min-width: 106px;
+    width: fit-content;
+}
+
+.note-row {
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.note {
+    color: $blue;
+}
+
+.highlighted {
+    font-weight: bold;
+}
+
+.summary {
+    color: $blue;
+    font-weight: bold;
+}
+
+.summary-row {
+    width: 100%;
 }

@@ -13,29 +13,57 @@
             </div> 
         </div>
     </div>
-    <div class="buttons-row row">
-        <span
-            type="button"
-            class="tab">
-            Grand Prix Summary
-        </span>
-    </div>
-    <div class="results-wrapper column">
-        <div class="row pole-and-lap">
-            <div class="row row-center-vertical pole-row">
-                <span class="profile-text-small">Pole Position:</span>
-                <span class="property">{{poleSitter}}</span>
+    <div class="row">
+        <!-- Summary -->
+        <div class="column column-center-horizontal">
+            <div class="buttons-row row">
+                <span
+                    type="button"
+                    class="tab">
+                    Grand Prix Summary
+                </span>
             </div>
-            <div class="row row-center-vertical">
-                <span class="profile-text-small">Fastest Lap:</span>
-                <span class="property">{{fastestDriver}}</span>
+            <div class="results-wrapper column">
+                <div class="row pole-and-lap">
+                    <div class="row row-center-vertical pole-row">
+                        <span class="profile-text-small">Pole Position:</span>
+                        <span class="property">{{poleSitter}}</span>
+                    </div>
+                    <div class="row row-center-vertical">
+                        <span class="profile-text-small">Fastest Lap:</span>
+                        <span class="property">{{fastestDriver}}</span>
+                    </div>
+                </div>
+                <div class="column results-table">
+                    <div class="row results-row" *ngFor="let result of raceResults">
+                        <span class="result-text results-driver">{{result.driver}}</span>
+                        <span class="result-text results-team">{{result.team}}</span>
+                        <span class="result-text results-points">{{result.points}}</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="column results-table">
-            <div class="row results-row" *ngFor="let result of raceResults">
-                <span class="result-text results-driver">{{result.driver}}</span>
-                <span class="result-text results-team">{{result.team}}</span>
-                <span class="result-text results-points">{{result.points}}</span>
+        <!-- Notes -->
+        <div class="column column-center-horizontal">
+            <div class="buttons-row row">
+                <span
+                    type="button"
+                    class="tab">
+                    Grand Prix Notes
+                </span>
+            </div>
+            <div class="notes-wrapper column column-center-horizontal">
+                <!-- Notes -->
+                <div class="column" *ngFor="let element of race.notes; let last = last">
+                    <div class="row row-center-horizontal note-row">
+                        <span class="stage-bubble">{{element.stage}}</span>
+                        <span [ngClass]="{'highlighted': element.important}" class="note">{{element.note}}</span>
+                    </div>
+               </div>
+               <!-- Summary -->
+               <div class="row row-center-horizontal summary-row">
+                    <span class="summary">{{race.summary}}</span>
+               </div>
             </div>
         </div>
     </div>

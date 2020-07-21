@@ -40,7 +40,7 @@ export class SeasonsPageComponent implements OnInit {
   teamsStandings = [];
   statistics: IStatUnit[] = [];
   showData: boolean = false;
-  eventsTabName: string = "upcoming";
+  eventsTabName: string = "past";
   standingsTabName: string = "teams";
   filter: string = "points";
 

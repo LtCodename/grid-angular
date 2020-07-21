@@ -7,6 +7,8 @@ export interface IRace {
     name: string;
     places: any;
     pole: string;
+    notes: INote[];
+    summary: string;
     round: string;
     fullName: string;
     circuit: string;
@@ -16,6 +18,13 @@ export interface IRace {
     "season-id": string;
     "name-full": string;
     "lap-team": string;
+}
+
+export interface INote {
+    event: string;
+    stage: string;
+    note: string;
+    important: boolean;
 }
 
 export interface IPlace {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IRace, IRaceResult, IPlace } from 'src/app/races/race-model';
+import { IRace, IRaceResult, INote } from 'src/app/races/race-model';
 import { SeasonsService } from 'src/app/seasons/seasons.service';
 import { ISeason } from 'src/app/seasons/seasons-model';
 import { IDriver } from 'src/app/drivers/drivers-model';
@@ -31,7 +31,9 @@ export class RaceEditFormComponent implements OnInit {
   raceOngoing: string = "false";
   raceFinished: string = "false";
   raceCircuit: string = "";
+  raceSummary: string = "";
   racePlaces = {};
+  raceNotes: INote[] = [];
   buttonName: string = "Submit";
   mode: string = "edit";
   tempId:string = "";
@@ -87,6 +89,8 @@ export class RaceEditFormComponent implements OnInit {
     this.racePole = this.raceData.pole;
     this.raceCircuit = this.raceData.circuit;
     this.racePlaces = this.raceData.places;
+    this.raceSummary = this.raceData.summary;
+    this.raceNotes = this.raceData.notes;
 
     this.setInformation();
 
@@ -154,6 +158,7 @@ export class RaceEditFormComponent implements OnInit {
         circuit: this.raceCircuit || "",
         location: this.raceLocation,
         date: this.raceDate,
+        summary: this.raceSummary,
         "season-id": this.raceSeason,
         lap: this.raceLap || "",
         "lap-team": this.raceLapTeam || "",
@@ -161,7 +166,8 @@ export class RaceEditFormComponent implements OnInit {
         finished: this.raceFinished === 'true',
         ongoing: this.raceOngoing === 'true',
         pole: this.racePole || "",
-        places: this.racePlaces || {}
+        places: this.racePlaces || {},
+        notes: this.raceNotes || []
       }).then(() => {
         this.buttonProgress("Done");
       }).catch(() => {
@@ -174,6 +180,7 @@ export class RaceEditFormComponent implements OnInit {
         circuit: this.raceCircuit || "",
         location: this.raceLocation,
         date: this.raceDate,
+        summary: this.raceSummary,
         "season-id": this.raceSeason,
         lap: this.raceLap || "",
         "lap-team": this.raceLapTeam || "",
@@ -181,7 +188,8 @@ export class RaceEditFormComponent implements OnInit {
         finished: this.raceFinished === 'true',
         ongoing: this.raceOngoing === 'true',
         pole: this.racePole || "",
-        places: this.racePlaces || {}
+        places: this.racePlaces || {},
+        notes: this.raceNotes || []
       }).then((res) => {
         this.tempId = res.id;
         this.mode = "edit";
