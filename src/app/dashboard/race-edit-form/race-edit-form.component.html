@@ -149,6 +149,62 @@
                         <option [value]="'false'">No</option>
                     </select>
                 </div>
+                <button 
+                    class="grid-button delete-button"
+                    type="button"
+                    (click)="deleteNote(index)">
+                    Delete
+                </button>
+            </div>
+            <!-- Add Button -->
+            <button 
+                *ngIf="!addNote"
+                class="grid-button add-button"
+                type="button"
+                (click)="toggleAddNoteMode()">
+                Add
+            </button>
+            <!-- Add Panel -->
+            <div class="column column-center-horizontal" *ngIf="addNote">
+                <!-- Note Item Type -->
+                <div class="row row-center-vertical">
+                    <label class="edit-label">Event</label>
+                    <select class="grid-input" [(ngModel)]="newNoteEvent">
+                        <option [value]="'practice'">Practice</option>
+                        <option [value]="'qualification'">Qualification</option>
+                        <option [value]="'race'">Race</option>
+                    </select>
+                </div>
+                <!-- Stage -->
+                <div class="row row-center-vertical">
+                    <label class="edit-label">Stage</label>
+                    <input class="grid-input" type="text" name="name" [(ngModel)]="newNoteStage">
+                </div>
+                <!-- Note -->
+                <div class="row row-center-vertical">
+                    <label class="edit-label">Note</label>
+                    <input class="grid-input" type="text" name="name" [(ngModel)]="newNoteText">
+                </div>
+                <!-- Important -->
+                <div class="row row-center-vertical">
+                    <label class="edit-label">Important</label>
+                    <select class="grid-input" [(ngModel)]="newNoteImportant">
+                        <option [value]="'true'">Yes</option>
+                        <option [value]="'false'">No</option>
+                    </select>
+                </div>
+                <button
+                        class="grid-button push-button"
+                        type="button"
+                        (click)="addNewNote()">
+                        Push
+                    </button>
+                    <button
+                        class="grid-button cancel-button"
+                        type="button"
+                        (click)="toggleAddNoteMode()">
+                        Cancel
+                    </button>
             </div>
         </div>
     </div>

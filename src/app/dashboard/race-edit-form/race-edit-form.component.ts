@@ -37,6 +37,11 @@ export class RaceEditFormComponent implements OnInit {
   buttonName: string = "Submit";
   mode: string = "edit";
   tempId:string = "";
+  addNote: boolean = false;
+  newNoteEvent: string = "race";
+  newNoteStage: string = "";
+  newNoteText: string = "";
+  newNoteImportant: string = "false";
   
   allSeasons: ISeason[] = [];
   allDrivers: IDriver[] = [];
@@ -198,6 +203,34 @@ export class RaceEditFormComponent implements OnInit {
         this.buttonProgress("Error");
       });
     }
+  }
+
+  deleteNote(index: number): void {
+    let fakeNotes: INote[] = [...this.raceNotes];
+    fakeNotes.splice(index, 1);
+    this.raceNotes = fakeNotes;
+  }
+
+  toggleAddNoteMode(): void {
+    this.addNote = !this.addNote;
+  }
+
+  addNewNote(): void {
+    if(!this.raceNotes) {
+      this.raceNotes = [];
+    }
+
+    this.raceNotes.push({
+      event: this.newNoteEvent,
+      stage: this.newNoteStage,
+      note: this.newNoteText,
+      important: this.newNoteImportant === 'true'
+    });
+
+    this.newNoteEvent = "race";
+    this.newNoteStage = "";
+    this.newNoteText = "";
+    this.newNoteImportant = "false";
   }
 
   buttonProgress(message: string): void {
