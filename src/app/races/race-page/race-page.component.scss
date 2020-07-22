@@ -89,6 +89,7 @@
     padding: 30px 40px 20px 40px;
     min-width: 495px;
     align-items: flex-start;
+    max-width: 600px;
 }
 
 .pole-row {
@@ -152,6 +153,7 @@
 .note-row {
     align-items: center;
     margin-bottom: 10px;
+    flex-wrap: nowrap;
 }
 
 .note {
@@ -165,6 +167,7 @@
 .summary {
     color: $blue;
     font-weight: bold;
+    text-align: center;
 }
 
 .summary-row {
