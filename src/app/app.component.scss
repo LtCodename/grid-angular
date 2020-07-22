@@ -1,8 +1,4 @@
-$blue: #303960;
-$pink: #ea9a96;
-$orange: #f8b24f;
-$grey: #e5e5e5;
-$white: #FFFFFF;
+@import "../variables";
 
 .tab {
     margin: 0 10px;
@@ -55,6 +51,7 @@ $white: #FFFFFF;
     left: 50%;
     transform: translateX(-50%);
     max-width: 650px;
+    z-index: 999;
 }
 
 .tab-holder {
