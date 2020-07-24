@@ -134,7 +134,7 @@ export class TeamEditFormComponent implements OnInit {
   addSummaryYearItem(index: number): void {
     let fakeSummary: ISummary[] = [...this.teamSummary];
     fakeSummary[index].years.push({
-      champ: this.newYearChamp === 'true',
+      champ: this.newYearChamp,
       name: this.newYearName
     });
 

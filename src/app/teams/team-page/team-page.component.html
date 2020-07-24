@@ -68,7 +68,7 @@
                             <span class="summary-text">{{element.text}}</span>
                      </div>
                      <div class="row row-center-horizontal summary-row" *ngSwitchCase="'years'">
-                            <span [ngClass]="{'champions': year.champ, 'not-champions': !year.champ}" class="summary-cloud" *ngFor="let year of element.years">
+                            <span [ngClass]="{'champions': year.champ === 'true', 'not-champions': year.champ === 'false'}" class="summary-cloud" *ngFor="let year of element.years">
                                 {{year.name}}
                             </span>
                      </div>
