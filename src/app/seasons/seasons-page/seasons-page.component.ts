@@ -40,7 +40,7 @@ export class SeasonsPageComponent implements OnInit {
   teamsStandings = [];
   statistics: IStatUnit[] = [];
   showData: boolean = false;
-  eventsTabName: string = "past";
+  eventsTabName: string = "upcoming";
   standingsTabName: string = "teams";
   filter: string = "points";
 
@@ -188,10 +188,10 @@ export class SeasonsPageComponent implements OnInit {
 
   setUpcomingRaces(racesData: IRace[]): IRace[] {
     return racesData.filter((race: IRace) => !race.finished).sort((a: IRace, b: IRace) => {
-      if (a.round < b.round) {
+      if (parseFloat(a.round) < parseFloat(b.round)) {
         return -1;
       }
-      if (a.round > b.round) {
+      if (parseFloat(a.round) > parseFloat(b.round)) {
         return 1;
       }
       return 0;
@@ -200,10 +200,10 @@ export class SeasonsPageComponent implements OnInit {
 
   setPastRaces(racesData: IRace[]): IRace[] {
     return racesData.filter((race: IRace) => race.finished).sort((a: IRace, b: IRace) => {
-      if (a.round < b.round) {
+      if (parseFloat(a.round) < parseFloat(b.round)) {
         return -1;
       }
-      if (a.round > b.round) {
+      if (parseFloat(a.round) > parseFloat(b.round)) {
         return 1;
       }
       return 0;
