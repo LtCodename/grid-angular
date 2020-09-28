@@ -62,6 +62,14 @@
                 </button>
             </div>
         </div>
+        <!-- Points Deduction -->
+        <span class="question">Points Deduction</span>
+        <div class="column">
+            <div class="row driver-row" *ngFor="let team of teamsToDisplay; let index = index;">
+                <span class="driver">{{team.name}}</span>
+                <input class="grid-input" type="text" name="points" [(ngModel)]="deductedPoints[team.id]">
+            </div>
+        </div>
     </div>
     <!-- Submit -->
     <button 

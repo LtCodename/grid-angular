@@ -298,6 +298,13 @@ export class SeasonsPageComponent implements OnInit {
       }
     });
 
+    if (this.currentSeason.hasOwnProperty("deductedPoints")) {
+      for (let tid in this.currentSeason.deductedPoints) {
+        let constructor: ITeam = teams.find((tm: ITeam) => tm.id === tid);
+        standingsHash[constructor.name] -= parseInt(this.currentSeason.deductedPoints[tid]);
+      }
+    }
+
     let standings = [];
 
     for (let i in standingsHash) {

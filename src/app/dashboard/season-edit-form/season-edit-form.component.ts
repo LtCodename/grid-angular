@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ISeason } from 'src/app/seasons/seasons-model';
+import { IDeductedPoints, ISeason } from 'src/app/seasons/seasons-model';
 import { DriversService } from 'src/app/drivers/drivers.service';
 import { IDriver } from 'src/app/drivers/drivers-model';
 import { SeasonsService } from 'src/app/seasons/seasons.service';
@@ -27,6 +27,7 @@ export class SeasonEditFormComponent implements OnInit {
   @Input() seasonData: ISeason;
 
   seasonName: string = "";
+  deductedPoints: IDeductedPoints = {};
   driverToAdd: string = "";
   teamToAdd: string = "";
   seasonCurrent: boolean = false;
@@ -63,6 +64,7 @@ export class SeasonEditFormComponent implements OnInit {
 
   updateData(): void {
     this.seasonName = this.seasonData.name;
+    this.deductedPoints = this.seasonData.deductedPoints || {};
     this.seasonCurrent = this.seasonData.current;
     this.seasonDrivers = this.seasonData.drivers;
     this.seasonTeams = this.seasonData.teams;
@@ -113,6 +115,7 @@ export class SeasonEditFormComponent implements OnInit {
       this.seasonService.edit({
         id: this.seasonData.id || this.tempId,
         name: this.seasonName,
+        deductedPoints: this.deductedPoints,
         current: this.seasonCurrent,
         drivers: this.seasonDrivers || [],
         teams: this.seasonTeams || []
@@ -124,6 +127,7 @@ export class SeasonEditFormComponent implements OnInit {
     } else {
       this.seasonService.add({
         name: this.seasonName,
+        deductedPoints: this.deductedPoints,
         current: this.seasonCurrent,
         drivers: this.seasonDrivers || [],
         teams: this.seasonTeams || []
